@@ -1,0 +1,893 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>活動時程 - 2026寒修行</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Microsoft JhengHei', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        }
+
+        /* Header & Navigation - 統一樣式 (與之前相同) */
+        .header {
+            background: linear-gradient(135deg, rgba(139,69,19,0.95) 0%, rgba(160,82,45,0.95) 50%, rgba(218,165,32,0.95) 100%);
+            color: white;
+            padding: 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 25px rgba(0,0,0,0.15);
+            backdrop-filter: blur(15px);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+            height: 80px;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            color: #FFD700;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .dharma-wheel {
+            width: 40px;
+            height: 40px;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="45" fill="%23FFD700"/><circle cx="50" cy="50" r="12" fill="%23DAA520"/></svg>') center/contain no-repeat;
+            filter: drop-shadow(0 0 8px rgba(255,215,0,0.4));
+            transition: all 0.3s ease;
+        }
+
+        .logo:hover .dharma-wheel { transform: rotate(30deg); }
+
+        .logo-text { display: flex; flex-direction: column; line-height: 1.1; }
+        .logo-year { font-size: 1rem; opacity: 0.9; }
+        .logo-main { font-size: 1.4rem; font-weight: 700; }
+
+        .nav-menu { display: flex; list-style: none; gap: 0.3rem; align-items: center; }
+        .nav-menu > li { position: relative; }
+
+        .nav-menu a {
+            color: rgba(255,255,255,0.9);
+            text-decoration: none;
+            padding: 0.9rem 1.3rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            white-space: nowrap;
+        }
+
+        .nav-menu a i { font-size: 0.9rem; }
+        .nav-menu a:hover { background: rgba(255,255,255,0.15); color: #FFD700; transform: translateY(-2px); }
+        .nav-menu a.active { background: rgba(255,215,0,0.2); color: #FFD700; font-weight: 600; }
+
+        .dropdown { position: relative; }
+        .dropdown-toggle { cursor: pointer; }
+        .dropdown-toggle::after {
+            content: '\f107';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            margin-left: 0.3rem;
+            font-size: 0.8rem;
+            transition: transform 0.3s ease;
+        }
+
+        .dropdown:hover .dropdown-toggle::after { transform: rotate(180deg); }
+
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: linear-gradient(135deg, rgba(139,69,19,0.98) 0%, rgba(160,82,45,0.98) 100%);
+            min-width: 200px;
+            border-radius: 12px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.25);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            margin-top: 0.5rem;
+            backdrop-filter: blur(10px);
+            overflow: hidden;
+        }
+
+        .dropdown:hover .dropdown-menu { opacity: 1; visibility: visible; transform: translateY(0); }
+        .dropdown-menu li { list-style: none; }
+
+        .dropdown-menu a {
+            padding: 0.9rem 1.3rem;
+            display: block;
+            border-radius: 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            font-size: 0.95rem;
+        }
+
+        .dropdown-menu li:last-child a { border-bottom: none; }
+        .dropdown-menu a:hover { background: rgba(255,215,0,0.15); padding-left: 1.8rem; transform: translateY(0); }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.8rem;
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-menu-btn:hover { background: rgba(255,255,255,0.1); color: #FFD700; }
+
+        /* Page Header */
+        .page-header {
+            background: linear-gradient(135deg, rgba(139,69,19,0.9), rgba(218,165,32,0.9)),
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 400"><rect fill="%23f8f9fa" width="1200" height="400"/><circle cx="300" cy="200" r="150" fill="%23DAA520" opacity="0.1"/><circle cx="900" cy="200" r="120" fill="%23DAA520" opacity="0.1"/></svg>');
+            background-size: cover;
+            color: white;
+            text-align: center;
+            padding: 8rem 2rem 4rem;
+            margin-top: 80px;
+        }
+
+        .page-header h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .page-header p {
+            font-size: 1.3rem;
+            max-width: 700px;
+            margin: 0 auto;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+
+        /* Main Content */
+        .main-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        /* View Toggle */
+        .view-toggle {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+
+        .toggle-btn {
+            padding: 1rem 2rem;
+            border: 2px solid #DAA520;
+            background: white;
+            color: #8B4513;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .toggle-btn:hover {
+            background: #f8f9fa;
+            transform: translateY(-2px);
+        }
+
+        .toggle-btn.active {
+            background: linear-gradient(45deg, #DAA520, #FFD700);
+            color: white;
+            border-color: #DAA520;
+        }
+
+        /* Timeline View */
+        .timeline-view {
+            position: relative;
+            padding: 2rem 0;
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 100px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 40px;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(180deg, #DAA520, #8B4513);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 3rem;
+            padding-left: 3rem;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: -60px;
+            top: 0;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #FFD700;
+            border: 4px solid white;
+            box-shadow: 0 0 0 4px #DAA520;
+            z-index: 1;
+        }
+
+        .timeline-date {
+            position: absolute;
+            left: -95px;
+            top: -5px;
+            width: 70px;
+            text-align: right;
+            font-weight: 600;
+            color: #8B4513;
+            font-size: 0.9rem;
+        }
+
+        .timeline-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .timeline-content:hover {
+            transform: translateX(10px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+
+        .timeline-content h3 {
+            color: #8B4513;
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-time {
+            color: #DAA520;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .timeline-description {
+            color: #666;
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+
+        .timeline-actions {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .action-btn {
+            padding: 0.6rem 1.2rem;
+            border: none;
+            border-radius: 20px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .add-calendar-btn {
+            background: linear-gradient(45deg, #DAA520, #FFD700);
+            color: white;
+        }
+
+        .add-calendar-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(218,165,32,0.3);
+        }
+
+        .detail-btn {
+            background: #f8f9fa;
+            color: #8B4513;
+            border: 2px solid #e9ecef;
+        }
+
+        .detail-btn:hover {
+            background: white;
+            border-color: #DAA520;
+        }
+
+        /* Calendar View */
+        .calendar-view {
+            display: none;
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .calendar-view.active {
+            display: block;
+        }
+
+        .calendar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid #e9ecef;
+        }
+
+        .calendar-header h2 {
+            color: #8B4513;
+            font-size: 2rem;
+        }
+
+        .calendar-nav {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .calendar-nav-btn {
+            width: 40px;
+            height: 40px;
+            border: none;
+            background: linear-gradient(45deg, #DAA520, #FFD700);
+            color: white;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .calendar-nav-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 5px 15px rgba(218,165,32,0.3);
+        }
+
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 1rem;
+        }
+
+        .calendar-day-header {
+            text-align: center;
+            font-weight: 600;
+            color: #8B4513;
+            padding: 1rem;
+        }
+
+        .calendar-day {
+            aspect-ratio: 1;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            padding: 0.5rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .calendar-day:hover {
+            border-color: #DAA520;
+            background: #f8f9fa;
+        }
+
+        .calendar-day.has-event {
+            border-color: #DAA520;
+            background: linear-gradient(135deg, #FFF9E6, #FFF);
+        }
+
+        .calendar-day.has-event::after {
+            content: '';
+            position: absolute;
+            bottom: 5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: #DAA520;
+        }
+
+        .calendar-day-number {
+            font-weight: 600;
+            color: #333;
+        }
+
+        .calendar-day.other-month .calendar-day-number {
+            color: #ccc;
+        }
+
+        /* Event Legend */
+        .event-legend {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background: #f8f9fa;
+            border-radius: 15px;
+        }
+
+        .event-legend h3 {
+            color: #8B4513;
+            margin-bottom: 1rem;
+        }
+
+        .legend-items {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .legend-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .legend-dot.dharma { background: #DAA520; }
+        .legend-dot.online { background: #8B4513; }
+        .legend-dot.study { background: #CD853F; }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 80px;
+                left: 0;
+                width: 100%;
+                background: linear-gradient(135deg, #8B4513 0%, #A0522D 100%);
+                padding: 1rem 0;
+                gap: 0;
+            }
+
+            .nav-menu.mobile-active { display: flex; }
+            .nav-menu > li { width: 100%; }
+            .nav-menu a { padding: 1rem 2rem; border-radius: 0; }
+
+            .dropdown-menu {
+                position: static;
+                opacity: 1;
+                visibility: visible;
+                transform: none;
+                box-shadow: none;
+                background: rgba(0,0,0,0.1);
+                margin-top: 0;
+                max-height: 0;
+                overflow: hidden;
+            }
+
+            .dropdown.mobile-open .dropdown-menu { max-height: 500px; }
+            .dropdown-menu a { padding-left: 3rem; background: rgba(0,0,0,0.1); }
+            .mobile-menu-btn { display: block; }
+
+            .page-header h1 { font-size: 2.5rem; }
+
+            .timeline {
+                padding-left: 60px;
+            }
+
+            .timeline::before {
+                left: 20px;
+            }
+
+            .timeline-dot {
+                left: 12px;
+            }
+
+            .timeline-date {
+                position: relative;
+                left: 0;
+                text-align: left;
+                width: auto;
+                margin-bottom: 0.5rem;
+            }
+
+            .timeline-item {
+                padding-left: 1rem;
+            }
+
+            .calendar-grid {
+                gap: 0.5rem;
+            }
+
+            .view-toggle {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .toggle-btn {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="nav-container">
+            <div class="logo">
+                <a href="index.html" style="color: inherit; text-decoration: none; display: flex; align-items: center; gap: 0.8rem;">
+                    <div class="dharma-wheel"></div>
+                    <div class="logo-text">
+                        <span class="logo-year">2026</span>
+                        <span class="logo-main">寒修行</span>
+                    </div>
+                </a>
+            </div>
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="index.html"><i class="fas fa-home"></i> 首頁</a></li>
+                    <li><a href="interactive.html"><i class="fas fa-users"></i> 2026互動區</a></li>
+                    <li><a href="news.html"><i class="fas fa-newspaper"></i> 最新消息</a></li>
+                    <li><a href="schedule.html" class="active"><i class="fas fa-calendar"></i> 時程</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle"><i class="fas fa-video"></i> 影片專區</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="videos.html"><i class="fas fa-play-circle"></i> 法會影片</a></li>
+                            <li><a href="promo.html"><i class="fas fa-film"></i> 參考影片</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle"><i class="fas fa-book"></i> 學習專區</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="doctrine.html"><i class="fas fa-pray"></i> 教誡拜讀</a></li>
+                            <li><a href="scripture.html"><i class="fas fa-book-open"></i> 讀經次第</a></li>
+                            <li><a href="cards.html"><i class="fas fa-images"></i> 卡片介紹</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="history.html"><i class="fas fa-landmark"></i> 苑史區</a></li>
+                </ul>
+                <button class="mobile-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <h1><i class="fas fa-calendar-alt"></i> 活動時程</h1>
+        <p>2026年寒修行完整時間表，讓您提前規劃，不錯過任何重要時刻</p>
+    </section>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- View Toggle -->
+        <div class="view-toggle">
+            <button class="toggle-btn active" onclick="switchView('timeline')">
+                <i class="fas fa-stream"></i> 時間軸檢視
+            </button>
+            <button class="toggle-btn" onclick="switchView('calendar')">
+                <i class="fas fa-calendar"></i> 月曆檢視
+            </button>
+        </div>
+
+        <!-- Timeline View -->
+        <div class="timeline-view active" id="timeline-view">
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date">1/20<br>週一</div>
+                    <div class="timeline-content">
+                        <h3>開幕法會</h3>
+                        <div class="timeline-time">
+                            <i class="fas fa-clock"></i> 上午 9:00 - 11:30
+                        </div>
+                        <p class="timeline-description">
+                            2026年寒修行正式開始！開幕法會將由苑主帶領，為這次修行之旅揭開序幕。法會將同步線上直播，無論身在何處都能參與。
+                        </p>
+                        <div class="timeline-actions">
+                            <button class="action-btn add-calendar-btn" onclick="addToCalendar('開幕法會', '2026-01-20 09:00')">
+                                <i class="fas fa-calendar-plus"></i> 加入行事曆
+                            </button>
+                            <button class="action-btn detail-btn">
+                                <i class="fas fa-info-circle"></i> 詳細資訊
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date">1/22<br>週三</div>
+                    <div class="timeline-content">
+                        <h3>教誡學習講座</h3>
+                        <div class="timeline-time">
+                            <i class="fas fa-clock"></i> 晚上 7:00 - 9:00
+                        </div>
+                        <p class="timeline-description">
+                            深入學習核心教誡，由資深法師帶領，解說教義精髓，並分享實踐心得。適合所有想要深化理解的信眾。
+                        </p>
+                        <div class="timeline-actions">
+                            <button class="action-btn add-calendar-btn" onclick="addToCalendar('教誡學習講座', '2026-01-22 19:00')">
+                                <i class="fas fa-calendar-plus"></i> 加入行事曆
+                            </button>
+                            <button class="action-btn detail-btn">
+                                <i class="fas fa-info-circle"></i> 詳細資訊
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date">1/25<br>週六</div>
+                    <div class="timeline-content">
+                        <h3>週末共修法會</h3>
+                        <div class="timeline-time">
+                            <i class="fas fa-clock"></i> 下午 2:00 - 5:00
+                        </div>
+                        <p class="timeline-description">
+                            週末共修時間，與眾多信眾一起誦經、禪坐、分享修行心得。這是一個很好的機會與大家交流，互相學習成長。
+                        </p>
+                        <div class="timeline-actions">
+                            <button class="action-btn add-calendar-btn" onclick="addToCalendar('週末共修法會', '2026-01-25 14:00')">
+                                <i class="fas fa-calendar-plus"></i> 加入行事曆
+                            </button>
+                            <button class="action-btn detail-btn">
+                                <i class="fas fa-info-circle"></i> 詳細資訊
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date">1/29<br>週三</div>
+                    <div class="timeline-content">
+                        <h3>線上讀經會</h3>
+                        <div class="timeline-time">
+                            <i class="fas fa-clock"></i> 晚上 8:00 - 9:30
+                        </div>
+                        <p class="timeline-description">
+                            透過線上平台，一起讀誦經文，由法師帶領，逐字逐句解釋經典含義，並回答學員問題。
+                        </p>
+                        <div class="timeline-actions">
+                            <button class="action-btn add-calendar-btn" onclick="addToCalendar('線上讀經會', '2026-01-29 20:00')">
+                                <i class="fas fa-calendar-plus"></i> 加入行事曆
+                            </button>
+                            <button class="action-btn detail-btn">
+                                <i class="fas fa-info-circle"></i> 詳細資訊
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date">2/1<br>週六</div>
+                    <div class="timeline-content">
+                        <h3>感恩法會</h3>
+                        <div class="timeline-time">
+                            <i class="fas fa-clock"></i> 上午 10:00 - 12:00
+                        </div>
+                        <p class="timeline-description">
+                            以感恩的心迎接新月，感謝過去一個月的成長與學習，並為未來的修行之路祈福。
+                        </p>
+                        <div class="timeline-actions">
+                            <button class="action-btn add-calendar-btn" onclick="addToCalendar('感恩法會', '2026-02-01 10:00')">
+                                <i class="fas fa-calendar-plus"></i> 加入行事曆
+                            </button>
+                            <button class="action-btn detail-btn">
+                                <i class="fas fa-info-circle"></i> 詳細資訊
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date">2/8<br>週六</div>
+                    <div class="timeline-content">
+                        <h3>圓滿閉幕法會</h3>
+                        <div class="timeline-time">
+                            <i class="fas fa-clock"></i> 下午 2:00 - 5:00
+                        </div>
+                        <p class="timeline-description">
+                            寒修行圓滿日，回顧這段時間的修行成果，分享心得體會，並為未來的修行之路祈福祝福。
+                        </p>
+                        <div class="timeline-actions">
+                            <button class="action-btn add-calendar-btn" onclick="addToCalendar('圓滿閉幕法會', '2026-02-08 14:00')">
+                                <i class="fas fa-calendar-plus"></i> 加入行事曆
+                            </button>
+                            <button class="action-btn detail-btn">
+                                <i class="fas fa-info-circle"></i> 詳細資訊
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Calendar View -->
+        <div class="calendar-view" id="calendar-view">
+            <div class="calendar-header">
+                <h2>2026年 1月</h2>
+                <div class="calendar-nav">
+                    <button class="calendar-nav-btn"><i class="fas fa-chevron-left"></i></button>
+                    <button class="calendar-nav-btn"><i class="fas fa-chevron-right"></i></button>
+                </div>
+            </div>
+            
+            <div class="calendar-grid">
+                <div class="calendar-day-header">日</div>
+                <div class="calendar-day-header">一</div>
+                <div class="calendar-day-header">二</div>
+                <div class="calendar-day-header">三</div>
+                <div class="calendar-day-header">四</div>
+                <div class="calendar-day-header">五</div>
+                <div class="calendar-day-header">六</div>
+                
+                <!-- Days -->
+                <div class="calendar-day other-month"><div class="calendar-day-number">29</div></div>
+                <div class="calendar-day other-month"><div class="calendar-day-number">30</div></div>
+                <div class="calendar-day other-month"><div class="calendar-day-number">31</div></div>
+                <div class="calendar-day"><div class="calendar-day-number">1</div></div>
+                <div class="calendar-day"><div class="calendar-day-number">2</div></div>
+                <div class="calendar-day"><div class="calendar-day-number">3</div></div>
+                <div class="calendar-day"><div class="calendar-day-number">4</div></div>
+                
+                <div class="calendar-day"><div class="calendar-day-number">5</div></div>
+                <div class="calendar-day"><div class="calendar-day-number">6</div></div>
+                <div class="calendar-day"><div class="calendar-day-number">7</div></div>
+                <div class="calendar-day"><div class="calendar-day-number">8</div></div>
+                <div class="calendar-day"><div class="calendar-day-number">9</div></div>
+                <div class="calendar-day"><div class="calendar-day-number">10</div></div>
+                <div class="calendar-day"><div class="calendar-day-number">11</div></div>
+                
+                <div class="calendar-day"><div class="calendar-day-number">12</div></div>
+                <div class="calendar-day"><div class="calendar-day-number">13</div></div>
+                <div class="calendar-day"><div class="calendar-day-number">14</div></div>
+                <div class="calendar-day"><div class="calendar-day-number">15</div></div>
+                <div class="calendar-day"><div class="calendar-day-number">16</div></div>
+                <div class="calendar-day"><div class="calendar-day-number">17</div></div>
+                <div class="calendar-day"><div class="calendar-day-number">18</div></div>
+                
+                <div class="calendar-day"><div class="calendar-day-number">19</div></div>
+                <div class="calendar-day has-event" onclick="alert('1/20 開幕法會 9:00-11:30')"><div class="calendar-day-number">20</div></div>
+                <div class="calendar-day"><div class="calendar-day-number">21</div></div>
+                <div class="calendar-day has-event" onclick="alert('1/22 教誡學習講座 19:00-21:00')"><div class="calendar-day-number">22</div></div>
+                <div class="calendar-day"><div class="calendar-day-number">23</div></div>
+                <div class="calendar-day"><div class="calendar-day-number">24</div></div>
+                <div class="calendar-day has-event" onclick="alert('1/25 週末共修法會 14:00-17:00')"><div class="calendar-day-number">25</div></div>
+                
+                <div class="calendar-day"><div class="calendar-day-number">26</div></div>
+                <div class="calendar-day"><div class="calendar-day-number">27</div></div>
+                <div class="calendar-day"><div class="calendar-day-number">28</div></div>
+                <div class="calendar-day has-event" onclick="alert('1/29 線上讀經會 20:00-21:30')"><div class="calendar-day-number">29</div></div>
+                <div class="calendar-day"><div class="calendar-day-number">30</div></div>
+                <div class="calendar-day"><div class="calendar-day-number">31</div></div>
+                <div class="calendar-day other-month"><div class="calendar-day-number">1</div></div>
+            </div>
+
+            <div class="event-legend">
+                <h3>活動類型</h3>
+                <div class="legend-items">
+                    <div class="legend-item">
+                        <div class="legend-dot dharma"></div>
+                        <span>法會活動</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-dot online"></div>
+                        <span>線上課程</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-dot study"></div>
+                        <span>學習共修</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // View switching
+        function switchView(view) {
+            const timelineView = document.getElementById('timeline-view');
+            const calendarView = document.getElementById('calendar-view');
+            const buttons = document.querySelectorAll('.toggle-btn');
+
+            if (view === 'timeline') {
+                timelineView.style.display = 'block';
+                calendarView.style.display = 'none';
+                buttons[0].classList.add('active');
+                buttons[1].classList.remove('active');
+            } else {
+                timelineView.style.display = 'none';
+                calendarView.style.display = 'block';
+                buttons[0].classList.remove('active');
+                buttons[1].classList.add('active');
+            }
+        }
+
+        // Add to calendar
+        function addToCalendar(title, datetime) {
+            alert(`將「${title}」加入您的行事曆\n時間: ${datetime}\n\n這個功能會生成 iCal 檔案，可以匯入 Google Calendar、Apple Calendar 等行事曆應用。`);
+        }
+
+        // Mobile menu
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const navMenu = document.querySelector('.nav-menu');
+        const dropdowns = document.querySelectorAll('.dropdown');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            navMenu.classList.toggle('mobile-active');
+            const icon = mobileMenuBtn.querySelector('i');
+            icon.className = navMenu.classList.contains('mobile-active') ? 'fas fa-times' : 'fas fa-bars';
+        });
+
+        if (window.innerWidth <= 768) {
+            dropdowns.forEach(dropdown => {
+                const toggle = dropdown.querySelector('.dropdown-toggle');
+                toggle.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    dropdown.classList.toggle('mobile-open');
+                });
+            });
+        }
+
+        if (window.innerWidth > 768) {
+            dropdowns.forEach(dropdown => {
+                const toggle = dropdown.querySelector('.dropdown-toggle');
+                toggle.addEventListener('click', (e) => e.preventDefault());
+            });
+        }
+
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.nav-container')) {
+                navMenu.classList.remove('mobile-active');
+                const icon = mobileMenuBtn.querySelector('i');
+                icon.className = 'fas fa-bars';
+            }
+        });
+    </script>
+</body>
+</html>

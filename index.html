@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2026寒修行 - 真如苑台灣教區 (index.html)</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Microsoft JhengHei', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        }
+
+        /* Header & Navigation */
+        .header {
+            background: linear-gradient(135deg, rgba(139,69,19,0.95) 0%, rgba(160,82,45,0.95) 50%, rgba(218,165,32,0.95) 100%);
+            color: white;
+            padding: 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 25px rgba(0,0,0,0.15);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+            height: 80px;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            color: #FFD700;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            letter-spacing: 1px;
+        }
+
+        .dharma-wheel {
+            width: 40px;
+            height: 40px;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="45" fill="%23FFD700"/><circle cx="50" cy="50" r="35" fill="none" stroke="%23B8860B" stroke-width="2"/><circle cx="50" cy="50" r="12" fill="%23DAA520"/></svg>') center/contain no-repeat;
+            filter: drop-shadow(0 0 8px rgba(255,215,0,0.4));
+            transition: all 0.3s ease;
+        }
+
+        .logo:hover .dharma-wheel {
+            filter: drop-shadow(0 0 15px rgba(255,215,0,0.6));
+            transform: rotate(30deg);
+        }
+
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+            line-height: 1.1;
+        }
+
+        .logo-year {
+            font-size: 1rem;
+            opacity: 0.9;
+            font-weight: 500;
+        }
+
+        .logo-main {
+            font-size: 1.4rem;
+            font-weight: 700;
+        }
+
+        /* 優化後的導航選單 */
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 0.3rem;
+            align-items: center;
+        }
+
+        .nav-menu > li {
+            position: relative;
+        }
+
+        .nav-menu a {
+            color: rgba(255,255,255,0.9);
+            text-decoration: none;
+            padding: 0.9rem 1.3rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            white-space: nowrap;
+        }
+
+        .nav-menu a i {
+            font-size: 0.9rem;
+        }
+
+        .nav-menu a:hover {
+            background: rgba(255,255,255,0.15);
+            color: #FFD700;
+            transform: translateY(-2px);
+        }
+
+        .nav-menu a.active {
+            background: rgba(255,215,0,0.2);
+            color: #FFD700;
+            font-weight: 600;
+        }
+
+        /* 下拉選單樣式 */
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-toggle {
+            cursor: pointer;
+        }
+
+        .dropdown-toggle::after {
+            content: '\f107';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            margin-left: 0.3rem;
+            font-size: 0.8rem;
+            transition: transform 0.3s ease;
+        }
+
+        .dropdown:hover .dropdown-toggle::after {
+            transform: rotate(180deg);
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: linear-gradient(135deg, rgba(139,69,19,0.98) 0%, rgba(160,82,45,0.98) 100%);
+            min-width: 200px;
+            border-radius: 12px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.25);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            margin-top: 0.5rem;
+            backdrop-filter: blur(10px);
+            overflow: hidden;
+        }
+
+        .dropdown:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-menu li {
+            list-style: none;
+        }
+
+        .dropdown-menu a {
+            padding: 0.9rem 1.3rem;
+            display: block;
+            border-radius: 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            font-size: 0.95rem;
+        }
+
+        .dropdown-menu li:last-child a {
+            border-bottom: none;
+        }
+
+        .dropdown-menu a:hover {
+            background: rgba(255,215,0,0.15);
+            padding-left: 1.8rem;
+            transform: translateY(0);
+        }
+
+        /* 手機選單按鈕 */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.8rem;
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-menu-btn:hover {
+            background: rgba(255,255,255,0.1);
+            color: #FFD700;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(139,69,19,0.7), rgba(218,165,32,0.7)), url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><rect width="100%" height="100%" fill="%23f8f9fa"/><circle cx="600" cy="300" r="150" fill="%23DAA520" opacity="0.1"/></svg>');
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            margin-top: 80px;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            padding: 2rem;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+
+        .demo-notice {
+            background: rgba(255,215,0,0.2);
+            border: 2px solid #FFD700;
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 2rem auto;
+            max-width: 800px;
+            backdrop-filter: blur(10px);
+        }
+
+        .demo-notice h2 {
+            color: #FFD700;
+            margin-bottom: 1rem;
+            font-size: 1.8rem;
+        }
+
+        .demo-notice ul {
+            text-align: left;
+            margin: 1rem 0;
+            padding-left: 2rem;
+        }
+
+        .demo-notice li {
+            margin: 0.8rem 0;
+            font-size: 1.1rem;
+        }
+
+        .demo-notice strong {
+            color: #FFD700;
+        }
+
+        /* 響應式設計 */
+        @media (max-width: 1024px) {
+            .nav-menu a {
+                padding: 0.8rem 1rem;
+                font-size: 0.95rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 80px;
+                left: 0;
+                width: 100%;
+                background: linear-gradient(135deg, #8B4513 0%, #A0522D 100%);
+                padding: 1rem 0;
+                box-shadow: 0 4px 25px rgba(0,0,0,0.2);
+                gap: 0;
+            }
+
+            .nav-menu.mobile-active {
+                display: flex;
+            }
+
+            .nav-menu > li {
+                width: 100%;
+            }
+
+            .nav-menu a {
+                padding: 1rem 2rem;
+                border-radius: 0;
+                justify-content: space-between;
+            }
+
+            .dropdown-menu {
+                position: static;
+                opacity: 1;
+                visibility: visible;
+                transform: none;
+                box-shadow: none;
+                background: rgba(0,0,0,0.1);
+                margin-top: 0;
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.3s ease;
+            }
+
+            .dropdown.mobile-open .dropdown-menu {
+                max-height: 500px;
+            }
+
+            .dropdown-toggle::after {
+                transition: transform 0.3s ease;
+            }
+
+            .dropdown.mobile-open .dropdown-toggle::after {
+                transform: rotate(180deg);
+            }
+
+            .dropdown-menu a {
+                padding-left: 3rem;
+                background: rgba(0,0,0,0.1);
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .hero {
+                margin-top: 80px;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .nav-container {
+                padding: 0 1rem;
+            }
+            
+            .logo {
+                gap: 0.5rem;
+            }
+            
+            .dharma-wheel {
+                width: 32px;
+                height: 32px;
+            }
+            
+            .logo-year {
+                font-size: 0.85rem;
+            }
+            
+            .logo-main {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="nav-container">
+            <div class="logo">
+                <a href="#home" style="color: inherit; text-decoration: none; display: flex; align-items: center; gap: 0.8rem;">
+                    <div class="dharma-wheel"></div>
+                    <div class="logo-text">
+                        <span class="logo-year">2026</span>
+                        <span class="logo-main">寒修行</span>
+                    </div>
+                </a>
+            </div>
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="#home" class="active"><i class="fas fa-home"></i> 首頁</a></li>
+                    <li><a href="interactive.html"><i class="fas fa-users"></i> 2026互動區</a></li>
+                    <li><a href="news.html"><i class="fas fa-newspaper"></i> 最新消息</a></li>
+                    <li><a href="schedule.html"><i class="fas fa-calendar"></i> 時程</a></li>
+                    
+                    <!-- 影片專區下拉選單 -->
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle"><i class="fas fa-video"></i> 影片專區</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="videos.html"><i class="fas fa-play-circle"></i> 法會影片</a></li>
+                            <li><a href="promo.html"><i class="fas fa-film"></i> 參考影片</a></li>
+                        </ul>
+                    </li>
+                    
+                    <!-- 學習專區下拉選單 -->
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle"><i class="fas fa-book"></i> 學習專區</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="doctrine.html"><i class="fas fa-pray"></i> 教誡拜讀</a></li>
+                            <li><a href="scripture.html"><i class="fas fa-book-open"></i> 讀經次第</a></li>
+                            <li><a href="cards.html"><i class="fas fa-images"></i> 卡片介紹</a></li>
+                        </ul>
+                    </li>
+                    
+                    <li><a href="history.html"><i class="fas fa-landmark"></i> 苑史區</a></li>
+                </ul>
+                <button class="mobile-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>✨ 導航列優化示範 ✨</h1>
+            <p>將10個項目整合為7個，使用下拉選單分組</p>
+            
+            <div class="demo-notice">
+                <h2><i class="fas fa-check-circle"></i> 優化重點</h2>
+                <ul>
+                    <li><strong>分組整合：</strong>將「法會影片」和「參考影片」整合為「影片專區」</li>
+                    <li><strong>學習專區：</strong>將「教誡拜讀」、「讀經次第」、「卡片介紹」整合為「學習專區」</li>
+                    <li><strong>增加圖示：</strong>每個項目都加上對應的圖示，提升辨識度</li>
+                    <li><strong>增大間距：</strong>padding 從 0.8rem 1.2rem 增加到 0.9rem 1.3rem</li>
+                    <li><strong>下拉動畫：</strong>平滑的展開動畫，提升使用者體驗</li>
+                    <li><strong>響應式設計：</strong>手機版自動調整為折疊式選單</li>
+                </ul>
+                
+                <p style="margin-top: 1.5rem; font-size: 1.1rem;">
+                    <i class="fas fa-mouse-pointer"></i> <strong>試試看：</strong>將滑鼠移到「影片專區」或「學習專區」查看下拉選單效果！
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // 手機選單功能
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const navMenu = document.querySelector('.nav-menu');
+        const dropdowns = document.querySelectorAll('.dropdown');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            navMenu.classList.toggle('mobile-active');
+            const icon = mobileMenuBtn.querySelector('i');
+            icon.className = navMenu.classList.contains('mobile-active') ? 'fas fa-times' : 'fas fa-bars';
+        });
+
+        // 手機版下拉選單點擊展開
+        if (window.innerWidth <= 768) {
+            dropdowns.forEach(dropdown => {
+                const toggle = dropdown.querySelector('.dropdown-toggle');
+                toggle.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    dropdown.classList.toggle('mobile-open');
+                });
+            });
+        }
+
+        // 桌面版阻止下拉選單連結的預設行為
+        if (window.innerWidth > 768) {
+            dropdowns.forEach(dropdown => {
+                const toggle = dropdown.querySelector('.dropdown-toggle');
+                toggle.addEventListener('click', (e) => {
+                    e.preventDefault();
+                });
+            });
+        }
+
+        // 點擊頁面其他地方關閉選單
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.nav-container')) {
+                navMenu.classList.remove('mobile-active');
+                const icon = mobileMenuBtn.querySelector('i');
+                icon.className = 'fas fa-bars';
+            }
+        });
+
+        // 響應視窗大小變化
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 768) {
+                navMenu.classList.remove('mobile-active');
+                dropdowns.forEach(dropdown => {
+                    dropdown.classList.remove('mobile-open');
+                });
+            }
+        });
+    </script>
+</body>
+</html>

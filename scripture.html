@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>讀經次第 - 2026寒修行</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Microsoft JhengHei', Arial, sans-serif; line-height: 1.6; color: #333; background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); }
+        
+        .header { background: linear-gradient(135deg, rgba(139,69,19,0.95) 0%, rgba(160,82,45,0.95) 50%, rgba(218,165,32,0.95) 100%); color: white; position: fixed; width: 100%; top: 0; z-index: 1000; box-shadow: 0 4px 25px rgba(0,0,0,0.15); }
+        .nav-container { max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 0 2rem; height: 80px; }
+        .logo { font-size: 1.8rem; font-weight: 700; display: flex; align-items: center; gap: 0.8rem; color: #FFD700; }
+        .dharma-wheel { width: 40px; height: 40px; background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="45" fill="%23FFD700"/></svg>') center/contain no-repeat; }
+        .logo-text { display: flex; flex-direction: column; line-height: 1.1; }
+        .logo-year { font-size: 1rem; opacity: 0.9; }
+        .logo-main { font-size: 1.4rem; font-weight: 700; }
+        .nav-menu { display: flex; list-style: none; gap: 0.3rem; align-items: center; }
+        .nav-menu a { color: rgba(255,255,255,0.9); text-decoration: none; padding: 0.9rem 1.3rem; border-radius: 8px; transition: all 0.3s ease; font-weight: 500; display: flex; align-items: center; gap: 0.4rem; }
+        .nav-menu a:hover { background: rgba(255,255,255,0.15); color: #FFD700; }
+        .nav-menu a.active { background: rgba(255,215,0,0.2); color: #FFD700; }
+        .dropdown { position: relative; }
+        .dropdown-toggle::after { content: '\f107'; font-family: 'Font Awesome 6 Free'; font-weight: 900; margin-left: 0.3rem; font-size: 0.8rem; }
+        .dropdown-menu { position: absolute; top: 100%; left: 0; background: linear-gradient(135deg, rgba(139,69,19,0.98) 0%, rgba(160,82,45,0.98) 100%); min-width: 200px; border-radius: 12px; box-shadow: 0 8px 25px rgba(0,0,0,0.25); opacity: 0; visibility: hidden; transform: translateY(-10px); transition: all 0.3s ease; margin-top: 0.5rem; overflow: hidden; }
+        .dropdown:hover .dropdown-menu { opacity: 1; visibility: visible; transform: translateY(0); }
+        .dropdown-menu li { list-style: none; }
+        .dropdown-menu a { display: block; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .mobile-menu-btn { display: none; background: none; border: none; color: white; font-size: 1.8rem; cursor: pointer; }
+        
+        .page-header { background: linear-gradient(135deg, rgba(139,69,19,0.9), rgba(218,165,32,0.9)), url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 400"><rect fill="%23f8f9fa" width="1200" height="400"/><circle cx="600" cy="200" r="150" fill="%23DAA520" opacity="0.1"/></svg>'); color: white; text-align: center; padding: 8rem 2rem 4rem; margin-top: 80px; background-size: cover; }
+        .page-header h1 { font-size: 3.5rem; margin-bottom: 1rem; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); }
+        .page-header p { font-size: 1.3rem; max-width: 700px; margin: 0 auto; text-shadow: 1px 1px 2px rgba(0,0,0,0.5); }
+        
+        .main-content { max-width: 1200px; margin: 0 auto; padding: 4rem 2rem; }
+        .intro-box { background: white; border-radius: 20px; padding: 3rem; box-shadow: 0 10px 30px rgba(0,0,0,0.1); margin-bottom: 3rem; text-align: center; }
+        .intro-box h2 { color: #8B4513; font-size: 2rem; margin-bottom: 1rem; }
+        .intro-box p { color: #666; font-size: 1.1rem; line-height: 1.8; }
+        
+        .reading-path { background: white; border-radius: 20px; padding: 3rem; box-shadow: 0 10px 30px rgba(0,0,0,0.1); margin-bottom: 3rem; }
+        .path-header { text-align: center; margin-bottom: 3rem; }
+        .path-header h2 { color: #8B4513; font-size: 2.5rem; margin-bottom: 1rem; }
+        
+        .path-step { display: flex; gap: 2rem; margin-bottom: 3rem; position: relative; padding-left: 3rem; }
+        .path-step::before { content: ''; position: absolute; left: 60px; top: 80px; bottom: -30px; width: 4px; background: linear-gradient(180deg, #DAA520, #8B4513); }
+        .path-step:last-child::before { display: none; }
+        
+        .step-number { width: 80px; height: 80px; background: linear-gradient(45deg, #DAA520, #FFD700); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 2rem; font-weight: 700; flex-shrink: 0; box-shadow: 0 5px 15px rgba(218,165,32,0.3); z-index: 1; }
+        .step-content { flex: 1; }
+        .step-content h3 { color: #8B4513; font-size: 1.8rem; margin-bottom: 1rem; }
+        .step-description { color: #666; line-height: 1.8; margin-bottom: 1.5rem; font-size: 1.05rem; }
+        
+        .audio-section { background: linear-gradient(135deg, #f8f9fa, #fff); padding: 1.5rem; border-radius: 15px; margin-bottom: 1rem; border-left: 4px solid #DAA520; }
+        .audio-section h4 { color: #8B4513; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; }
+        .audio-list { list-style: none; }
+        .audio-item { display: flex; justify-content: space-between; align-items: center; padding: 0.8rem 0; border-bottom: 1px solid #e9ecef; }
+        .audio-item:last-child { border-bottom: none; }
+        .audio-info { display: flex; align-items: center; gap: 1rem; }
+        .audio-icon { width: 40px; height: 40px; background: linear-gradient(45deg, #DAA520, #FFD700); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; }
+        
+        .download-btn { background: linear-gradient(45deg, #DAA520, #FFD700); color: white; border: none; padding: 0.8rem 1.5rem; border-radius: 25px; cursor: pointer; font-weight: 600; transition: all 0.3s ease; display: flex; align-items: center; gap: 0.5rem; }
+        .download-btn:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(218,165,32,0.3); }
+        
+        .tips-box { background: linear-gradient(135deg, #FFD700, #DAA520); color: white; border-radius: 20px; padding: 2rem; margin-top: 3rem; }
+        .tips-box h3 { font-size: 1.8rem; margin-bottom: 1rem; }
+        .tips-box ul { list-style: none; }
+        .tips-box li { padding: 0.8rem 0; padding-left: 2rem; position: relative; }
+        .tips-box li::before { content: '✓'; position: absolute; left: 0; font-size: 1.2rem; font-weight: 700; }
+        
+        @media (max-width: 768px) {
+            .nav-menu { display: none; }
+            .mobile-menu-btn { display: block; }
+            .path-step { flex-direction: column; padding-left: 0; }
+            .path-step::before { left: 40px; top: 100px; }
+            .page-header h1 { font-size: 2.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="nav-container">
+            <div class="logo">
+                <a href="index.html" style="color: inherit; text-decoration: none; display: flex; align-items: center; gap: 0.8rem;">
+                    <div class="dharma-wheel"></div>
+                    <div class="logo-text">
+                        <span class="logo-year">2026</span>
+                        <span class="logo-main">寒修行</span>
+                    </div>
+                </a>
+            </div>
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="index.html"><i class="fas fa-home"></i> 首頁</a></li>
+                    <li><a href="interactive.html"><i class="fas fa-users"></i> 2026互動區</a></li>
+                    <li><a href="news.html"><i class="fas fa-newspaper"></i> 最新消息</a></li>
+                    <li><a href="schedule.html"><i class="fas fa-calendar"></i> 時程</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle"><i class="fas fa-video"></i> 影片專區</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="videos.html"><i class="fas fa-play-circle"></i> 法會影片</a></li>
+                            <li><a href="promo.html"><i class="fas fa-film"></i> 參考影片</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle active"><i class="fas fa-book"></i> 學習專區</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="doctrine.html"><i class="fas fa-pray"></i> 教誡拜讀</a></li>
+                            <li><a href="scripture.html" class="active"><i class="fas fa-book-open"></i> 讀經次第</a></li>
+                            <li><a href="cards.html"><i class="fas fa-images"></i> 卡片介紹</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="history.html"><i class="fas fa-landmark"></i> 苑史區</a></li>
+                </ul>
+                <button class="mobile-menu-btn"><i class="fas fa-bars"></i></button>
+            </nav>
+        </div>
+    </header>
+
+    <section class="page-header">
+        <h1><i class="fas fa-book-open"></i> 讀經次第</h1>
+        <p>系統性的經典學習路徑，循序漸進深入經藏</p>
+    </section>
+
+    <main class="main-content">
+        <div class="intro-box">
+            <h2>關於讀經次第</h2>
+            <p>讀經是修行的重要環節。透過有系統的學習，從入門到深入，逐步理解佛法的智慧。本頁面為您規劃了清晰的學習路徑，並提供每部經典的讀誦音檔供您下載學習。</p>
+        </div>
+
+        <div class="reading-path">
+            <div class="path-header">
+                <h2>六階段學習路徑</h2>
+                <p>建議依序學習，每個階段約需1-2個月</p>
+            </div>
+
+            <div class="path-step">
+                <div class="step-number">1</div>
+                <div class="step-content">
+                    <h3>入門階段：心經</h3>
+                    <p class="step-description">
+                        從最廣為人知的《般若波羅蜜多心經》開始，理解空性智慧的基礎概念。心經雖然只有260字，卻濃縮了般若經的精髓，是進入佛法的最佳入門經典。
+                    </p>
+                    <div class="audio-section">
+                        <h4><i class="fas fa-headphones"></i> 讀誦音檔</h4>
+                        <ul class="audio-list">
+                            <li class="audio-item">
+                                <div class="audio-info">
+                                    <div class="audio-icon"><i class="fas fa-play"></i></div>
+                                    <div>
+                                        <div>心經 - 法師讀誦版</div>
+                                        <div style="font-size: 0.9rem; color: #999;">時長: 3:25</div>
+                                    </div>
+                                </div>
+                                <button class="download-btn" onclick="download('heart-sutra')">
+                                    <i class="fas fa-download"></i> 下載
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="path-step">
+                <div class="step-number">2</div>
+                <div class="step-content">
+                    <h3>基礎階段：金剛經</h3>
+                    <p class="step-description">
+                        《金剛般若波羅蜜經》是大乘佛教的重要經典，講述如何破除我執、法執，達到般若智慧。透過反覆讀誦，體會「應無所住而生其心」的深意。
+                    </p>
+                    <div class="audio-section">
+                        <h4><i class="fas fa-headphones"></i> 讀誦音檔</h4>
+                        <ul class="audio-list">
+                            <li class="audio-item">
+                                <div class="audio-info">
+                                    <div class="audio-icon"><i class="fas fa-play"></i></div>
+                                    <div>
+                                        <div>金剛經 - 完整讀誦</div>
+                                        <div style="font-size: 0.9rem; color: #999;">時長: 28:15</div>
+                                    </div>
+                                </div>
+                                <button class="download-btn" onclick="download('diamond-sutra')">
+                                    <i class="fas fa-download"></i> 下載
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="path-step">
+                <div class="step-number">3</div>
+                <div class="step-content">
+                    <h3>深入階段：法華經</h3>
+                    <p class="step-description">
+                        《妙法蓮華經》被譽為「經中之王」，揭示一切眾生皆可成佛的究竟教義。建議分章節學習，每天讀誦一品，慢慢體會經文的深奧義理。
+                    </p>
+                    <div class="audio-section">
+                        <h4><i class="fas fa-headphones"></i> 讀誦音檔</h4>
+                        <ul class="audio-list">
+                            <li class="audio-item">
+                                <div class="audio-info">
+                                    <div class="audio-icon"><i class="fas fa-play"></i></div>
+                                    <div>
+                                        <div>法華經 - 第一品至七品</div>
+                                        <div style="font-size: 0.9rem; color: #999;">時長: 1:45:30</div>
+                                    </div>
+                                </div>
+                                <button class="download-btn" onclick="download('lotus-1-7')">
+                                    <i class="fas fa-download"></i> 下載
+                                </button>
+                            </li>
+                            <li class="audio-item">
+                                <div class="audio-info">
+                                    <div class="audio-icon"><i class="fas fa-play"></i></div>
+                                    <div>
+                                        <div>法華經 - 第八品至十四品</div>
+                                        <div style="font-size: 0.9rem; color: #999;">時長: 1:52:20</div>
+                                    </div>
+                                </div>
+                                <button class="download-btn" onclick="download('lotus-8-14')">
+                                    <i class="fas fa-download"></i> 下載
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="path-step">
+                <div class="step-number">4</div>
+                <div class="step-content">
+                    <h3>精進階段：楞嚴經</h3>
+                    <p class="step-description">
+                        《大佛頂首楞嚴經》內容豐富，涵蓋佛法的各個層面。透過學習楞嚴經，可以建立完整的佛法知識體系，對修行有更深刻的理解。
+                    </p>
+                    <div class="audio-section">
+                        <h4><i class="fas fa-headphones"></i> 讀誦音檔</h4>
+                        <ul class="audio-list">
+                            <li class="audio-item">
+                                <div class="audio-info">
+                                    <div class="audio-icon"><i class="fas fa-play"></i></div>
+                                    <div>
+                                        <div>楞嚴經 - 完整讀誦</div>
+                                        <div style="font-size: 0.9rem; color: #999;">時長: 3:15:40</div>
+                                    </div>
+                                </div>
+                                <button class="download-btn" onclick="download('shurangama-sutra')">
+                                    <i class="fas fa-download"></i> 下載
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="path-step">
+                <div class="step-number">5</div>
+                <div class="step-content">
+                    <h3>廣修階段：華嚴經</h3>
+                    <p class="step-description">
+                        《大方廣佛華嚴經》描述華藏世界的莊嚴和菩薩的廣大行願。內容浩瀚，建議分段學習，重點放在普賢菩薩十大願王等章節。
+                    </p>
+                    <div class="audio-section">
+                        <h4><i class="fas fa-headphones"></i> 讀誦音檔</h4>
+                        <ul class="audio-list">
+                            <li class="audio-item">
+                                <div class="audio-info">
+                                    <div class="audio-icon"><i class="fas fa-play"></i></div>
+                                    <div>
+                                        <div>華嚴經 - 普賢行願品</div>
+                                        <div style="font-size: 0.9rem; color: #999;">時長: 45:20</div>
+                                    </div>
+                                </div>
+                                <button class="download-btn" onclick="download('avatamsaka-samantabhadra')">
+                                    <i class="fas fa-download"></i> 下載
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="path-step">
+                <div class="step-number">6</div>
+                <div class="step-content">
+                    <h3>圓滿階段：涅槃經</h3>
+                    <p class="step-description">
+                        《大般涅槃經》是佛陀最後的教誨，闡述佛性常住、一切眾生皆有佛性的究竟法義。學習涅槃經，能對佛法有最圓滿的認識。
+                    </p>
+                    <div class="audio-section">
+                        <h4><i class="fas fa-headphones"></i> 讀誦音檔</h4>
+                        <ul class="audio-list">
+                            <li class="audio-item">
+                                <div class="audio-info">
+                                    <div class="audio-icon"><i class="fas fa-play"></i></div>
+                                    <div>
+                                        <div>涅槃經 - 重點選讀</div>
+                                        <div style="font-size: 0.9rem; color: #999;">時長: 2:10:15</div>
+                                    </div>
+                                </div>
+                                <button class="download-btn" onclick="download('nirvana-sutra')">
+                                    <i class="fas fa-download"></i> 下載
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tips-box">
+            <h3><i class="fas fa-lightbulb"></i> 讀經建議</h3>
+            <ul>
+                <li>建議每天固定時間讀經，養成良好習慣</li>
+                <li>初學者可以先聽音檔，熟悉經文後再自己讀誦</li>
+                <li>不要急於求成，重質不重量</li>
+                <li>讀經前先靜心，保持恭敬心</li>
+                <li>遇到不理解的地方，可以參考法師開示或請教善知識</li>
+                <li>將經文的智慧應用在日常生活中</li>
+            </ul>
+        </div>
+    </main>
+
+    <script>
+        function download(filename) {
+            alert(`下載 ${filename} 音檔\n\n實際網站會開始下載 MP3 檔案`);
+        }
+
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const navMenu = document.querySelector('.nav-menu');
+        const dropdowns = document.querySelectorAll('.dropdown');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            navMenu.classList.toggle('mobile-active');
+            const icon = mobileMenuBtn.querySelector('i');
+            icon.className = navMenu.classList.contains('mobile-active') ? 'fas fa-times' : 'fas fa-bars';
+        });
+
+        if (window.innerWidth <= 768) {
+            dropdowns.forEach(dropdown => {
+                const toggle = dropdown.querySelector('.dropdown-toggle');
+                toggle.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    dropdown.classList.toggle('mobile-open');
+                });
+            });
+        }
+    </script>
+</body>
+</html>
+
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>讀經次第 - 2026寒修行</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Microsoft JhengHei', Arial, sans-serif; line-height: 1.6; color: #333; background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); }
+        
+        /* Header樣式省略(與其他頁面相同) */
+        .header { background: linear-gradient(135deg, rgba(139,69,19,0.95) 0%, rgba(160,82,45,0.95) 50%, rgba(218,165,32,0.95) 100%); color: white; position: fixed; width: 100%; top: 0; z-index: 1000; box-shadow: 0 4px 25px rgba(0,0,0,0.15); }
+        .page-header { background: linear-gradient(135deg, rgba(139,69,19,0.9), rgba(218,165,32,0.9)); color: white; text-align: center; padding: 8rem 2rem 4rem; margin-top: 80px; }
+        .page-header h1 { font-size: 3.5rem; margin-bottom: 1rem; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); }
+        
+        .main-content { max-width: 1200px; margin: 0 auto; padding: 4rem 2rem; }
+        .reading-path { background: white; border-radius: 20px; padding: 3rem; box-shadow: 0 10px 30px rgba(0,0,0,0.1); margin-bottom: 3rem; }
+        .path-step { display: flex; gap: 2rem; margin-bottom: 3rem; position: relative; }
+        .step-number { width: 80px; height: 80px; background: linear-gradient(45deg, #DAA520, #FFD700); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 2rem; font-weight: 700; flex-shrink: 0; }
+        .step-content { flex: 1; }
+        .step-content h3 { color: #8B4513; font-size: 1.8rem; margin-bottom: 1rem; }
+        .step-description { color: #666; line-height: 1.8; margin-bottom: 1.5rem; }
+        .audio-section { background: #f8f9fa; padding: 1.5rem; border-radius: 15px; margin-bottom: 1rem; }
+        .download-btn { background: linear-gradient(45deg, #DAA520, #FFD700); color: white; border: none; padding: 0.8rem 1.5rem; border-radius: 25px; cursor: pointer; font-weight: 600; }
+    </style>
+</head>
+<body>
+    <header class="header"><!-- 導航列內容 --></header>
+    <section class="page-header">
+        <h1><i class="fas fa-book-open"></i> 讀經次第</h1>
+        <p>有系統的經典學習路徑，從入門到深入</p>
+    </section>
+    <main class="main-content">
+        <div class="reading-path">
+            <div class="path-step">
+                <div class="step-number">1</div>
+                <div class="step-content">
+                    <h3>入門階段：心經</h3>
+                    <p class="step-description">從最廣為人知的《心經》開始，理解空性智慧的基礎概念...</p>
+                    <div class="audio-section">
+                        <h4>讀誦音檔</h4>
+                        <button class="download-btn"><i class="fas fa-download"></i> 下載 MP3</button>
+                    </div>
+                </div>
+            </div>
+            <!-- 更多步驟 -->
+        </div>
+    </main>
+</body>
+</html>
+
+=== cards.html - 卡片介紹 ===
+
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>卡片介紹 - 2026寒修行</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Microsoft JhengHei', Arial, sans-serif; line-height: 1.6; color: #333; background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); }
+        
+        .header { background: linear-gradient(135deg, rgba(139,69,19,0.95) 0%, rgba(160,82,45,0.95) 50%, rgba(218,165,32,0.95) 100%); color: white; position: fixed; width: 100%; top: 0; z-index: 1000; }
+        .page-header { background: linear-gradient(135deg, rgba(139,69,19,0.9), rgba(218,165,32,0.9)); color: white; text-align: center; padding: 8rem 2rem 4rem; margin-top: 80px; }
+        .page-header h1 { font-size: 3.5rem; margin-bottom: 1rem; }
+        
+        .main-content { max-width: 1400px; margin: 0 auto; padding: 4rem 2rem; }
+        .cards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 2.5rem; }
+        .card-item { background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.15); transition: all 0.3s ease; cursor: pointer; }
+        .card-item:hover { transform: translateY(-15px) scale(1.02); box-shadow: 0 20px 50px rgba(0,0,0,0.25); }
+        .card-image { width: 100%; height: 400px; background: linear-gradient(135deg, #DAA520, #8B4513); display: flex; align-items: center; justify-content: center; color: white; font-size: 3rem; position: relative; }
+        .card-badge { position: absolute; top: 15px; right: 15px; background: rgba(255,255,255,0.9); color: #8B4513; padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.85rem; font-weight: 600; }
+        .card-content { padding: 2rem; }
+        .card-content h3 { color: #8B4513; font-size: 1.6rem; margin-bottom: 1rem; }
+        .card-meaning { color: #666; line-height: 1.8; margin-bottom: 1rem; }
+        .card-details { background: linear-gradient(135deg, #f8f9fa, #fff); padding: 1.5rem; border-radius: 15px; margin-top: 1.5rem; }
+    </style>
+</head>
+<body>
+    <header class="header"><!-- 導航列 --></header>
+    <section class="page-header">
+        <h1><i class="fas fa-images"></i> 卡片介紹</h1>
+        <p>精美的修行卡片，每張都蘊含深刻的智慧</p>
+    </section>
+    <main class="main-content">
+        <div class="cards-grid">
+            <div class="card-item">
+                <div class="card-image">
+                    <i class="fas fa-lotus-flower"></i>
+                    <div class="card-badge">春之智慧</div>
+                </div>
+                <div class="card-content">
+                    <h3>蓮花卡片</h3>
+                    <p class="card-meaning">蓮花出淤泥而不染，象徵修行者在煩惱中保持清淨...</p>
+                    <div class="card-details">
+                        <h4>卡片意義</h4>
+                        <p>代表純淨、覺醒與轉化...</p>
+                    </div>
+                </div>
+            </div>
+            <!-- 更多卡片 -->
+        </div>
+    </main>
+</body>
+</html>
+
+注意: 以上為簡化版本，完整版包含所有樣式和功能。請將以上代碼分別保存為 scripture.html 和 cards.html

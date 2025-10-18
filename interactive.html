@@ -1,0 +1,1288 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2026互動區 - 真如苑台灣教區</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Microsoft JhengHei', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            min-height: 100vh;
+        }
+
+        /* Header & Navigation - 與 index.html 相同的樣式 */
+        .header {
+            background: linear-gradient(135deg, rgba(139,69,19,0.95) 0%, rgba(160,82,45,0.95) 50%, rgba(218,165,32,0.95) 100%);
+            color: white;
+            padding: 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 25px rgba(0,0,0,0.15);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+            height: 80px;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            color: #FFD700;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            letter-spacing: 1px;
+        }
+
+        .dharma-wheel {
+            width: 40px;
+            height: 40px;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><linearGradient id="goldGradient" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:%23FFD700;stop-opacity:1" /><stop offset="50%" style="stop-color:%23FFA500;stop-opacity:1" /><stop offset="100%" style="stop-color:%23DAA520;stop-opacity:1" /></linearGradient></defs><g fill="url(%23goldGradient)" stroke="%23B8860B" stroke-width="0.5"><circle cx="50" cy="50" r="45"/><circle cx="50" cy="50" r="35" fill="none" stroke-width="2"/><circle cx="50" cy="50" r="25" fill="none" stroke-width="1.5"/><g><rect x="48" y="5" width="4" height="20" rx="2"/><rect x="48" y="75" width="4" height="20" rx="2"/><rect x="5" y="48" width="20" height="4" rx="2"/><rect x="75" y="48" width="20" height="4" rx="2"/></g><circle cx="50" cy="50" r="12" fill="url(%23goldGradient)"/></g></svg>') center/contain no-repeat;
+            filter: drop-shadow(0 0 8px rgba(255,215,0,0.4));
+            transition: all 0.3s ease;
+        }
+
+        .logo:hover .dharma-wheel {
+            filter: drop-shadow(0 0 15px rgba(255,215,0,0.6));
+            transform: rotate(30deg);
+        }
+
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+            line-height: 1.1;
+        }
+
+        .logo-year {
+            font-size: 1rem;
+            opacity: 0.9;
+            font-weight: 500;
+        }
+
+        .logo-main {
+            font-size: 1.4rem;
+            font-weight: 700;
+        }
+
+        /* 優化後的導航選單 */
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 0.3rem;
+            align-items: center;
+        }
+
+        .nav-menu > li {
+            position: relative;
+        }
+
+        .nav-menu a {
+            color: rgba(255,255,255,0.9);
+            text-decoration: none;
+            padding: 0.9rem 1.3rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            white-space: nowrap;
+        }
+
+        .nav-menu a i {
+            font-size: 0.9rem;
+        }
+
+        .nav-menu a:hover {
+            background: rgba(255,255,255,0.15);
+            color: #FFD700;
+            transform: translateY(-2px);
+        }
+
+        .nav-menu a.active {
+            background: rgba(255,215,0,0.2);
+            color: #FFD700;
+            font-weight: 600;
+        }
+
+        /* 下拉選單樣式 */
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-toggle {
+            cursor: pointer;
+        }
+
+        .dropdown-toggle::after {
+            content: '\f107';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            margin-left: 0.3rem;
+            font-size: 0.8rem;
+            transition: transform 0.3s ease;
+        }
+
+        .dropdown:hover .dropdown-toggle::after {
+            transform: rotate(180deg);
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: linear-gradient(135deg, rgba(139,69,19,0.98) 0%, rgba(160,82,45,0.98) 100%);
+            min-width: 200px;
+            border-radius: 12px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.25);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            margin-top: 0.5rem;
+            backdrop-filter: blur(10px);
+            overflow: hidden;
+        }
+
+        .dropdown:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-menu li {
+            list-style: none;
+        }
+
+        .dropdown-menu a {
+            padding: 0.9rem 1.3rem;
+            display: block;
+            border-radius: 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            font-size: 0.95rem;
+        }
+
+        .dropdown-menu li:last-child a {
+            border-bottom: none;
+        }
+
+        .dropdown-menu a:hover {
+            background: rgba(255,215,0,0.15);
+            padding-left: 1.8rem;
+            transform: translateY(0);
+        }
+
+        /* 手機選單按鈕 */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.8rem;
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-menu-btn:hover {
+            background: rgba(255,255,255,0.1);
+            color: #FFD700;
+        }
+
+        /* Page Header */
+        .page-header {
+            background: linear-gradient(135deg, rgba(139,69,19,0.9), rgba(218,165,32,0.9)), url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 400"><defs><pattern id="lotus" patternUnits="userSpaceOnUse" width="100" height="100"><rect width="100" height="100" fill="%23f8f9fa" opacity="0.1"/><circle cx="50" cy="50" r="20" fill="%23DAA520" opacity="0.2"/></pattern></defs><rect width="100%" height="100%" fill="url(%23lotus)"/></svg>');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 8rem 2rem 4rem;
+            margin-top: 80px;
+        }
+
+        .page-header h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .page-header p {
+            font-size: 1.3rem;
+            max-width: 600px;
+            margin: 0 auto;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+
+        /* Main Content */
+        .main-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .interactive-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 4rem;
+        }
+
+        .interactive-section {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+
+        .interactive-section:hover {
+            transform: translateY(-5px);
+        }
+
+        .section-header {
+            background: linear-gradient(135deg, #8B4513, #DAA520);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .section-header h2 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .section-content {
+            padding: 2rem;
+        }
+
+        /* Daily Activity Section */
+        .daily-activity {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .activity-card {
+            background: linear-gradient(135deg, #FFD700, #DAA520);
+            color: #8B4513;
+            padding: 2rem;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+        }
+
+        .activity-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .activity-card p {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .progress-bar {
+            background: rgba(139,69,19,0.2);
+            height: 10px;
+            border-radius: 5px;
+            overflow: hidden;
+            margin-bottom: 1rem;
+        }
+
+        .progress-fill {
+            background: #8B4513;
+            height: 100%;
+            width: 65%;
+            border-radius: 5px;
+            transition: width 0.3s ease;
+        }
+
+        .activity-btn {
+            background: #8B4513;
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 25px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .activity-btn:hover {
+            background: #A0522D;
+            transform: translateY(-2px);
+        }
+
+        /* Prayer Wall */
+        .prayer-wall {
+            grid-column: 1 / -1;
+        }
+
+        .prayer-form {
+            background: #f8f9fa;
+            padding: 2rem;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #8B4513;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #DAA520;
+        }
+
+        .form-group textarea {
+            height: 120px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            background: linear-gradient(45deg, #DAA520, #FFD700);
+            color: #8B4513;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(218,165,32,0.3);
+        }
+
+        .prayers-display {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .prayer-card {
+            background: linear-gradient(135deg, #fff, #f8f9fa);
+            padding: 1.5rem;
+            border-radius: 15px;
+            border-left: 4px solid #DAA520;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+        }
+
+        .prayer-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        .prayer-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .prayer-author {
+            font-weight: 600;
+            color: #8B4513;
+        }
+
+        .prayer-date {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .prayer-content {
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .prayer-reactions {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .reaction-btn {
+            background: none;
+            border: none;
+            color: #8B4513;
+            cursor: pointer;
+            transition: color 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .reaction-btn:hover {
+            color: #DAA520;
+        }
+
+        /* Photo Upload Section */
+        .photo-upload {
+            background: #f8f9fa;
+            padding: 2rem;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .upload-area {
+            border: 3px dashed #DAA520;
+            border-radius: 15px;
+            padding: 3rem;
+            margin-bottom: 2rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .upload-area:hover {
+            background: rgba(218,165,32,0.05);
+            border-color: #8B4513;
+        }
+
+        .upload-icon {
+            font-size: 3rem;
+            color: #DAA520;
+            margin-bottom: 1rem;
+        }
+
+        .upload-text {
+            font-size: 1.1rem;
+            color: #666;
+        }
+
+        .file-input {
+            display: none;
+        }
+
+        .photo-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .photo-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .photo-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+        }
+
+        .photo-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .photo-info {
+            padding: 1.5rem;
+        }
+
+        .photo-caption {
+            color: #555;
+            margin-bottom: 1rem;
+            line-height: 1.5;
+        }
+
+        .photo-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        /* Social Sharing */
+        .social-sharing {
+            background: linear-gradient(135deg, #8B4513, #DAA520);
+            color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+        }
+
+        .social-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .social-btn {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            border: none;
+            padding: 1rem;
+            border-radius: 50%;
+            font-size: 1.2rem;
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .social-btn:hover {
+            background: rgba(255,255,255,0.3);
+            transform: translateY(-3px);
+        }
+
+        .social-btn.facebook:hover { background: #3b5998; }
+        .social-btn.line:hover { background: #00c300; }
+        .social-btn.instagram:hover { background: #e4405f; }
+        .social-btn.twitter:hover { background: #1da1f2; }
+
+        /* 響應式設計 */
+        @media (max-width: 1024px) {
+            .nav-menu a {
+                padding: 0.8rem 1rem;
+                font-size: 0.95rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 80px;
+                left: 0;
+                width: 100%;
+                background: linear-gradient(135deg, #8B4513 0%, #A0522D 100%);
+                padding: 1rem 0;
+                box-shadow: 0 4px 25px rgba(0,0,0,0.2);
+                gap: 0;
+            }
+
+            .nav-menu.mobile-active {
+                display: flex;
+            }
+
+            .nav-menu > li {
+                width: 100%;
+            }
+
+            .nav-menu a {
+                padding: 1rem 2rem;
+                border-radius: 0;
+                justify-content: space-between;
+            }
+
+            .dropdown-menu {
+                position: static;
+                opacity: 1;
+                visibility: visible;
+                transform: none;
+                box-shadow: none;
+                background: rgba(0,0,0,0.1);
+                margin-top: 0;
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.3s ease;
+            }
+
+            .dropdown.mobile-open .dropdown-menu {
+                max-height: 500px;
+            }
+
+            .dropdown-toggle::after {
+                transition: transform 0.3s ease;
+            }
+
+            .dropdown.mobile-open .dropdown-toggle::after {
+                transform: rotate(180deg);
+            }
+
+            .dropdown-menu a {
+                padding-left: 3rem;
+                background: rgba(0,0,0,0.1);
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .page-header h1 {
+                font-size: 2.5rem;
+            }
+
+            .interactive-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .prayers-display {
+                grid-template-columns: 1fr;
+            }
+
+            .photo-gallery {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            }
+
+            .social-buttons {
+                gap: 0.5rem;
+            }
+
+            .social-btn {
+                width: 45px;
+                height: 45px;
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .nav-container {
+                padding: 0 1rem;
+            }
+            
+            .logo {
+                gap: 0.5rem;
+            }
+            
+            .dharma-wheel {
+                width: 32px;
+                height: 32px;
+            }
+            
+            .logo-year {
+                font-size: 0.85rem;
+            }
+            
+            .logo-main {
+                font-size: 1.2rem;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-in {
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        /* Loading Animation */
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,0.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="nav-container">
+            <div class="logo">
+                <a href="index.html" style="color: inherit; text-decoration: none; display: flex; align-items: center; gap: 0.8rem;">
+                    <div class="dharma-wheel"></div>
+                    <div class="logo-text">
+                        <span class="logo-year">2026</span>
+                        <span class="logo-main">寒修行</span>
+                    </div>
+                </a>
+            </div>
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="index.html"><i class="fas fa-home"></i> 首頁</a></li>
+                    <li><a href="interactive.html" class="active"><i class="fas fa-users"></i> 2026互動區</a></li>
+                    <li><a href="news.html"><i class="fas fa-newspaper"></i> 最新消息</a></li>
+                    <li><a href="schedule.html"><i class="fas fa-calendar"></i> 時程</a></li>
+                    
+                    <!-- 影片專區下拉選單 -->
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle"><i class="fas fa-video"></i> 影片專區</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="videos.html"><i class="fas fa-play-circle"></i> 法會影片</a></li>
+                            <li><a href="promo.html"><i class="fas fa-film"></i> 參考影片</a></li>
+                        </ul>
+                    </li>
+                    
+                    <!-- 學習專區下拉選單 -->
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle"><i class="fas fa-book"></i> 學習專區</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="doctrine.html"><i class="fas fa-pray"></i> 教誡拜讀</a></li>
+                            <li><a href="scripture.html"><i class="fas fa-book-open"></i> 讀經次第</a></li>
+                            <li><a href="cards.html"><i class="fas fa-images"></i> 卡片介紹</a></li>
+                        </ul>
+                    </li>
+                    
+                    <li><a href="history.html"><i class="fas fa-landmark"></i> 苑史區</a></li>
+                </ul>
+                <button class="mobile-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <h1><i class="fas fa-users"></i> 2026互動區</h1>
+        <p>與全體信眾一同參與,分享修行路上的點點滴滴,讓心靈在交流中獲得成長</p>
+    </section>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="interactive-grid">
+            <!-- Daily Activity Section -->
+            <div class="interactive-section animate-in">
+                <div class="section-header">
+                    <h2><i class="fas fa-calendar-day"></i> 今日修行目標</h2>
+                </div>
+                <div class="section-content">
+                    <div class="daily-activity">
+                        <div class="activity-card">
+                            <h3>今日主題:感恩與慈悲</h3>
+                            <p>在日常生活中實踐感恩的心,對身邊的每一個人、每一件事心懷感激,同時培養慈悲心,關愛所有眾生。</p>
+                            <div class="progress-bar">
+                                <div class="progress-fill"></div>
+                            </div>
+                            <p><strong>完成進度: 65%</strong></p>
+                            <button class="activity-btn" onclick="completeActivity()">
+                                <i class="fas fa-check"></i> 標記完成
+                            </button>
+                        </div>
+                        
+                        <div style="text-align: left;">
+                            <h4 style="color: #8B4513; margin-bottom: 1rem;">修行指引:</h4>
+                            <ul style="color: #555; padding-left: 1.5rem;">
+                                <li>早晨起床後,感恩新的一天</li>
+                                <li>用餐前,感恩食物的來源</li>
+                                <li>對遇到的每個人心懷慈悲</li>
+                                <li>晚間反思今日的感恩時刻</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Photo Upload Section -->
+            <div class="interactive-section animate-in">
+                <div class="section-header">
+                    <h2><i class="fas fa-camera"></i> 修行相片分享</h2>
+                </div>
+                <div class="section-content">
+                    <div class="photo-upload">
+                        <div class="upload-area" onclick="document.getElementById('photo-input').click()">
+                            <div class="upload-icon">
+                                <i class="fas fa-cloud-upload-alt"></i>
+                            </div>
+                            <div class="upload-text">
+                                <p><strong>點擊上傳您的修行照片</strong></p>
+                                <p>分享在家修行、學習心得或參與活動的珍貴時刻</p>
+                            </div>
+                        </div>
+                        <input type="file" id="photo-input" class="file-input" accept="image/*" onchange="handlePhotoUpload(event)">
+                        <p style="font-size: 0.9rem; color: #666;">
+                            * 上傳的照片將經過審核後顯示在展示牆上
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Prayer Wall -->
+        <div class="interactive-section prayer-wall animate-in">
+            <div class="section-header">
+                <h2><i class="fas fa-hands"></i> 互動祈福牆</h2>
+                <p>在這裡留下您的心願與祝福,與所有信眾一同祈禱</p>
+            </div>
+            <div class="section-content">
+                <div class="prayer-form">
+                    <form onsubmit="submitPrayer(event)">
+                        <div class="form-group">
+                            <label for="prayer-name">您的法名(或暱稱)</label>
+                            <input type="text" id="prayer-name" required placeholder="請輸入您的法名或暱稱">
+                        </div>
+                        <div class="form-group">
+                            <label for="prayer-content">祈福內容</label>
+                            <textarea id="prayer-content" required placeholder="請分享您的心願、感恩或為他人的祝福..."></textarea>
+                        </div>
+                        <button type="submit" class="submit-btn">
+                            <i class="fas fa-paper-plane"></i> 發送祈福
+                        </button>
+                    </form>
+                </div>
+
+                <div class="prayers-display" id="prayers-container">
+                    <!-- 預設祈福內容 -->
+                    <div class="prayer-card">
+                        <div class="prayer-header">
+                            <span class="prayer-author">慧心</span>
+                            <span class="prayer-date">2小時前</span>
+                        </div>
+                        <div class="prayer-content">
+                            感恩能夠參與2026年寒修行,願所有眾生都能在修行路上獲得平安與智慧。也祈願家人身體健康,工作順利。南無真如。
+                        </div>
+                        <div class="prayer-reactions">
+                            <button class="reaction-btn" onclick="addReaction(this, 'like')">
+                                <i class="fas fa-heart"></i> <span>12</span>
+                            </button>
+                            <button class="reaction-btn" onclick="addReaction(this, 'pray')">
+                                <i class="fas fa-hands"></i> <span>8</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="prayer-card">
+                        <div class="prayer-header">
+                            <span class="prayer-author">法喜</span>
+                            <span class="prayer-date">5小時前</span>
+                        </div>
+                        <div class="prayer-content">
+                            今日修行感受到內心的平靜,感恩開祖與苑主的慈悲教導。願將此功德迴向給所有需要幫助的眾生,希望世界和平,人人都能離苦得樂。
+                        </div>
+                        <div class="prayer-reactions">
+                            <button class="reaction-btn" onclick="addReaction(this, 'like')">
+                                <i class="fas fa-heart"></i> <span>15</span>
+                            </button>
+                            <button class="reaction-btn" onclick="addReaction(this, 'pray')">
+                                <i class="fas fa-hands"></i> <span>11</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="prayer-card">
+                        <div class="prayer-header">
+                            <span class="prayer-author">智慧</span>
+                            <span class="prayer-date">1天前</span>
+                        </div>
+                        <div class="prayer-content">
+                            參與線上法會讓我深深感動,雖然無法親臨現場,但透過網路也能感受到大家的虔誠。祈願疫情早日結束,讓我們能夠再次相聚在精舍。
+                        </div>
+                        <div class="prayer-reactions">
+                            <button class="reaction-btn" onclick="addReaction(this, 'like')">
+                                <i class="fas fa-heart"></i> <span>23</span>
+                            </button>
+                            <button class="reaction-btn" onclick="addReaction(this, 'pray')">
+                                <i class="fas fa-hands"></i> <span>18</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Photo Gallery -->
+        <div class="interactive-section animate-in">
+            <div class="section-header">
+                <h2><i class="fas fa-images"></i> 修行照片展示牆</h2>
+                <p>信眾們分享的珍貴修行時刻</p>
+            </div>
+            <div class="section-content">
+                <div class="photo-gallery">
+                    <div class="photo-card">
+                        <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='200'><rect width='100%' height='100%' fill='%23DAA520'/><text x='50%' y='50%' fill='white' text-anchor='middle' dy='.3em' font-size='16'>在家修行</text></svg>" alt="在家修行">
+                        <div class="photo-info">
+                            <div class="photo-caption">今日在家中設置了小佛壇,與家人一同誦經修行,感受到內心的平靜與喜悅。</div>
+                            <div class="photo-meta">
+                                <span>by 法喜</span>
+                                <span>2天前</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="photo-card">
+                        <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='200'><rect width='100%' height='100%' fill='%238B4513'/><text x='50%' y='50%' fill='white' text-anchor='middle' dy='.3em' font-size='16'>學習筆記</text></svg>" alt="學習筆記">
+                        <div class="photo-info">
+                            <div class="photo-caption">整理了這個月的學習心得,每一頁都是修行路上的珍貴收穫。</div>
+                            <div class="photo-meta">
+                                <span>by 慧心</span>
+                                <span>3天前</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="photo-card">
+                        <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='200'><rect width='100%' height='100%' fill='%23B8860B'/><text x='50%' y='50%' fill='white' text-anchor='middle' dy='.3em' font-size='16'>線上法會</text></svg>" alt="線上法會">
+                        <div class="photo-info">
+                            <div class="photo-caption">透過電腦參與線上法會,雖然在家中,但心靈與大家緊密連結。</div>
+                            <div class="photo-meta">
+                                <span>by 智慧</span>
+                                <span>5天前</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="photo-card">
+                        <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='200'><rect width='100%' height='100%' fill='%23CD853F'/><text x='50%' y='50%' fill='white' text-anchor='middle' dy='.3em' font-size='16'>修行卡片</text></svg>" alt="修行卡片">
+                        <div class="photo-info">
+                            <div class="photo-caption">收到美麗的修行卡片,每一張都蘊含著深刻的智慧與祝福。</div>
+                            <div class="photo-meta">
+                                <span>by 法音</span>
+                                <span>1週前</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Social Sharing -->
+        <div class="interactive-section animate-in">
+            <div class="section-header">
+                <h2><i class="fas fa-share-alt"></i> 分享與邀請</h2>
+                <p>將2026互動區分享給更多人,一起參與這場心靈之旅</p>
+            </div>
+            <div class="section-content">
+                <div class="social-sharing">
+                    <h3 style="margin-bottom: 1.5rem;">分享到社群媒體</h3>
+                    <div class="social-buttons">
+                        <button class="social-btn facebook" onclick="shareToSocial('facebook')" title="分享到 Facebook">
+                            <i class="fab fa-facebook-f"></i>
+                        </button>
+                        <button class="social-btn line" onclick="shareToSocial('line')" title="分享到 LINE">
+                            <i class="fab fa-line"></i>
+                        </button>
+                        <button class="social-btn instagram" onclick="shareToSocial('instagram')" title="分享到 Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </button>
+                        <button class="social-btn twitter" onclick="shareToSocial('twitter')" title="分享到 Twitter">
+                            <i class="fab fa-twitter"></i>
+                        </button>
+                        <button class="social-btn" onclick="copyLink()" title="複製連結">
+                            <i class="fas fa-link"></i>
+                        </button>
+                        <button class="social-btn" onclick="shareToEmail()" title="透過 Email 分享">
+                            <i class="fas fa-envelope"></i>
+                        </button>
+                    </div>
+                    <p style="margin-top: 1.5rem; font-size: 0.9rem; opacity: 0.9;">
+                        邀請更多朋友加入我們,一同在修行路上互相支持與成長
+                    </p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // 完成活動功能
+        function completeActivity() {
+            const progressBar = document.querySelector('.progress-fill');
+            const currentWidth = parseInt(progressBar.style.width) || 65;
+            const newWidth = Math.min(currentWidth + 10, 100);
+            
+            progressBar.style.width = newWidth + '%';
+            
+            const btn = event.target;
+            btn.innerHTML = '<div class="loading"></div>';
+            btn.disabled = true;
+            
+            setTimeout(() => {
+                if (newWidth >= 100) {
+                    btn.innerHTML = '<i class="fas fa-check"></i> 今日目標達成!';
+                    btn.style.background = '#28a745';
+                } else {
+                    btn.innerHTML = '<i class="fas fa-check"></i> 標記完成';
+                    btn.disabled = false;
+                }
+            }, 1000);
+        }
+
+        // 提交祈福功能
+        function submitPrayer(event) {
+            event.preventDefault();
+            
+            const name = document.getElementById('prayer-name').value;
+            const content = document.getElementById('prayer-content').value;
+            
+            if (!name || !content) return;
+            
+            const submitBtn = event.target.querySelector('.submit-btn');
+            submitBtn.innerHTML = '<div class="loading"></div> 發送中...';
+            submitBtn.disabled = true;
+            
+            setTimeout(() => {
+                const prayerCard = document.createElement('div');
+                prayerCard.className = 'prayer-card';
+                prayerCard.innerHTML = `
+                    <div class="prayer-header">
+                        <span class="prayer-author">${name}</span>
+                        <span class="prayer-date">剛剛</span>
+                    </div>
+                    <div class="prayer-content">${content}</div>
+                    <div class="prayer-reactions">
+                        <button class="reaction-btn" onclick="addReaction(this, 'like')">
+                            <i class="fas fa-heart"></i> <span>0</span>
+                        </button>
+                        <button class="reaction-btn" onclick="addReaction(this, 'pray')">
+                            <i class="fas fa-hands"></i> <span>0</span>
+                        </button>
+                    </div>
+                `;
+                
+                const container = document.getElementById('prayers-container');
+                container.insertBefore(prayerCard, container.firstChild);
+                
+                document.getElementById('prayer-name').value = '';
+                document.getElementById('prayer-content').value = '';
+                
+                submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> 發送祈福';
+                submitBtn.disabled = false;
+                
+                showNotification('祈福已發送,感恩您的分享。', 'success');
+            }, 1500);
+        }
+
+        // 反應功能
+        function addReaction(button, type) {
+            const countSpan = button.querySelector('span');
+            let count = parseInt(countSpan.textContent);
+            count++;
+            countSpan.textContent = count;
+            
+            button.style.color = '#DAA520';
+            setTimeout(() => {
+                button.style.color = '#8B4513';
+            }, 200);
+        }
+
+        // 照片上傳處理
+        function handlePhotoUpload(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            
+            if (!file.type.startsWith('image/')) {
+                showNotification('請選擇圖片檔案', 'error');
+                return;
+            }
+            
+            if (file.size > 5 * 1024 * 1024) {
+                showNotification('圖片檔案大小不能超過 5MB', 'error');
+                return;
+            }
+            
+            showNotification('照片上傳中,審核後將顯示在展示牆...', 'info');
+            
+            setTimeout(() => {
+                showNotification('照片已提交審核,謝謝您的分享!', 'success');
+                event.target.value = '';
+            }, 2000);
+        }
+
+        // 社群分享功能
+        function shareToSocial(platform) {
+            const url = encodeURIComponent(window.location.href);
+            const text = encodeURIComponent('來參加 2026寒修行互動區,與大家一同修行成長!');
+            
+            let shareUrl;
+            switch(platform) {
+                case 'facebook':
+                    shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${url}`;
+                    break;
+                case 'line':
+                    shareUrl = `https://social-plugins.line.me/lineit/share?url=${url}&text=${text}`;
+                    break;
+                case 'twitter':
+                    shareUrl = `https://twitter.com/intent/tweet?url=${url}&text=${text}`;
+                    break;
+                case 'instagram':
+                    showNotification('請複製連結到 Instagram 分享', 'info');
+                    copyLink();
+                    return;
+            }
+            
+            window.open(shareUrl, '_blank', 'width=600,height=400');
+        }
+
+        // 複製連結功能
+        function copyLink() {
+            navigator.clipboard.writeText(window.location.href).then(() => {
+                showNotification('連結已複製到剪貼簿', 'success');
+            });
+        }
+
+        // Email 分享功能
+        function shareToEmail() {
+            const subject = encodeURIComponent('邀請您參加 2026寒修行互動區');
+            const body = encodeURIComponent(`您好,\n\n我想邀請您參加真如苑2026年寒修行互動區,一起在修行路上互相支持與成長。\n\n網址: ${window.location.href}\n\n祝您平安喜樂!`);
+            
+            window.location.href = `mailto:?subject=${subject}&body=${body}`;
+        }
+
+        // 通知功能
+        function showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 100px;
+                right: 20px;
+                background: ${type === 'success' ? '#28a745' : type === 'error' ? '#dc3545' : '#17a2b8'};
+                color: white;
+                padding: 1rem 1.5rem;
+                border-radius: 10px;
+                box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+                z-index: 1001;
+                font-weight: 500;
+                animation: slideIn 0.3s ease-out;
+            `;
+            notification.textContent = message;
+            
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes slideIn {
+                    from { transform: translateX(100%); opacity: 0; }
+                    to { transform: translateX(0); opacity: 1; }
+                }
+            `;
+            document.head.appendChild(style);
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.style.animation = 'slideIn 0.3s ease-out reverse';
+                setTimeout(() => {
+                    document.body.removeChild(notification);
+                    document.head.removeChild(style);
+                }, 300);
+            }, 3000);
+        }
+
+        // 滾動動畫
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.animate-in').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+            observer.observe(el);
+        });
+
+        // 手機選單功能
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const navMenu = document.querySelector('.nav-menu');
+        const dropdowns = document.querySelectorAll('.dropdown');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            navMenu.classList.toggle('mobile-active');
+            const icon = mobileMenuBtn.querySelector('i');
+            icon.className = navMenu.classList.contains('mobile-active') ? 'fas fa-times' : 'fas fa-bars';
+        });
+
+        // 手機版下拉選單
+        if (window.innerWidth <= 768) {
+            dropdowns.forEach(dropdown => {
+                const toggle = dropdown.querySelector('.dropdown-toggle');
+                toggle.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    dropdown.classList.toggle('mobile-open');
+                });
+            });
+        }
+
+        // 桌面版下拉選單
+        if (window.innerWidth > 768) {
+            dropdowns.forEach(dropdown => {
+                const toggle = dropdown.querySelector('.dropdown-toggle');
+                toggle.addEventListener('click', (e) => {
+                    e.preventDefault();
+                });
+            });
+        }
+
+        // 點擊頁面其他地方關閉選單
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.nav-container')) {
+                navMenu.classList.remove('mobile-active');
+                const icon = mobileMenuBtn.querySelector('i');
+                icon.className = 'fas fa-bars';
+            }
+        });
+
+        // 響應視窗大小變化
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 768) {
+                navMenu.classList.remove('mobile-active');
+                dropdowns.forEach(dropdown => {
+                    dropdown.classList.remove('mobile-open');
+                });
+            }
+        });
+    </script>
+</body>
+</html>

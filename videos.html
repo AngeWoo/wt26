@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>法會影片 - 2026寒修行</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Microsoft JhengHei', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        }
+
+        /* Header & Navigation */
+        .header {
+            background: linear-gradient(135deg, rgba(139,69,19,0.95) 0%, rgba(160,82,45,0.95) 50%, rgba(218,165,32,0.95) 100%);
+            color: white;
+            padding: 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 25px rgba(0,0,0,0.15);
+            backdrop-filter: blur(15px);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+            height: 80px;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            color: #FFD700;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .dharma-wheel {
+            width: 40px;
+            height: 40px;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="45" fill="%23FFD700"/><circle cx="50" cy="50" r="12" fill="%23DAA520"/></svg>') center/contain no-repeat;
+            filter: drop-shadow(0 0 8px rgba(255,215,0,0.4));
+            transition: all 0.3s ease;
+        }
+
+        .logo:hover .dharma-wheel { transform: rotate(30deg); }
+        .logo-text { display: flex; flex-direction: column; line-height: 1.1; }
+        .logo-year { font-size: 1rem; opacity: 0.9; }
+        .logo-main { font-size: 1.4rem; font-weight: 700; }
+
+        .nav-menu { display: flex; list-style: none; gap: 0.3rem; align-items: center; }
+        .nav-menu > li { position: relative; }
+
+        .nav-menu a {
+            color: rgba(255,255,255,0.9);
+            text-decoration: none;
+            padding: 0.9rem 1.3rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            white-space: nowrap;
+        }
+
+        .nav-menu a i { font-size: 0.9rem; }
+        .nav-menu a:hover { background: rgba(255,255,255,0.15); color: #FFD700; transform: translateY(-2px); }
+        .nav-menu a.active { background: rgba(255,215,0,0.2); color: #FFD700; font-weight: 600; }
+
+        .dropdown { position: relative; }
+        .dropdown-toggle { cursor: pointer; }
+        .dropdown-toggle::after {
+            content: '\f107';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            margin-left: 0.3rem;
+            font-size: 0.8rem;
+            transition: transform 0.3s ease;
+        }
+
+        .dropdown:hover .dropdown-toggle::after { transform: rotate(180deg); }
+
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: linear-gradient(135deg, rgba(139,69,19,0.98) 0%, rgba(160,82,45,0.98) 100%);
+            min-width: 200px;
+            border-radius: 12px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.25);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            margin-top: 0.5rem;
+            backdrop-filter: blur(10px);
+            overflow: hidden;
+        }
+
+        .dropdown:hover .dropdown-menu { opacity: 1; visibility: visible; transform: translateY(0); }
+        .dropdown-menu li { list-style: none; }
+
+        .dropdown-menu a {
+            padding: 0.9rem 1.3rem;
+            display: block;
+            border-radius: 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            font-size: 0.95rem;
+        }
+
+        .dropdown-menu li:last-child a { border-bottom: none; }
+        .dropdown-menu a:hover { background: rgba(255,215,0,0.15); padding-left: 1.8rem; transform: translateY(0); }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.8rem;
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 8px;
+        }
+
+        .mobile-menu-btn:hover { background: rgba(255,255,255,0.1); color: #FFD700; }
+
+        /* Page Header */
+        .page-header {
+            background: linear-gradient(135deg, rgba(139,69,19,0.9), rgba(218,165,32,0.9)),
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 400"><rect fill="%23f8f9fa" width="1200" height="400"/><circle cx="300" cy="200" r="120" fill="%23DAA520" opacity="0.1"/><circle cx="900" cy="200" r="150" fill="%23DAA520" opacity="0.1"/></svg>');
+            background-size: cover;
+            color: white;
+            text-align: center;
+            padding: 8rem 2rem 4rem;
+            margin-top: 80px;
+        }
+
+        .page-header h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .page-header p {
+            font-size: 1.3rem;
+            max-width: 700px;
+            margin: 0 auto;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+
+        /* Main Content */
+        .main-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        /* Filter Section */
+        .filter-section {
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            margin-bottom: 3rem;
+        }
+
+        .filter-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .search-box {
+            flex: 1;
+            min-width: 250px;
+            position: relative;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 0.8rem 1rem 0.8rem 3rem;
+            border: 2px solid #e9ecef;
+            border-radius: 25px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .search-box input:focus {
+            outline: none;
+            border-color: #DAA520;
+        }
+
+        .search-box i {
+            position: absolute;
+            left: 1.2rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #999;
+        }
+
+        .filter-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 0.8rem 1.5rem;
+            border: 2px solid #e9ecef;
+            background: white;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .filter-btn:hover {
+            border-color: #DAA520;
+            background: #f8f9fa;
+        }
+
+        .filter-btn.active {
+            background: linear-gradient(45deg, #DAA520, #FFD700);
+            color: white;
+            border-color: #DAA520;
+        }
+
+        /* Featured Video */
+        .featured-video {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            margin-bottom: 3rem;
+        }
+
+        .featured-badge {
+            background: linear-gradient(45deg, #DAA520, #FFD700);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 600;
+            margin: 2rem 2rem 0 2rem;
+            border-radius: 20px;
+        }
+
+        .featured-video-player {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%;
+            background: #000;
+        }
+
+        .featured-video-placeholder {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #8B4513, #DAA520);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .featured-video-placeholder:hover {
+            transform: scale(1.02);
+        }
+
+        .play-button {
+            width: 100px;
+            height: 100px;
+            background: rgba(255,255,255,0.9);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #8B4513;
+            font-size: 2.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .featured-video-placeholder:hover .play-button {
+            background: white;
+            transform: scale(1.1);
+        }
+
+        .featured-video-info {
+            padding: 2rem;
+        }
+
+        .featured-video-info h2 {
+            color: #8B4513;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .video-meta {
+            display: flex;
+            gap: 2rem;
+            color: #666;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .video-meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .featured-video-description {
+            color: #666;
+            line-height: 1.8;
+            font-size: 1.1rem;
+        }
+
+        /* Video Grid */
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .video-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .video-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+        }
+
+        .video-thumbnail {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%;
+            background: linear-gradient(135deg, #DAA520, #8B4513);
+            overflow: hidden;
+        }
+
+        .video-thumbnail-placeholder {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+            transition: all 0.3s ease;
+        }
+
+        .video-card:hover .video-thumbnail-placeholder {
+            transform: scale(1.1);
+        }
+
+        .video-duration {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            background: rgba(0,0,0,0.8);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .video-card-content {
+            padding: 1.5rem;
+        }
+
+        .video-category {
+            display: inline-block;
+            background: linear-gradient(45deg, #DAA520, #FFD700);
+            color: white;
+            padding: 0.3rem 1rem;
+            border-radius: 15px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .video-card h3 {
+            color: #8B4513;
+            font-size: 1.3rem;
+            margin-bottom: 0.8rem;
+            line-height: 1.4;
+        }
+
+        .video-card-meta {
+            display: flex;
+            gap: 1.5rem;
+            color: #999;
+            font-size: 0.9rem;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid #e9ecef;
+        }
+
+        .video-card-meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        /* Section Title */
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin: 3rem 0 2rem 0;
+            padding-bottom: 1rem;
+            border-bottom: 3px solid #DAA520;
+        }
+
+        .section-title h2 {
+            color: #8B4513;
+            font-size: 2rem;
+        }
+
+        .section-title-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(45deg, #DAA520, #FFD700);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 80px;
+                left: 0;
+                width: 100%;
+                background: linear-gradient(135deg, #8B4513 0%, #A0522D 100%);
+                padding: 1rem 0;
+                gap: 0;
+            }
+
+            .nav-menu.mobile-active { display: flex; }
+            .nav-menu > li { width: 100%; }
+            .nav-menu a { padding: 1rem 2rem; border-radius: 0; }
+
+            .dropdown-menu {
+                position: static;
+                opacity: 1;
+                visibility: visible;
+                transform: none;
+                box-shadow: none;
+                background: rgba(0,0,0,0.1);
+                margin-top: 0;
+                max-height: 0;
+                overflow: hidden;
+            }
+
+            .dropdown.mobile-open .dropdown-menu { max-height: 500px; }
+            .dropdown-menu a { padding-left: 3rem; background: rgba(0,0,0,0.1); }
+            .mobile-menu-btn { display: block; }
+
+            .page-header h1 { font-size: 2.5rem; }
+
+            .video-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .filter-header {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .search-box {
+                width: 100%;
+            }
+
+            .filter-buttons {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="nav-container">
+            <div class="logo">
+                <a href="index.html" style="color: inherit; text-decoration: none; display: flex; align-items: center; gap: 0.8rem;">
+                    <div class="dharma-wheel"></div>
+                    <div class="logo-text">
+                        <span class="logo-year">2026</span>
+                        <span class="logo-main">寒修行</span>
+                    </div>
+                </a>
+            </div>
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="index.html"><i class="fas fa-home"></i> 首頁</a></li>
+                    <li><a href="interactive.html"><i class="fas fa-users"></i> 2026互動區</a></li>
+                    <li><a href="news.html"><i class="fas fa-newspaper"></i> 最新消息</a></li>
+                    <li><a href="schedule.html"><i class="fas fa-calendar"></i> 時程</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle active"><i class="fas fa-video"></i> 影片專區</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="videos.html" class="active"><i class="fas fa-play-circle"></i> 法會影片</a></li>
+                            <li><a href="promo.html"><i class="fas fa-film"></i> 參考影片</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle"><i class="fas fa-book"></i> 學習專區</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="doctrine.html"><i class="fas fa-pray"></i> 教誡拜讀</a></li>
+                            <li><a href="scripture.html"><i class="fas fa-book-open"></i> 讀經次第</a></li>
+                            <li><a href="cards.html"><i class="fas fa-images"></i> 卡片介紹</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="history.html"><i class="fas fa-landmark"></i> 苑史區</a></li>
+                </ul>
+                <button class="mobile-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <h1><i class="fas fa-play-circle"></i> 法會影片</h1>
+        <p>線上直播與完整錄影存檔，隨時隨地參與殊勝的法會</p>
+    </section>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Filter Section -->
+        <div class="filter-section">
+            <div class="filter-header">
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="搜尋法會影片...">
+                </div>
+                <div class="filter-buttons">
+                    <button class="filter-btn active">全部</button>
+                    <button class="filter-btn">2026年</button>
+                    <button class="filter-btn">2025年</button>
+                    <button class="filter-btn">開示講座</button>
+                    <button class="filter-btn">共修法會</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Featured Video -->
+        <div class="featured-video">
+            <span class="featured-badge">
+                <i class="fas fa-star"></i> 精選法會
+            </span>
+            <div class="featured-video-player">
+                <div class="featured-video-placeholder" onclick="playVideo('featured')">
+                    <div class="play-button">
+                        <i class="fas fa-play"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="featured-video-info">
+                <h2>2026年寒修行開幕法會</h2>
+                <div class="video-meta">
+                    <div class="video-meta-item">
+                        <i class="fas fa-calendar"></i>
+                        <span>2026年1月20日</span>
+                    </div>
+                    <div class="video-meta-item">
+                        <i class="fas fa-clock"></i>
+                        <span>2小時30分</span>
+                    </div>
+                    <div class="video-meta-item">
+                        <i class="fas fa-eye"></i>
+                        <span>15,847 次觀看</span>
+                    </div>
+                </div>
+                <p class="featured-video-description">
+                    2026年寒修行開幕法會完整錄影。由苑主帶領，為這次修行之旅揭開序幕。法會中包含開示、誦經、禪坐等環節，讓我們一起回顧這場殊勝的法會，感受當時的莊嚴與感動。
+                </p>
+            </div>
+        </div>
+
+        <!-- Recent Videos Section -->
+        <div class="section-title">
+            <div class="section-title-icon">
+                <i class="fas fa-video"></i>
+            </div>
+            <h2>最新法會</h2>
+        </div>
+
+        <div class="video-grid">
+            <div class="video-card" onclick="playVideo('1')">
+                <div class="video-thumbnail">
+                    <div class="video-thumbnail-placeholder">
+                        <i class="fas fa-play-circle"></i>
+                    </div>
+                    <div class="video-duration">1:45:30</div>
+                </div>
+                <div class="video-card-content">
+                    <span class="video-category">開示講座</span>
+                    <h3>教誡學習講座 - 感恩與慈悲</h3>
+                    <div class="video-card-meta">
+                        <div class="video-card-meta-item">
+                            <i class="fas fa-calendar"></i>
+                            <span>1/22</span>
+                        </div>
+                        <div class="video-card-meta-item">
+                            <i class="fas fa-eye"></i>
+                            <span>8,234</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="video-card" onclick="playVideo('2')">
+                <div class="video-thumbnail">
+                    <div class="video-thumbnail-placeholder">
+                        <i class="fas fa-play-circle"></i>
+                    </div>
+                    <div class="video-duration">2:15:00</div>
+                </div>
+                <div class="video-card-content">
+                    <span class="video-category">共修法會</span>
+                    <h3>週末共修法會 - 誦經與禪坐</h3>
+                    <div class="video-card-meta">
+                        <div class="video-card-meta-item">
+                            <i class="fas fa-calendar"></i>
+                            <span>1/25</span>
+                        </div>
+                        <div class="video-card-meta-item">
+                            <i class="fas fa-eye"></i>
+                            <span>12,567</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="video-card" onclick="playVideo('3')">
+                <div class="video-thumbnail">
+                    <div class="video-thumbnail-placeholder">
+                        <i class="fas fa-play-circle"></i>
+                    </div>
+                    <div class="video-duration">1:30:00</div>
+                </div>
+                <div class="video-card-content">
+                    <span class="video-category">線上課程</span>
+                    <h3>線上讀經會 - 經典解說</h3>
+                    <div class="video-card-meta">
+                        <div class="video-card-meta-item">
+                            <i class="fas fa-calendar"></i>
+                            <span>1/29</span>
+                        </div>
+                        <div class="video-card-meta-item">
+                            <i class="fas fa-eye"></i>
+                            <span>6,891</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="video-card" onclick="playVideo('4')">
+                <div class="video-thumbnail">
+                    <div class="video-thumbnail-placeholder">
+                        <i class="fas fa-play-circle"></i>
+                    </div>
+                    <div class="video-duration">2:00:00</div>
+                </div>
+                <div class="video-card-content">
+                    <span class="video-category">感恩法會</span>
+                    <h3>感恩法會 - 迎接新月</h3>
+                    <div class="video-card-meta">
+                        <div class="video-card-meta-item">
+                            <i class="fas fa-calendar"></i>
+                            <span>2/1</span>
+                        </div>
+                        <div class="video-card-meta-item">
+                            <i class="fas fa-eye"></i>
+                            <span>10,234</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="video-card" onclick="playVideo('5')">
+                <div class="video-thumbnail">
+                    <div class="video-thumbnail-placeholder">
+                        <i class="fas fa-play-circle"></i>
+                    </div>
+                    <div class="video-duration">3:00:00</div>
+                </div>
+                <div class="video-card-content">
+                    <span class="video-category">圓滿法會</span>
+                    <h3>圓滿閉幕法會 - 寒修行圓滿</h3>
+                    <div class="video-card-meta">
+                        <div class="video-card-meta-item">
+                            <i class="fas fa-calendar"></i>
+                            <span>2/8</span>
+                        </div>
+                        <div class="video-card-meta-item">
+                            <i class="fas fa-eye"></i>
+                            <span>14,567</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="video-card" onclick="playVideo('6')">
+                <div class="video-thumbnail">
+                    <div class="video-thumbnail-placeholder">
+                        <i class="fas fa-play-circle"></i>
+                    </div>
+                    <div class="video-duration">1:20:00</div>
+                </div>
+                <div class="video-card-content">
+                    <span class="video-category">特別開示</span>
+                    <h3>法師開示 - 修行的意義</h3>
+                    <div class="video-card-meta">
+                        <div class="video-card-meta-item">
+                            <i class="fas fa-calendar"></i>
+                            <span>1/27</span>
+                        </div>
+                        <div class="video-card-meta-item">
+                            <i class="fas fa-eye"></i>
+                            <span>9,123</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Archive Section -->
+        <div class="section-title">
+            <div class="section-title-icon">
+                <i class="fas fa-archive"></i>
+            </div>
+            <h2>歷年法會存檔</h2>
+        </div>
+
+        <div class="video-grid">
+            <div class="video-card" onclick="playVideo('7')">
+                <div class="video-thumbnail">
+                    <div class="video-thumbnail-placeholder">
+                        <i class="fas fa-play-circle"></i>
+                    </div>
+                    <div class="video-duration">2:30:00</div>
+                </div>
+                <div class="video-card-content">
+                    <span class="video-category">2025年</span>
+                    <h3>2025年寒修行開幕法會</h3>
+                    <div class="video-card-meta">
+                        <div class="video-card-meta-item">
+                            <i class="fas fa-calendar"></i>
+                            <span>2025/1/15</span>
+                        </div>
+                        <div class="video-card-meta-item">
+                            <i class="fas fa-eye"></i>
+                            <span>23,456</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="video-card" onclick="playVideo('8')">
+                <div class="video-thumbnail">
+                    <div class="video-thumbnail-placeholder">
+                        <i class="fas fa-play-circle"></i>
+                    </div>
+                    <div class="video-duration">1:45:00</div>
+                </div>
+                <div class="video-card-content">
+                    <span class="video-category">2025年</span>
+                    <h3>2025年共修法會精選</h3>
+                    <div class="video-card-meta">
+                        <div class="video-card-meta-item">
+                            <i class="fas fa-calendar"></i>
+                            <span>2025/1/20</span>
+                        </div>
+                        <div class="video-card-meta-item">
+                            <i class="fas fa-eye"></i>
+                            <span>18,234</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="video-card" onclick="playVideo('9')">
+                <div class="video-thumbnail">
+                    <div class="video-thumbnail-placeholder">
+                        <i class="fas fa-play-circle"></i>
+                    </div>
+                    <div class="video-duration">2:00:00</div>
+                </div>
+                <div class="video-card-content">
+                    <span class="video-category">2024年</span>
+                    <h3>2024年度回顧特輯</h3>
+                    <div class="video-card-meta">
+                        <div class="video-card-meta-item">
+                            <i class="fas fa-calendar"></i>
+                            <span>2024/12/31</span>
+                        </div>
+                        <div class="video-card-meta-item">
+                            <i class="fas fa-eye"></i>
+                            <span>31,567</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Play video function
+        function playVideo(videoId) {
+            alert(`播放影片 ${videoId}\n\n實際網站會在此處嵌入 YouTube 或 Vimeo 播放器`);
+        }
+
+        // Filter buttons
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+            });
+        });
+
+        // Search functionality
+        const searchInput = document.querySelector('.search-box input');
+        searchInput.addEventListener('input', (e) => {
+            const searchTerm = e.target.value.toLowerCase();
+            console.log('搜尋:', searchTerm);
+            // 實際網站會在此處進行影片篩選
+        });
+
+        // Mobile menu
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const navMenu = document.querySelector('.nav-menu');
+        const dropdowns = document.querySelectorAll('.dropdown');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            navMenu.classList.toggle('mobile-active');
+            const icon = mobileMenuBtn.querySelector('i');
+            icon.className = navMenu.classList.contains('mobile-active') ? 'fas fa-times' : 'fas fa-bars';
+        });
+
+        if (window.innerWidth <= 768) {
+            dropdowns.forEach(dropdown => {
+                const toggle = dropdown.querySelector('.dropdown-toggle');
+                toggle.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    dropdown.classList.toggle('mobile-open');
+                });
+            });
+        }
+
+        if (window.innerWidth > 768) {
+            dropdowns.forEach(dropdown => {
+                const toggle = dropdown.querySelector('.dropdown-toggle');
+                toggle.addEventListener('click', (e) => e.preventDefault());
+            });
+        }
+
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.nav-container')) {
+                navMenu.classList.remove('mobile-active');
+                const icon = mobileMenuBtn.querySelector('i');
+                icon.className = 'fas fa-bars';
+            }
+        });
+    </script>
+</body>
+</html>

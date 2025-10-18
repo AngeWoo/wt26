@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>最新消息 - 2026寒修行</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Microsoft JhengHei', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        }
+
+        /* Header & Navigation - 統一樣式 */
+        .header {
+            background: linear-gradient(135deg, rgba(139,69,19,0.95) 0%, rgba(160,82,45,0.95) 50%, rgba(218,165,32,0.95) 100%);
+            color: white;
+            padding: 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 25px rgba(0,0,0,0.15);
+            backdrop-filter: blur(15px);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+            height: 80px;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            color: #FFD700;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .dharma-wheel {
+            width: 40px;
+            height: 40px;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="45" fill="%23FFD700"/><circle cx="50" cy="50" r="12" fill="%23DAA520"/></svg>') center/contain no-repeat;
+            filter: drop-shadow(0 0 8px rgba(255,215,0,0.4));
+            transition: all 0.3s ease;
+        }
+
+        .logo:hover .dharma-wheel {
+            transform: rotate(30deg);
+        }
+
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+            line-height: 1.1;
+        }
+
+        .logo-year { font-size: 1rem; opacity: 0.9; }
+        .logo-main { font-size: 1.4rem; font-weight: 700; }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 0.3rem;
+            align-items: center;
+        }
+
+        .nav-menu > li { position: relative; }
+
+        .nav-menu a {
+            color: rgba(255,255,255,0.9);
+            text-decoration: none;
+            padding: 0.9rem 1.3rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            white-space: nowrap;
+        }
+
+        .nav-menu a i { font-size: 0.9rem; }
+
+        .nav-menu a:hover {
+            background: rgba(255,255,255,0.15);
+            color: #FFD700;
+            transform: translateY(-2px);
+        }
+
+        .nav-menu a.active {
+            background: rgba(255,215,0,0.2);
+            color: #FFD700;
+            font-weight: 600;
+        }
+
+        .dropdown { position: relative; }
+        .dropdown-toggle { cursor: pointer; }
+
+        .dropdown-toggle::after {
+            content: '\f107';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            margin-left: 0.3rem;
+            font-size: 0.8rem;
+            transition: transform 0.3s ease;
+        }
+
+        .dropdown:hover .dropdown-toggle::after { transform: rotate(180deg); }
+
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: linear-gradient(135deg, rgba(139,69,19,0.98) 0%, rgba(160,82,45,0.98) 100%);
+            min-width: 200px;
+            border-radius: 12px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.25);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            margin-top: 0.5rem;
+            backdrop-filter: blur(10px);
+            overflow: hidden;
+        }
+
+        .dropdown:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-menu li { list-style: none; }
+
+        .dropdown-menu a {
+            padding: 0.9rem 1.3rem;
+            display: block;
+            border-radius: 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            font-size: 0.95rem;
+        }
+
+        .dropdown-menu li:last-child a { border-bottom: none; }
+
+        .dropdown-menu a:hover {
+            background: rgba(255,215,0,0.15);
+            padding-left: 1.8rem;
+            transform: translateY(0);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.8rem;
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-menu-btn:hover {
+            background: rgba(255,255,255,0.1);
+            color: #FFD700;
+        }
+
+        /* Page Header */
+        .page-header {
+            background: linear-gradient(135deg, rgba(139,69,19,0.9), rgba(218,165,32,0.9)),
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 400"><rect fill="%23f8f9fa" width="1200" height="400"/><circle cx="200" cy="200" r="100" fill="%23DAA520" opacity="0.1"/><circle cx="600" cy="150" r="80" fill="%23DAA520" opacity="0.1"/><circle cx="1000" cy="250" r="120" fill="%23DAA520" opacity="0.1"/></svg>');
+            background-size: cover;
+            color: white;
+            text-align: center;
+            padding: 8rem 2rem 4rem;
+            margin-top: 80px;
+        }
+
+        .page-header h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .page-header p {
+            font-size: 1.3rem;
+            max-width: 700px;
+            margin: 0 auto;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+
+        /* Main Content */
+        .main-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        /* Pinned Post */
+        .pinned-section {
+            margin-bottom: 3rem;
+        }
+
+        .pinned-post {
+            background: linear-gradient(135deg, #FFD700, #DAA520);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pinned-post::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(-30%, -30%); }
+        }
+
+        .pinned-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: #8B4513;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .pinned-post h2 {
+            color: #8B4513;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .pinned-post-content {
+            color: #5a3a1a;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            position: relative;
+            z-index: 1;
+        }
+
+        .pinned-post-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 2px solid rgba(139,69,19,0.2);
+            position: relative;
+            z-index: 1;
+        }
+
+        .post-date {
+            color: #8B4513;
+            font-weight: 600;
+        }
+
+        .read-more-btn {
+            background: #8B4513;
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .read-more-btn:hover {
+            background: #A0522D;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        /* News Grid */
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .news-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .news-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .news-card-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            background: linear-gradient(135deg, #DAA520, #8B4513);
+        }
+
+        .news-card-content {
+            padding: 2rem;
+        }
+
+        .news-category {
+            display: inline-block;
+            background: linear-gradient(45deg, #DAA520, #FFD700);
+            color: #8B4513;
+            padding: 0.3rem 1rem;
+            border-radius: 15px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .news-card h3 {
+            font-size: 1.5rem;
+            color: #8B4513;
+            margin-bottom: 1rem;
+            line-height: 1.4;
+        }
+
+        .news-excerpt {
+            color: #666;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .news-card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 1rem;
+            border-top: 1px solid #e9ecef;
+        }
+
+        .news-date {
+            color: #999;
+            font-size: 0.9rem;
+        }
+
+        .news-read-more {
+            color: #DAA520;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .news-read-more:hover {
+            color: #8B4513;
+            gap: 0.8rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 80px;
+                left: 0;
+                width: 100%;
+                background: linear-gradient(135deg, #8B4513 0%, #A0522D 100%);
+                padding: 1rem 0;
+                box-shadow: 0 4px 25px rgba(0,0,0,0.2);
+                gap: 0;
+            }
+
+            .nav-menu.mobile-active { display: flex; }
+            .nav-menu > li { width: 100%; }
+
+            .nav-menu a {
+                padding: 1rem 2rem;
+                border-radius: 0;
+                justify-content: space-between;
+            }
+
+            .dropdown-menu {
+                position: static;
+                opacity: 1;
+                visibility: visible;
+                transform: none;
+                box-shadow: none;
+                background: rgba(0,0,0,0.1);
+                margin-top: 0;
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.3s ease;
+            }
+
+            .dropdown.mobile-open .dropdown-menu { max-height: 500px; }
+            .dropdown.mobile-open .dropdown-toggle::after { transform: rotate(180deg); }
+
+            .dropdown-menu a {
+                padding-left: 3rem;
+                background: rgba(0,0,0,0.1);
+            }
+
+            .mobile-menu-btn { display: block; }
+
+            .page-header h1 { font-size: 2.5rem; }
+
+            .news-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="nav-container">
+            <div class="logo">
+                <a href="index.html" style="color: inherit; text-decoration: none; display: flex; align-items: center; gap: 0.8rem;">
+                    <div class="dharma-wheel"></div>
+                    <div class="logo-text">
+                        <span class="logo-year">2026</span>
+                        <span class="logo-main">寒修行</span>
+                    </div>
+                </a>
+            </div>
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="index.html"><i class="fas fa-home"></i> 首頁</a></li>
+                    <li><a href="interactive.html"><i class="fas fa-users"></i> 2026互動區</a></li>
+                    <li><a href="news.html" class="active"><i class="fas fa-newspaper"></i> 最新消息</a></li>
+                    <li><a href="schedule.html"><i class="fas fa-calendar"></i> 時程</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle"><i class="fas fa-video"></i> 影片專區</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="videos.html"><i class="fas fa-play-circle"></i> 法會影片</a></li>
+                            <li><a href="promo.html"><i class="fas fa-film"></i> 參考影片</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle"><i class="fas fa-book"></i> 學習專區</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="doctrine.html"><i class="fas fa-pray"></i> 教誡拜讀</a></li>
+                            <li><a href="scripture.html"><i class="fas fa-book-open"></i> 讀經次第</a></li>
+                            <li><a href="cards.html"><i class="fas fa-images"></i> 卡片介紹</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="history.html"><i class="fas fa-landmark"></i> 苑史區</a></li>
+                </ul>
+                <button class="mobile-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <h1><i class="fas fa-newspaper"></i> 最新消息</h1>
+        <p>掌握2026年寒修行的最新動態、重要公告與活動資訊</p>
+    </section>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Pinned Post -->
+        <section class="pinned-section">
+            <div class="pinned-post">
+                <span class="pinned-badge">
+                    <i class="fas fa-thumbtack"></i> 置頂公告
+                </span>
+                <h2>2026年寒修行正式啟動！誠摯邀請您的參與</h2>
+                <div class="pinned-post-content">
+                    <p>親愛的信眾們，2026年寒修行將於2026年1月20日正式展開。今年的主題為「感恩與慈悲」，我們將透過一系列的法會、學習與實踐活動，共同在寒冷的冬日中溫暖彼此的心靈，淨化內在，增長智慧。</p>
+                    <p>無論您身在何處，都可以透過線上直播參與法會，或在互動區與全球信眾交流分享。讓我們一起在修行的道路上互相扶持，共同成長。</p>
+                </div>
+                <div class="pinned-post-meta">
+                    <span class="post-date"><i class="fas fa-calendar-alt"></i> 2025年10月18日</span>
+                    <button class="read-more-btn" onclick="alert('完整公告內容將在此顯示')">
+                        閱讀完整公告 <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- News Grid -->
+        <div class="news-grid">
+            <div class="news-card" onclick="alert('新聞詳細內容')">
+                <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='250'><rect width='100%' height='100%' fill='%23DAA520'/><text x='50%' y='50%' fill='white' text-anchor='middle' dy='.3em' font-size='24' font-weight='bold'>線上法會直播</text></svg>" alt="線上法會" class="news-card-image">
+                <div class="news-card-content">
+                    <span class="news-category">活動通知</span>
+                    <h3>線上法會直播時間確定！全球同步參與</h3>
+                    <p class="news-excerpt">為了讓無法親臨現場的信眾也能參與，我們將提供高品質的線上法會直播服務。所有法會將在官方平台同步直播，並提供錄影回放...</p>
+                    <div class="news-card-footer">
+                        <span class="news-date">2025年10月15日</span>
+                        <span class="news-read-more">
+                            閱讀更多 <i class="fas fa-arrow-right"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="news-card" onclick="alert('新聞詳細內容')">
+                <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='250'><rect width='100%' height='100%' fill='%238B4513'/><text x='50%' y='50%' fill='white' text-anchor='middle' dy='.3em' font-size='24' font-weight='bold'>互動區上線</text></svg>" alt="互動區" class="news-card-image">
+                <div class="news-card-content">
+                    <span class="news-category">系統更新</span>
+                    <h3>2026互動區全新功能上線</h3>
+                    <p class="news-excerpt">互動區現已開放！您可以在祈福牆留下心願、上傳修行照片、參與每日修行目標，與全球信眾一起分享修行路上的點點滴滴...</p>
+                    <div class="news-card-footer">
+                        <span class="news-date">2025年10月12日</span>
+                        <span class="news-read-more">
+                            閱讀更多 <i class="fas fa-arrow-right"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="news-card" onclick="alert('新聞詳細內容')">
+                <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='250'><rect width='100%' height='100%' fill='%23B8860B'/><text x='50%' y='50%' fill='white' text-anchor='middle' dy='.3em' font-size='24' font-weight='bold'>時程公布</text></svg>" alt="時程" class="news-card-image">
+                <div class="news-card-content">
+                    <span class="news-category">重要公告</span>
+                    <h3>完整活動時程表正式公布</h3>
+                    <p class="news-excerpt">2026年寒修行的完整時程表已經公布！包含所有法會時間、線上課程、共修活動等。請前往時程頁面查看詳細資訊並加入您的行事曆...</p>
+                    <div class="news-card-footer">
+                        <span class="news-date">2025年10月10日</span>
+                        <span class="news-read-more">
+                            閱讀更多 <i class="fas fa-arrow-right"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="news-card" onclick="alert('新聞詳細內容')">
+                <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='250'><rect width='100%' height='100%' fill='%23CD853F'/><text x='50%' y='50%' fill='white' text-anchor='middle' dy='.3em' font-size='24' font-weight='bold'>教誡資源</text></svg>" alt="教誡" class="news-card-image">
+                <div class="news-card-content">
+                    <span class="news-category">學習資源</span>
+                    <h3>教誡拜讀音檔全面更新</h3>
+                    <p class="news-excerpt">為了讓大家更方便學習，我們更新了所有教誡的讀誦音檔，音質更清晰，並新增了多位法師的讀誦版本，歡迎下載聆聽...</p>
+                    <div class="news-card-footer">
+                        <span class="news-date">2025年10月8日</span>
+                        <span class="news-read-more">
+                            閱讀更多 <i class="fas fa-arrow-right"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="news-card" onclick="alert('新聞詳細內容')">
+                <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='250'><rect width='100%' height='100%' fill='%23DEB887'/><text x='50%' y='50%' fill='white' text-anchor='middle' dy='.3em' font-size='24' font-weight='bold'>修行卡片</text></svg>" alt="卡片" class="news-card-image">
+                <div class="news-card-content">
+                    <span class="news-category">文化分享</span>
+                    <h3>2026年度修行卡片設計揭曉</h3>
+                    <p class="news-excerpt">今年的修行卡片以「四季智慧」為主題，每張卡片都蘊含著深刻的佛法智慧與美好祝福。現在就到卡片介紹頁面欣賞精美設計...</p>
+                    <div class="news-card-footer">
+                        <span class="news-date">2025年10月5日</span>
+                        <span class="news-read-more">
+                            閱讀更多 <i class="fas fa-arrow-right"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="news-card" onclick="alert('新聞詳細內容')">
+                <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='250'><rect width='100%' height='100%' fill='%23BC8F8F'/><text x='50%' y='50%' fill='white' text-anchor='middle' dy='.3em' font-size='24' font-weight='bold'>苑史回顧</text></svg>" alt="苑史" class="news-card-image">
+                <div class="news-card-content">
+                    <span class="news-category">歷史文化</span>
+                    <h3>真如苑台灣教區歷史特展</h3>
+                    <p class="news-excerpt">在苑史區，我們整理了真如苑在台灣發展的珍貴歷史照片與文獻。透過互動時間軸，帶您回顧這些年來的感動時刻...</p>
+                    <div class="news-card-footer">
+                        <span class="news-date">2025年10月1日</span>
+                        <span class="news-read-more">
+                            閱讀更多 <i class="fas fa-arrow-right"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // 手機選單
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const navMenu = document.querySelector('.nav-menu');
+        const dropdowns = document.querySelectorAll('.dropdown');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            navMenu.classList.toggle('mobile-active');
+            const icon = mobileMenuBtn.querySelector('i');
+            icon.className = navMenu.classList.contains('mobile-active') ? 'fas fa-times' : 'fas fa-bars';
+        });
+
+        if (window.innerWidth <= 768) {
+            dropdowns.forEach(dropdown => {
+                const toggle = dropdown.querySelector('.dropdown-toggle');
+                toggle.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    dropdown.classList.toggle('mobile-open');
+                });
+            });
+        }
+
+        if (window.innerWidth > 768) {
+            dropdowns.forEach(dropdown => {
+                const toggle = dropdown.querySelector('.dropdown-toggle');
+                toggle.addEventListener('click', (e) => e.preventDefault());
+            });
+        }
+
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.nav-container')) {
+                navMenu.classList.remove('mobile-active');
+                const icon = mobileMenuBtn.querySelector('i');
+                icon.className = 'fas fa-bars';
+            }
+        });
+
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 768) {
+                navMenu.classList.remove('mobile-active');
+                dropdowns.forEach(dropdown => dropdown.classList.remove('mobile-open'));
+            }
+        });
+    </script>
+</body>
+</html>

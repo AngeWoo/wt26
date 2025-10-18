@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>苑史區 - 2026寒修行</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Microsoft JhengHei', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        }
+
+        /* Header & Navigation */
+        .header {
+            background: linear-gradient(135deg, rgba(139,69,19,0.95) 0%, rgba(160,82,45,0.95) 50%, rgba(218,165,32,0.95) 100%);
+            color: white;
+            padding: 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 25px rgba(0,0,0,0.15);
+            backdrop-filter: blur(15px);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+            height: 80px;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            color: #FFD700;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .dharma-wheel {
+            width: 40px;
+            height: 40px;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="45" fill="%23FFD700"/><circle cx="50" cy="50" r="12" fill="%23DAA520"/></svg>') center/contain no-repeat;
+            filter: drop-shadow(0 0 8px rgba(255,215,0,0.4));
+            transition: all 0.3s ease;
+        }
+
+        .logo:hover .dharma-wheel { transform: rotate(30deg); }
+        .logo-text { display: flex; flex-direction: column; line-height: 1.1; }
+        .logo-year { font-size: 1rem; opacity: 0.9; }
+        .logo-main { font-size: 1.4rem; font-weight: 700; }
+
+        .nav-menu { display: flex; list-style: none; gap: 0.3rem; align-items: center; }
+        .nav-menu > li { position: relative; }
+
+        .nav-menu a {
+            color: rgba(255,255,255,0.9);
+            text-decoration: none;
+            padding: 0.9rem 1.3rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            white-space: nowrap;
+        }
+
+        .nav-menu a i { font-size: 0.9rem; }
+        .nav-menu a:hover { background: rgba(255,255,255,0.15); color: #FFD700; transform: translateY(-2px); }
+        .nav-menu a.active { background: rgba(255,215,0,0.2); color: #FFD700; font-weight: 600; }
+
+        .dropdown { position: relative; }
+        .dropdown-toggle { cursor: pointer; }
+        .dropdown-toggle::after {
+            content: '\f107';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            margin-left: 0.3rem;
+            font-size: 0.8rem;
+            transition: transform 0.3s ease;
+        }
+
+        .dropdown:hover .dropdown-toggle::after { transform: rotate(180deg); }
+
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: linear-gradient(135deg, rgba(139,69,19,0.98) 0%, rgba(160,82,45,0.98) 100%);
+            min-width: 200px;
+            border-radius: 12px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.25);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            margin-top: 0.5rem;
+            backdrop-filter: blur(10px);
+            overflow: hidden;
+        }
+
+        .dropdown:hover .dropdown-menu { opacity: 1; visibility: visible; transform: translateY(0); }
+        .dropdown-menu li { list-style: none; }
+
+        .dropdown-menu a {
+            padding: 0.9rem 1.3rem;
+            display: block;
+            border-radius: 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            font-size: 0.95rem;
+        }
+
+        .dropdown-menu li:last-child a { border-bottom: none; }
+        .dropdown-menu a:hover { background: rgba(255,215,0,0.15); padding-left: 1.8rem; transform: translateY(0); }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.8rem;
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 8px;
+        }
+
+        .mobile-menu-btn:hover { background: rgba(255,255,255,0.1); color: #FFD700; }
+
+        /* Page Header */
+        .page-header {
+            background: linear-gradient(135deg, rgba(139,69,19,0.9), rgba(218,165,32,0.9)),
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 400"><rect fill="%23f8f9fa" width="1200" height="400"/><circle cx="200" cy="200" r="100" fill="%23DAA520" opacity="0.1"/><circle cx="600" cy="150" r="120" fill="%23DAA520" opacity="0.1"/><circle cx="1000" cy="250" r="90" fill="%23DAA520" opacity="0.1"/></svg>');
+            background-size: cover;
+            color: white;
+            text-align: center;
+            padding: 8rem 2rem 4rem;
+            margin-top: 80px;
+        }
+
+        .page-header h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .page-header p {
+            font-size: 1.3rem;
+            max-width: 700px;
+            margin: 0 auto;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+
+        /* Main Content */
+        .main-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        /* Historical Timeline */
+        .timeline-section {
+            background: white;
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin-bottom: 4rem;
+        }
+
+        .timeline-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .timeline-header h2 {
+            color: #8B4513;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .timeline {
+            position: relative;
+            padding: 2rem 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(180deg, #DAA520, #8B4513);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 4rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .timeline-item:nth-child(odd) {
+            flex-direction: row-reverse;
+        }
+
+        .timeline-content {
+            width: 45%;
+            padding: 2rem;
+            background: linear-gradient(135deg, #f8f9fa, #fff);
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .timeline-item:nth-child(odd) .timeline-content {
+            margin-right: auto;
+            margin-left: 5%;
+        }
+
+        .timeline-item:nth-child(even) .timeline-content {
+            margin-left: auto;
+            margin-right: 5%;
+        }
+
+        .timeline-content:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+
+        .timeline-year {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(45deg, #DAA520, #FFD700);
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 25px;
+            font-size: 1.5rem;
+            font-weight: 700;
+            box-shadow: 0 5px 15px rgba(218,165,32,0.3);
+            z-index: 1;
+        }
+
+        .timeline-content h3 {
+            color: #8B4513;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .timeline-content p {
+            color: #666;
+            line-height: 1.8;
+        }
+
+        /* Photo Gallery */
+        .gallery-section {
+            margin-bottom: 4rem;
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 3px solid #DAA520;
+        }
+
+        .section-title h2 {
+            color: #8B4513;
+            font-size: 2rem;
+        }
+
+        .section-title-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(45deg, #DAA520, #FFD700);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        .photo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .photo-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .photo-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+        }
+
+        .photo-card-image {
+            width: 100%;
+            height: 250px;
+            background: linear-gradient(135deg, #DAA520, #8B4513);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .photo-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .photo-card:hover .photo-overlay {
+            background: rgba(0,0,0,0.5);
+        }
+
+        .photo-overlay i {
+            opacity: 0;
+            transform: scale(0.5);
+            transition: all 0.3s ease;
+        }
+
+        .photo-card:hover .photo-overlay i {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .photo-card-info {
+            padding: 1.5rem;
+        }
+
+        .photo-card h4 {
+            color: #8B4513;
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .photo-year {
+            color: #DAA520;
+            font-weight: 600;
+            margin-bottom: 0.8rem;
+        }
+
+        .photo-description {
+            color: #666;
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+
+        /* Video Section */
+        .video-section {
+            background: white;
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .video-card {
+            background: linear-gradient(135deg, #f8f9fa, #fff);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .video-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+        }
+
+        .video-thumbnail {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%;
+            background: linear-gradient(135deg, #DAA520, #8B4513);
+        }
+
+        .video-play-btn {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 70px;
+            height: 70px;
+            background: rgba(255,255,255,0.9);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #8B4513;
+            font-size: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .video-card:hover .video-play-btn {
+            background: white;
+            transform: translate(-50%, -50%) scale(1.1);
+        }
+
+        .video-duration {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            background: rgba(0,0,0,0.8);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .video-card-content {
+            padding: 1.5rem;
+        }
+
+        .video-card h4 {
+            color: #8B4513;
+            font-size: 1.3rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .video-card p {
+            color: #666;
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 80px;
+                left: 0;
+                width: 100%;
+                background: linear-gradient(135deg, #8B4513 0%, #A0522D 100%);
+                padding: 1rem 0;
+                gap: 0;
+            }
+
+            .nav-menu.mobile-active { display: flex; }
+            .nav-menu > li { width: 100%; }
+            .nav-menu a { padding: 1rem 2rem; border-radius: 0; }
+
+            .dropdown-menu {
+                position: static;
+                opacity: 1;
+                visibility: visible;
+                transform: none;
+                box-shadow: none;
+                background: rgba(0,0,0,0.1);
+                margin-top: 0;
+                max-height: 0;
+                overflow: hidden;
+            }
+
+            .dropdown.mobile-open .dropdown-menu { max-height: 500px; }
+            .dropdown-menu a { padding-left: 3rem; background: rgba(0,0,0,0.1); }
+            .mobile-menu-btn { display: block; }
+
+            .page-header h1 { font-size: 2.5rem; }
+
+            .timeline::before {
+                left: 20px;
+            }
+
+            .timeline-item {
+                flex-direction: column !important;
+                align-items: flex-start;
+                padding-left: 60px;
+            }
+
+            .timeline-content {
+                width: 100% !important;
+                margin: 0 !important;
+            }
+
+            .timeline-year {
+                left: 20px;
+                transform: none;
+                font-size: 1.2rem;
+                padding: 0.8rem 1.2rem;
+            }
+
+            .photo-grid,
+            .video-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="nav-container">
+            <div class="logo">
+                <a href="index.html" style="color: inherit; text-decoration: none; display: flex; align-items: center; gap: 0.8rem;">
+                    <div class="dharma-wheel"></div>
+                    <div class="logo-text">
+                        <span class="logo-year">2026</span>
+                        <span class="logo-main">寒修行</span>
+                    </div>
+                </a>
+            </div>
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="index.html"><i class="fas fa-home"></i> 首頁</a></li>
+                    <li><a href="interactive.html"><i class="fas fa-users"></i> 2026互動區</a></li>
+                    <li><a href="news.html"><i class="fas fa-newspaper"></i> 最新消息</a></li>
+                    <li><a href="schedule.html"><i class="fas fa-calendar"></i> 時程</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle"><i class="fas fa-video"></i> 影片專區</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="videos.html"><i class="fas fa-play-circle"></i> 法會影片</a></li>
+                            <li><a href="promo.html"><i class="fas fa-film"></i> 參考影片</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle"><i class="fas fa-book"></i> 學習專區</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="doctrine.html"><i class="fas fa-pray"></i> 教誡拜讀</a></li>
+                            <li><a href="scripture.html"><i class="fas fa-book-open"></i> 讀經次第</a></li>
+                            <li><a href="cards.html"><i class="fas fa-images"></i> 卡片介紹</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="history.html" class="active"><i class="fas fa-landmark"></i> 苑史區</a></li>
+                </ul>
+                <button class="mobile-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <h1><i class="fas fa-landmark"></i> 苑史區</h1>
+        <p>回顧真如苑台灣教區的發展歷程，見證美好的歷史時刻</p>
+    </section>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Historical Timeline -->
+        <div class="timeline-section">
+            <div class="timeline-header">
+                <h2>真如苑台灣教區大事記</h2>
+                <p>從創立至今的重要里程碑</p>
+            </div>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-year">1970</div>
+                    <div class="timeline-content">
+                        <h3>真如苑創立</h3>
+                        <p>伊藤真乘大僧正於日本創立真如苑，以「慈悲」為核心理念，開始弘揚佛法，幫助眾生離苦得樂。這是真如苑發展的起點，奠定了今日的基礎。</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-year">1985</div>
+                    <div class="timeline-content">
+                        <h3>台灣教區成立</h3>
+                        <p>真如苑正式在台灣設立教區，開始在寶島弘法。第一批台灣信眾加入，開啟了真如苑在台灣發展的新篇章。</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-year">1995</div>
+                    <div class="timeline-content">
+                        <h3>首座精舍落成</h3>
+                        <p>台灣第一座精舍正式落成啟用，為信眾提供了更完善的修行場所。這是台灣教區發展的重要里程碑。</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-year">2005</div>
+                    <div class="timeline-content">
+                        <h3>千人大法會</h3>
+                        <p>舉辦首次千人大法會，來自全台各地的信眾齊聚一堂，場面莊嚴殊勝，展現了台灣教區的成長與團結。</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-year">2015</div>
+                    <div class="timeline-content">
+                        <h3>台灣教區30週年</h3>
+                        <p>慶祝台灣教區成立30週年，舉辦系列慶祝活動，回顧過去、展望未來。信眾人數已突破萬人，遍布全台各地。</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-year">2020</div>
+                    <div class="timeline-content">
+                        <h3>線上法會開啟</h3>
+                        <p>因應時代變化，開始提供線上法會服務，讓更多人能夠不受地域限制參與修行，開創弘法新模式。</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-year">2025</div>
+                    <div class="timeline-content">
+                        <h3>台灣教區40週年</h3>
+                        <p>台灣教區迎來40週年慶，舉辦盛大慶典。回首來時路，感恩所有前輩的付出，期許未來繼續弘揚佛法。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Photo Gallery -->
+        <section class="gallery-section">
+            <div class="section-title">
+                <div class="section-title-icon">
+                    <i class="fas fa-images"></i>
+                </div>
+                <h2>珍貴歷史照片</h2>
+            </div>
+            <div class="photo-grid">
+                <div class="photo-card" onclick="viewPhoto(1)">
+                    <div class="photo-card-image">
+                        <i class="fas fa-camera"></i>
+                        <div class="photo-overlay">
+                            <i class="fas fa-search-plus"></i>
+                        </div>
+                    </div>
+                    <div class="photo-card-info">
+                        <h4>首座精舍落成典禮</h4>
+                        <p class="photo-year">1995年</p>
+                        <p class="photo-description">台灣第一座精舍落成當天，信眾們歡欣鼓舞，共同見證這歷史性的時刻。</p>
+                    </div>
+                </div>
+
+                <div class="photo-card" onclick="viewPhoto(2)">
+                    <div class="photo-card-image">
+                        <i class="fas fa-camera"></i>
+                        <div class="photo-overlay">
+                            <i class="fas fa-search-plus"></i>
+                        </div>
+                    </div>
+                    <div class="photo-card-info">
+                        <h4>千人大法會盛況</h4>
+                        <p class="photo-year">2005年</p>
+                        <p class="photo-description">首次千人大法會，信眾們虔誠祈禱，場面莊嚴肅穆，令人動容。</p>
+                    </div>
+                </div>
+
+                <div class="photo-card" onclick="viewPhoto(3)">
+                    <div class="photo-card-image">
+                        <i class="fas fa-camera"></i>
+                        <div class="photo-overlay">
+                            <i class="fas fa-search-plus"></i>
+                        </div>
+                    </div>
+                    <div class="photo-card-info">
+                        <h4>苑主訪台</h4>
+                        <p class="photo-year">2010年</p>
+                        <p class="photo-description">苑主親臨台灣，為信眾開示，鼓勵大家精進修行，場面溫馨感人。</p>
+                    </div>
+                </div>
+
+                <div class="photo-card" onclick="viewPhoto(4)">
+                    <div class="photo-card-image">
+                        <i class="fas fa-camera"></i>
+                        <div class="photo-overlay">
+                            <i class="fas fa-search-plus"></i>
+                        </div>
+                    </div>
+                    <div class="photo-card-info">
+                        <h4>30週年慶典</h4>
+                        <p class="photo-year">2015年</p>
+                        <p class="photo-description">台灣教區30週年慶典，老中青三代信眾齊聚，共同慶祝這特別的日子。</p>
+                    </div>
+                </div>
+
+                <div class="photo-card" onclick="viewPhoto(5)">
+                    <div class="photo-card-image">
+                        <i class="fas fa-camera"></i>
+                        <div class="photo-overlay">
+                            <i class="fas fa-search-plus"></i>
+                        </div>
+                    </div>
+                    <div class="photo-card-info">
+                        <h4>義工服務活動</h4>
+                        <p class="photo-year">2018年</p>
+                        <p class="photo-description">信眾們參與社會服務，實踐慈悲精神，將修行落實在日常生活中。</p>
+                    </div>
+                </div>
+
+                <div class="photo-card" onclick="viewPhoto(6)">
+                    <div class="photo-card-image">
+                        <i class="fas fa-camera"></i>
+                        <div class="photo-overlay">
+                            <i class="fas fa-search-plus"></i>
+                        </div>
+                    </div>
+                    <div class="photo-card-info">
+                        <h4>青年修行營</h4>
+                        <p class="photo-year">2022年</p>
+                        <p class="photo-description">專為年輕人舉辦的修行營，讓新生代也能體驗修行的美好，傳承信仰。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- History Videos -->
+        <section class="video-section">
+            <div class="section-title">
+                <div class="section-title-icon">
+                    <i class="fas fa-video"></i>
+                </div>
+                <h2>苑史影片</h2>
+            </div>
+            <div class="video-grid">
+                <div class="video-card" onclick="playHistoryVideo(1)">
+                    <div class="video-thumbnail">
+                        <div class="video-play-btn">
+                            <i class="fas fa-play"></i>
+                        </div>
+                        <div class="video-duration">25:30</div>
+                    </div>
+                    <div class="video-card-content">
+                        <h4>真如苑台灣教區40年回顧</h4>
+                        <p>完整記錄台灣教區40年來的發展歷程，從創立到今日的點點滴滴，見證信仰的力量。</p>
+                    </div>
+                </div>
+
+                <div class="video-card" onclick="playHistoryVideo(2)">
+                    <div class="video-thumbnail">
+                        <div class="video-play-btn">
+                            <i class="fas fa-play"></i>
+                        </div>
+                        <div class="video-duration">18:45</div>
+                    </div>
+                    <div class="video-card-content">
+                        <h4>信眾心路歷程</h4>
+                        <p>資深信眾分享他們的修行故事，從初次接觸到深入修行，每個故事都充滿感動。</p>
+                    </div>
+                </div>
+
+                <div class="video-card" onclick="playHistoryVideo(3)">
+                    <div class="video-thumbnail">
+                        <div class="video-play-btn">
+                            <i class="fas fa-play"></i>
+                        </div>
+                        <div class="video-duration">15:20</div>
+                    </div>
+                    <div class="video-card-content">
+                        <h4>精舍建築巡禮</h4>
+                        <p>帶您走訪台灣各地的精舍，了解每座精舍背後的故事與建築特色。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        function viewPhoto(id) {
+            alert(`查看照片 ${id}\n\n實際網站會顯示大圖預覽`);
+        }
+
+        function playHistoryVideo(id) {
+            alert(`播放苑史影片 ${id}\n\n實際網站會在此處嵌入影片播放器`);
+        }
+
+        // Mobile menu
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const navMenu = document.querySelector('.nav-menu');
+        const dropdowns = document.querySelectorAll('.dropdown');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            navMenu.classList.toggle('mobile-active');
+            const icon = mobileMenuBtn.querySelector('i');
+            icon.className = navMenu.classList.contains('mobile-active') ? 'fas fa-times' : 'fas fa-bars';
+        });
+
+        if (window.innerWidth <= 768) {
+            dropdowns.forEach(dropdown => {
+                const toggle = dropdown.querySelector('.dropdown-toggle');
+                toggle.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    dropdown.classList.toggle('mobile-open');
+                });
+            });
+        }
+
+        if (window.innerWidth > 768) {
+            dropdowns.forEach(dropdown => {
+                const toggle = dropdown.querySelector('.dropdown-toggle');
+                toggle.addEventListener('click', (e) => e.preventDefault());
+            });
+        }
+
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.nav-container')) {
+                navMenu.classList.remove('mobile-active');
+                const icon = mobileMenuBtn.querySelector('i');
+                icon.className = 'fas fa-bars';
+            }
+        });
+    </script>
+</body>
+</html>

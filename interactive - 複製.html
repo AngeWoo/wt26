@@ -20,7 +20,7 @@
             min-height: 100vh;
         }
 
-        /* Header & Navigation */
+        /* Header & Navigation - 與 index.html 相同的樣式 */
         .header {
             background: linear-gradient(135deg, rgba(139,69,19,0.95) 0%, rgba(160,82,45,0.95) 50%, rgba(218,165,32,0.95) 100%);
             color: white;
@@ -85,6 +85,7 @@
             font-weight: 700;
         }
 
+        /* 優化後的導航選單 */
         .nav-menu {
             display: flex;
             list-style: none;
@@ -126,6 +127,7 @@
             font-weight: 600;
         }
 
+        /* 下拉選單樣式 */
         .dropdown {
             position: relative;
         }
@@ -192,6 +194,7 @@
             transform: translateY(0);
         }
 
+        /* 手機選單按鈕 */
         .mobile-menu-btn {
             display: none;
             background: none;
@@ -242,7 +245,7 @@
 
         .interactive-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: 1fr 1fr;
             gap: 3rem;
             margin-bottom: 4rem;
         }
@@ -334,247 +337,6 @@
         .activity-btn:hover {
             background: #A0522D;
             transform: translateY(-2px);
-        }
-
-        /* Experience Cards */
-        .experience-cards {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1.5rem;
-            margin-top: 2rem;
-        }
-
-        .experience-card {
-            background: linear-gradient(135deg, #fff, #f8f9fa);
-            padding: 2rem;
-            border-radius: 15px;
-            text-align: center;
-            border: 2px solid transparent;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
-        }
-
-        .experience-card:hover {
-            border-color: #DAA520;
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(218,165,32,0.2);
-        }
-
-        .experience-icon {
-            font-size: 3rem;
-            color: #DAA520;
-            margin-bottom: 1rem;
-            transition: all 0.3s ease;
-        }
-
-        .experience-card:hover .experience-icon {
-            transform: scale(1.1);
-            color: #8B4513;
-        }
-
-        .experience-card h3 {
-            color: #8B4513;
-            font-size: 1.3rem;
-            margin-bottom: 0.8rem;
-        }
-
-        .experience-card p {
-            color: #666;
-            line-height: 1.6;
-            margin-bottom: 1.2rem;
-            font-size: 0.95rem;
-        }
-
-        .experience-btn {
-            background: linear-gradient(45deg, #DAA520, #FFD700);
-            color: #8B4513;
-            border: none;
-            padding: 0.7rem 1.3rem;
-            border-radius: 25px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-size: 0.95rem;
-        }
-
-        .experience-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(218,165,32,0.3);
-        }
-
-        /* Game Styles */
-        .game-container {
-            background: linear-gradient(135deg, #f8f9fa, #fff);
-            border-radius: 15px;
-            padding: 2rem;
-        }
-
-        .game-info {
-            text-align: center;
-            margin-bottom: 2rem;
-        }
-
-        .game-board {
-            background: white;
-            border-radius: 15px;
-            padding: 2rem;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-        }
-
-        .game-progress {
-            margin-bottom: 2rem;
-        }
-
-        .lamp-container {
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            padding: 2rem 0;
-            background: linear-gradient(135deg, rgba(139,69,19,0.05), rgba(218,165,32,0.05));
-            border-radius: 15px;
-        }
-
-        .lamp {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 0.5rem;
-            transition: all 0.3s ease;
-        }
-
-        .lamp i {
-            font-size: 2.5rem;
-            color: #ccc;
-            transition: all 0.5s ease;
-        }
-
-        .lamp.lit i {
-            color: #FFD700;
-            text-shadow: 0 0 20px rgba(255,215,0,0.8);
-            animation: glow 1.5s ease-in-out infinite;
-        }
-
-        .lamp span {
-            font-size: 0.85rem;
-            color: #666;
-            font-weight: 500;
-        }
-
-        @keyframes glow {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-        }
-
-        .question-area {
-            background: linear-gradient(135deg, #f8f9fa, #fff);
-            padding: 2rem;
-            border-radius: 15px;
-            margin-bottom: 2rem;
-            min-height: 200px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-
-        .question-title {
-            color: #8B4513;
-            font-size: 1.3rem;
-            margin-bottom: 1rem;
-            text-align: center;
-        }
-
-        .question-text {
-            color: #555;
-            font-size: 1.1rem;
-            line-height: 1.6;
-            text-align: center;
-            margin-bottom: 2rem;
-        }
-
-        .answer-buttons {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1rem;
-        }
-
-        .answer-btn {
-            background: white;
-            border: 2px solid #DAA520;
-            color: #8B4513;
-            padding: 1rem;
-            border-radius: 10px;
-            font-size: 1rem;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .answer-btn:hover {
-            background: #DAA520;
-            color: white;
-            transform: translateY(-2px);
-        }
-
-        .answer-btn.correct {
-            background: #28a745;
-            border-color: #28a745;
-            color: white;
-        }
-
-        .answer-btn.wrong {
-            background: #dc3545;
-            border-color: #dc3545;
-            color: white;
-        }
-
-        .start-game-btn {
-            background: linear-gradient(45deg, #DAA520, #FFD700);
-            color: #8B4513;
-            border: none;
-            padding: 1.2rem 2.5rem;
-            border-radius: 25px;
-            font-size: 1.2rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-            margin: 0 auto;
-        }
-
-        .start-game-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(218,165,32,0.3);
-        }
-
-        .game-score {
-            display: flex;
-            justify-content: center;
-            gap: 3rem;
-            padding: 1.5rem;
-            background: linear-gradient(135deg, rgba(139,69,19,0.05), rgba(218,165,32,0.05));
-            border-radius: 15px;
-        }
-
-        .score-item {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-size: 1.1rem;
-            color: #8B4513;
-        }
-
-        .score-item i {
-            color: #DAA520;
-            font-size: 1.3rem;
-        }
-
-        .score-item strong {
-            font-size: 1.3rem;
-            color: #8B4513;
         }
 
         /* Prayer Wall */
@@ -831,14 +593,6 @@
                 padding: 0.8rem 1rem;
                 font-size: 0.95rem;
             }
-
-            .interactive-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .experience-cards {
-                grid-template-columns: 1fr;
-            }
         }
 
         @media (max-width: 768px) {
@@ -907,6 +661,11 @@
                 font-size: 2.5rem;
             }
 
+            .interactive-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
             .prayers-display {
                 grid-template-columns: 1fr;
             }
@@ -923,19 +682,6 @@
                 width: 45px;
                 height: 45px;
                 font-size: 1rem;
-            }
-
-            .lamp-container {
-                flex-wrap: wrap;
-                gap: 1rem;
-            }
-
-            .lamp i {
-                font-size: 2rem;
-            }
-
-            .answer-buttons {
-                grid-template-columns: 1fr;
             }
         }
 
@@ -1014,6 +760,7 @@
                     <li><a href="news.html"><i class="fas fa-newspaper"></i> 最新消息</a></li>
                     <li><a href="schedule.html"><i class="fas fa-calendar"></i> 時程</a></li>
                     
+                    <!-- 影片專區下拉選單 -->
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle"><i class="fas fa-video"></i> 影片專區</a>
                         <ul class="dropdown-menu">
@@ -1022,6 +769,7 @@
                         </ul>
                     </li>
                     
+                    <!-- 學習專區下拉選單 -->
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle"><i class="fas fa-book"></i> 學習專區</a>
                         <ul class="dropdown-menu">
@@ -1048,108 +796,59 @@
 
     <!-- Main Content -->
     <main class="main-content">
-        <!-- Small Fire Experience Section -->
-        <div class="interactive-section animate-in" style="margin-bottom: 4rem;">
-            <div class="section-header">
-                <h2><i class="fas fa-fire"></i> 小小炭火體驗談</h2>
-            </div>
-            <div class="section-content">
-                <p style="text-align: center; color: #666; margin-bottom: 1.5rem;">
-                    分享您的修行體驗,點燃心中的智慧之火
-                </p>
-                
-                <div class="experience-cards">
-                    <div class="experience-card" onclick="showExperience('flight')">
-                        <div class="experience-icon">
-                            <i class="fas fa-dove"></i>
+        <div class="interactive-grid">
+            <!-- Daily Activity Section -->
+            <div class="interactive-section animate-in">
+                <div class="section-header">
+                    <h2><i class="fas fa-calendar-day"></i> 今日修行目標</h2>
+                </div>
+                <div class="section-content">
+                    <div class="daily-activity">
+                        <div class="activity-card">
+                            <h3>今日主題:感恩與慈悲</h3>
+                            <p>在日常生活中實踐感恩的心,對身邊的每一個人、每一件事心懷感激,同時培養慈悲心,關愛所有眾生。</p>
+                            <div class="progress-bar">
+                                <div class="progress-fill"></div>
+                            </div>
+                            <p><strong>完成進度: 65%</strong></p>
+                            <button class="activity-btn" onclick="completeActivity()">
+                                <i class="fas fa-check"></i> 標記完成
+                            </button>
                         </div>
-                        <h3>逆風飛翔</h3>
-                        <p>鼓起勇氣,擺開傷心,要飛翔要尋找真理想。</p>
-                        <button class="experience-btn">分享體驗</button>
-                    </div>
-                    
-                    <div class="experience-card" onclick="showExperience('return')">
-                        <div class="experience-icon">
-                            <i class="fas fa-home"></i>
+                        
+                        <div style="text-align: left;">
+                            <h4 style="color: #8B4513; margin-bottom: 1rem;">修行指引:</h4>
+                            <ul style="color: #555; padding-left: 1.5rem;">
+                                <li>早晨起床後,感恩新的一天</li>
+                                <li>用餐前,感恩食物的來源</li>
+                                <li>對遇到的每個人心懷慈悲</li>
+                                <li>晚間反思今日的感恩時刻</li>
+                            </ul>
                         </div>
-                        <h3>回歸親苑</h3>
-                        <p>踏上未知的旅程,鼓起勇氣,跨出一步,改變的契機。</p>
-                        <button class="experience-btn">分享體驗</button>
-                    </div>
-                    
-                    <div class="experience-card" onclick="showExperience('life')">
-                        <div class="experience-icon">
-                            <i class="fas fa-seedling"></i>
-                        </div>
-                        <h3>修行生活</h3>
-                        <p>改變與希望,面對壓力,樂觀面對,和諧修行。</p>
-                        <button class="experience-btn">分享體驗</button>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <!-- Lamp Mountain Game - Full Width -->
-        <div class="interactive-section animate-in" style="margin-bottom: 4rem;">
-            <div class="section-header">
-                <h2><i class="fas fa-gamepad"></i> 燈檯寶山互動遊戲</h2>
-                <p>點亮智慧之燈,探索修行寶山</p>
-            </div>
-            <div class="section-content">
-                <div class="game-container">
-                    <div class="game-info">
-                        <h3 style="color: #8B4513; margin-bottom: 1rem;">遊戲說明</h3>
-                        <p style="color: #666; margin-bottom: 1.5rem;">
-                            在這個互動遊戲中,您將扮演一位修行者,攀登智慧寶山。每答對一題,就能點亮一盞燈,照亮前行的道路。
+            <!-- Photo Upload Section -->
+            <div class="interactive-section animate-in">
+                <div class="section-header">
+                    <h2><i class="fas fa-camera"></i> 修行相片分享</h2>
+                </div>
+                <div class="section-content">
+                    <div class="photo-upload">
+                        <div class="upload-area" onclick="document.getElementById('photo-input').click()">
+                            <div class="upload-icon">
+                                <i class="fas fa-cloud-upload-alt"></i>
+                            </div>
+                            <div class="upload-text">
+                                <p><strong>點擊上傳您的修行照片</strong></p>
+                                <p>分享在家修行、學習心得或參與活動的珍貴時刻</p>
+                            </div>
+                        </div>
+                        <input type="file" id="photo-input" class="file-input" accept="image/*" onchange="handlePhotoUpload(event)">
+                        <p style="font-size: 0.9rem; color: #666;">
+                            * 上傳的照片將經過審核後顯示在展示牆上
                         </p>
-                    </div>
-                    
-                    <div class="game-board">
-                        <div class="game-progress">
-                            <div class="lamp-container">
-                                <div class="lamp" id="lamp1">
-                                    <i class="fas fa-lightbulb"></i>
-                                    <span>第一燈</span>
-                                </div>
-                                <div class="lamp" id="lamp2">
-                                    <i class="fas fa-lightbulb"></i>
-                                    <span>第二燈</span>
-                                </div>
-                                <div class="lamp" id="lamp3">
-                                    <i class="fas fa-lightbulb"></i>
-                                    <span>第三燈</span>
-                                </div>
-                                <div class="lamp" id="lamp4">
-                                    <i class="fas fa-lightbulb"></i>
-                                    <span>第四燈</span>
-                                </div>
-                                <div class="lamp" id="lamp5">
-                                    <i class="fas fa-lightbulb"></i>
-                                    <span>第五燈</span>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="question-area" id="question-area">
-                            <h3 class="question-title" id="question-title">準備好開始了嗎?</h3>
-                            <p class="question-text" id="question-text">點擊下方按鈕開始您的智慧之旅</p>
-                            <div class="answer-buttons" id="answer-buttons">
-                                <button class="start-game-btn" onclick="startGame()">
-                                    <i class="fas fa-play"></i> 開始遊戲
-                                </button>
-                            </div>
-                        </div>
-                        
-                        <div class="game-score">
-                            <div class="score-item">
-                                <i class="fas fa-star"></i>
-                                <span>得分: <strong id="score">0</strong></span>
-                            </div>
-                            <div class="score-item">
-                                <i class="fas fa-fire"></i>
-                                <span>連勝: <strong id="streak">0</strong></span>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -1158,7 +857,7 @@
         <!-- Prayer Wall -->
         <div class="interactive-section prayer-wall animate-in">
             <div class="section-header">
-                <h2><i class="fas fa-hands"></i> 互動祈禱牆</h2>
+                <h2><i class="fas fa-hands"></i> 互動祈福牆</h2>
                 <p>在這裡留下您的心願與祝福,與所有信眾一同祈禱</p>
             </div>
             <div class="section-content">
@@ -1169,17 +868,17 @@
                             <input type="text" id="prayer-name" required placeholder="請輸入您的法名或暱稱">
                         </div>
                         <div class="form-group">
-                            <label for="prayer-content">祈禱內容</label>
+                            <label for="prayer-content">祈福內容</label>
                             <textarea id="prayer-content" required placeholder="請分享您的心願、感恩或為他人的祝福..."></textarea>
                         </div>
                         <button type="submit" class="submit-btn">
-                            <i class="fas fa-paper-plane"></i> 發送祈禱
+                            <i class="fas fa-paper-plane"></i> 發送祈福
                         </button>
                     </form>
                 </div>
 
                 <div class="prayers-display" id="prayers-container">
-                    <!-- 預設祈禱內容 -->
+                    <!-- 預設祈福內容 -->
                     <div class="prayer-card">
                         <div class="prayer-header">
                             <span class="prayer-author">慧心</span>
@@ -1244,24 +943,50 @@
                 <p>信眾們分享的珍貴修行時刻</p>
             </div>
             <div class="section-content">
-                <div class="photo-upload">
-                    <div class="upload-area" onclick="document.getElementById('photo-input').click()">
-                        <div class="upload-icon">
-                            <i class="fas fa-cloud-upload-alt"></i>
-                        </div>
-                        <div class="upload-text">
-                            <p><strong>點擊上傳您的修行照片</strong></p>
-                            <p>分享在家修行、學習心得或參與活動的珍貴時刻</p>
+                <div class="photo-gallery">
+                    <div class="photo-card">
+                        <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='200'><rect width='100%' height='100%' fill='%23DAA520'/><text x='50%' y='50%' fill='white' text-anchor='middle' dy='.3em' font-size='16'>在家修行</text></svg>" alt="在家修行">
+                        <div class="photo-info">
+                            <div class="photo-caption">今日在家中設置了小佛壇,與家人一同誦經修行,感受到內心的平靜與喜悅。</div>
+                            <div class="photo-meta">
+                                <span>by 法喜</span>
+                                <span>2天前</span>
+                            </div>
                         </div>
                     </div>
-                    <input type="file" id="photo-input" class="file-input" accept="image/*" onchange="handlePhotoUpload(event)">
-                    <p style="font-size: 0.9rem; color: #666;">
-                        * 上傳的照片將經過審核後顯示在展示牆上
-                    </p>
-                </div>
 
-                <div class="photo-gallery">
-                    <!-- 照片卡片將在信眾上傳後顯示於此 -->
+                    <div class="photo-card">
+                        <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='200'><rect width='100%' height='100%' fill='%238B4513'/><text x='50%' y='50%' fill='white' text-anchor='middle' dy='.3em' font-size='16'>學習筆記</text></svg>" alt="學習筆記">
+                        <div class="photo-info">
+                            <div class="photo-caption">整理了這個月的學習心得,每一頁都是修行路上的珍貴收穫。</div>
+                            <div class="photo-meta">
+                                <span>by 慧心</span>
+                                <span>3天前</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="photo-card">
+                        <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='200'><rect width='100%' height='100%' fill='%23B8860B'/><text x='50%' y='50%' fill='white' text-anchor='middle' dy='.3em' font-size='16'>線上法會</text></svg>" alt="線上法會">
+                        <div class="photo-info">
+                            <div class="photo-caption">透過電腦參與線上法會,雖然在家中,但心靈與大家緊密連結。</div>
+                            <div class="photo-meta">
+                                <span>by 智慧</span>
+                                <span>5天前</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="photo-card">
+                        <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='200'><rect width='100%' height='100%' fill='%23CD853F'/><text x='50%' y='50%' fill='white' text-anchor='middle' dy='.3em' font-size='16'>修行卡片</text></svg>" alt="修行卡片">
+                        <div class="photo-info">
+                            <div class="photo-caption">收到美麗的修行卡片,每一張都蘊含著深刻的智慧與祝福。</div>
+                            <div class="photo-meta">
+                                <span>by 法音</span>
+                                <span>1週前</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1301,166 +1026,9 @@
                 </div>
             </div>
         </div>
-
     </main>
 
     <script>
-        // 遊戲相關變數
-        let currentQuestion = 0;
-        let score = 0;
-        let streak = 0;
-        let gameQuestions = [
-            {
-                question: "修行的根本目的是什麼?",
-                answers: ["追求名利", "離苦得樂,自覺覺他", "逃避現實", "獲得神通"],
-                correct: 1
-            },
-            {
-                question: "佛教的三寶是指什麼?",
-                answers: ["金銀財寶", "佛、法、僧", "戒定慧", "聞思修"],
-                correct: 1
-            },
-            {
-                question: "修行人應該培養什麼樣的心態?",
-                answers: ["傲慢自大", "慈悲喜捨", "貪嗔癡慢", "自私自利"],
-                correct: 1
-            },
-            {
-                question: "什麼是「四攝法」中的第一法?",
-                answers: ["愛語", "同事", "布施", "利行"],
-                correct: 2
-            },
-            {
-                question: "修行的最高境界是什麼?",
-                answers: ["成佛", "升天", "長壽", "富貴"],
-                correct: 0
-            }
-        ];
-
-        // 開始遊戲
-        function startGame() {
-            currentQuestion = 0;
-            score = 0;
-            streak = 0;
-            updateScore();
-            resetLamps();
-            showQuestion();
-        }
-
-        // 顯示問題
-        function showQuestion() {
-            if (currentQuestion >= gameQuestions.length) {
-                endGame();
-                return;
-            }
-
-            const question = gameQuestions[currentQuestion];
-            document.getElementById('question-title').textContent = `第 ${currentQuestion + 1} 題`;
-            document.getElementById('question-text').textContent = question.question;
-
-            const buttonsContainer = document.getElementById('answer-buttons');
-            buttonsContainer.innerHTML = '';
-
-            question.answers.forEach((answer, index) => {
-                const button = document.createElement('button');
-                button.className = 'answer-btn';
-                button.textContent = answer;
-                button.onclick = () => checkAnswer(index);
-                buttonsContainer.appendChild(button);
-            });
-        }
-
-        // 檢查答案
-        function checkAnswer(selectedIndex) {
-            const question = gameQuestions[currentQuestion];
-            const buttons = document.querySelectorAll('.answer-btn');
-            
-            buttons.forEach(btn => btn.disabled = true);
-
-            if (selectedIndex === question.correct) {
-                buttons[selectedIndex].classList.add('correct');
-                score += 100;
-                streak++;
-                lightLamp(currentQuestion + 1);
-                showNotification('答對了!智慧之燈已點亮 ✨', 'success');
-            } else {
-                buttons[selectedIndex].classList.add('wrong');
-                buttons[question.correct].classList.add('correct');
-                streak = 0;
-                showNotification('答錯了,繼續加油!', 'error');
-            }
-
-            updateScore();
-
-            setTimeout(() => {
-                currentQuestion++;
-                showQuestion();
-            }, 2000);
-        }
-
-        // 點亮燈檯
-        function lightLamp(lampNumber) {
-            const lamp = document.getElementById(`lamp${lampNumber}`);
-            if (lamp) {
-                lamp.classList.add('lit');
-            }
-        }
-
-        // 重置燈檯
-        function resetLamps() {
-            for (let i = 1; i <= 5; i++) {
-                const lamp = document.getElementById(`lamp${i}`);
-                if (lamp) {
-                    lamp.classList.remove('lit');
-                }
-            }
-        }
-
-        // 更新分數
-        function updateScore() {
-            document.getElementById('score').textContent = score;
-            document.getElementById('streak').textContent = streak;
-        }
-
-        // 結束遊戲
-        function endGame() {
-            const litLamps = document.querySelectorAll('.lamp.lit').length;
-            document.getElementById('question-title').textContent = '遊戲結束!';
-            document.getElementById('question-text').textContent = 
-                `恭喜您完成了智慧之旅!\n您點亮了 ${litLamps} 盞燈,獲得 ${score} 分。\n願您在修行路上越走越光明!`;
-            
-            const buttonsContainer = document.getElementById('answer-buttons');
-            buttonsContainer.innerHTML = `
-                <button class="start-game-btn" onclick="startGame()">
-                    <i class="fas fa-redo"></i> 再玩一次
-                </button>
-            `;
-
-            if (litLamps === 5) {
-                showNotification('太棒了!您點亮了所有的燈!🎉', 'success');
-            }
-        }
-
-        // 顯示體驗分享對話框
-        function showExperience(type) {
-            const titles = {
-                'flight': '逆風飛翔',
-                'return': '回歸親苑',
-                'life': '修行生活'
-            };
-            
-            const messages = {
-                'flight': '鼓起勇氣,擺開傷心,要飛翔要尋找真理想。請分享您如何在逆境中堅持修行的經驗。',
-                'return': '踏上未知的旅程,鼓起勇氣,跨出一步,改變的契機。請分享您回到精舍修行的感動。',
-                'life': '改變與希望,面對壓力,樂觀面對,和諧修行。請分享您在日常生活中實踐修行的心得。'
-            };
-
-            const title = titles[type];
-            const message = messages[type];
-
-            showNotification(`感謝您選擇分享「${title}」的體驗!\n${message}`, 'info');
-        }
-
         // 完成活動功能
         function completeActivity() {
             const progressBar = document.querySelector('.progress-fill');
@@ -1484,7 +1052,7 @@
             }, 1000);
         }
 
-        // 提交祈禱功能
+        // 提交祈福功能
         function submitPrayer(event) {
             event.preventDefault();
             
@@ -1522,10 +1090,10 @@
                 document.getElementById('prayer-name').value = '';
                 document.getElementById('prayer-content').value = '';
                 
-                submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> 發送祈禱';
+                submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> 發送祈福';
                 submitBtn.disabled = false;
                 
-                showNotification('祈禱已發送,感恩您的分享。', 'success');
+                showNotification('祈福已發送,感恩您的分享。', 'success');
             }, 1500);
         }
 
@@ -1620,8 +1188,6 @@
                 z-index: 1001;
                 font-weight: 500;
                 animation: slideIn 0.3s ease-out;
-                max-width: 350px;
-                white-space: pre-line;
             `;
             notification.textContent = message;
             

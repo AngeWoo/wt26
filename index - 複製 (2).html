@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2026寒修行 - 真如苑台灣教區</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Microsoft JhengHei', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        }
+
+        /* Header & Navigation */
+        .header {
+            background: linear-gradient(135deg, rgba(139,69,19,0.95) 0%, rgba(160,82,45,0.95) 50%, rgba(218,165,32,0.95) 100%);
+            color: white;
+            padding: 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 25px rgba(0,0,0,0.15);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .header.scrolled {
+            background: linear-gradient(135deg, rgba(139,69,19,0.9) 0%, rgba(160,82,45,0.9) 50%, rgba(218,165,32,0.9) 100%);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            box-shadow: 0 4px 30px rgba(0,0,0,0.2);
+        }
+
+        .header.transparent {
+            background: linear-gradient(135deg, rgba(139,69,19,0.8) 0%, rgba(160,82,45,0.8) 50%, rgba(218,165,32,0.8) 100%);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+            height: 80px;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            color: #FFD700;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            letter-spacing: 1px;
+        }
+
+        .logo i {
+            font-size: 2rem;
+            text-shadow: 0 0 10px rgba(255,215,0,0.5);
+        }
+
+        .dharma-wheel {
+            width: 40px;
+            height: 40px;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><linearGradient id="goldGradient" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:%23FFD700;stop-opacity:1" /><stop offset="50%" style="stop-color:%23FFA500;stop-opacity:1" /><stop offset="100%" style="stop-color:%23DAA520;stop-opacity:1" /></linearGradient></defs><g fill="url(%23goldGradient)" stroke="%23B8860B" stroke-width="0.5"><circle cx="50" cy="50" r="45"/><circle cx="50" cy="50" r="35" fill="none" stroke-width="2"/><circle cx="50" cy="50" r="25" fill="none" stroke-width="1.5"/><g><rect x="48" y="5" width="4" height="20" rx="2"/><rect x="48" y="75" width="4" height="20" rx="2"/><rect x="5" y="48" width="20" height="4" rx="2"/><rect x="75" y="48" width="20" height="4" rx="2"/><rect x="18.9" y="18.9" width="4" height="14.14" rx="2" transform="rotate(45 21 26)"/><rect x="77.1" y="77.1" width="4" height="14.14" rx="2" transform="rotate(45 79 84)"/><rect x="77.1" y="18.9" width="4" height="14.14" rx="2" transform="rotate(-45 79 26)"/><rect x="18.9" y="77.1" width="4" height="14.14" rx="2" transform="rotate(-45 21 84)"/></g><circle cx="50" cy="50" r="12" fill="url(%23goldGradient)"/><g fill="%23FFA500"><circle cx="50" cy="15" r="2"/><circle cx="50" cy="85" r="2"/><circle cx="15" cy="50" r="2"/><circle cx="85" cy="50" r="2"/><circle cx="26.86" cy="26.86" r="1.5"/><circle cx="73.14" cy="73.14" r="1.5"/><circle cx="73.14" cy="26.86" r="1.5"/><circle cx="26.86" cy="73.14" r="1.5"/></g><g fill="%23DAA520" opacity="0.8"><circle cx="50" cy="45" r="1"/><circle cx="50" cy="55" r="1"/><circle cx="45" cy="50" r="1"/><circle cx="55" cy="50" r="1"/><circle cx="47" cy="47" r="0.8"/><circle cx="53" cy="53" r="0.8"/><circle cx="53" cy="47" r="0.8"/><circle cx="47" cy="53" r="0.8"/></g></g></svg>') center/contain no-repeat;
+            filter: drop-shadow(0 0 8px rgba(255,215,0,0.4));
+            transition: all 0.3s ease;
+        }
+
+        .logo:hover .dharma-wheel {
+            filter: drop-shadow(0 0 15px rgba(255,215,0,0.6));
+            transform: rotate(30deg);
+        }
+
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+            line-height: 1.1;
+        }
+
+        .logo-year {
+            font-size: 1rem;
+            opacity: 0.9;
+            font-weight: 500;
+        }
+
+        .logo-main {
+            font-size: 1.4rem;
+            font-weight: 700;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 0.5rem;
+            align-items: center;
+        }
+
+        .nav-menu li {
+            position: relative;
+        }
+
+        .nav-menu a {
+            color: rgba(255,255,255,0.9);
+            text-decoration: none;
+            padding: 0.8rem 1.2rem;
+            border-radius: 8px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            font-weight: 500;
+            font-size: 0.95rem;
+            position: relative;
+            display: block;
+            white-space: nowrap;
+        }
+
+        .nav-menu a::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #FFD700, #FFA500);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        .nav-menu a:hover {
+            background: rgba(255,255,255,0.15);
+            color: #FFD700;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .nav-menu a:hover::before {
+            width: 80%;
+        }
+
+        .nav-menu a.active {
+            background: rgba(255,215,0,0.2);
+            color: #FFD700;
+            font-weight: 600;
+        }
+
+        .nav-menu a.active::before {
+            width: 80%;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.8rem;
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-menu-btn:hover {
+            background: rgba(255,255,255,0.1);
+            color: #FFD700;
+        }
+
+        /* Mobile Navigation */
+        .nav-menu.mobile-active {
+            display: flex;
+            flex-direction: column;
+            position: absolute;
+            top: 80px;
+            left: 0;
+            width: 100%;
+            background: linear-gradient(135deg, #8B4513 0%, #A0522D 50%, #DAA520 100%);
+            padding: 1rem 0;
+            box-shadow: 0 4px 25px rgba(0,0,0,0.2);
+            gap: 0;
+        }
+
+        .nav-menu.mobile-active li {
+            width: 100%;
+        }
+
+        .nav-menu.mobile-active a {
+            padding: 1rem 2rem;
+            border-radius: 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .nav-menu.mobile-active a:hover {
+            background: rgba(255,255,255,0.1);
+            transform: translateX(10px);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(139,69,19,0.7), rgba(218,165,32,0.7)), url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><defs><pattern id="temple" patternUnits="userSpaceOnUse" width="200" height="200"><rect width="200" height="200" fill="%23f8f9fa"/><circle cx="100" cy="100" r="30" fill="%23DAA520" opacity="0.1"/></pattern></defs><rect width="100%" height="100%" fill="url(%23temple)"/></svg>');
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            margin-top: 80px;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            padding: 2rem;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+            animation: fadeInUp 1s ease-out 0.3s both;
+        }
+
+        .countdown-container {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            margin: 2rem 0;
+            animation: fadeInUp 1s ease-out 0.6s both;
+        }
+
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .countdown-item {
+            text-align: center;
+        }
+
+        .countdown-item .number {
+            font-size: 3rem;
+            font-weight: bold;
+            display: block;
+            color: #FFD700;
+        }
+
+        .countdown-item .label {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: fadeInUp 1s ease-out 0.9s both;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, #DAA520, #FFD700);
+            color: #8B4513;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        /* Main Content Sections */
+        .main-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .section {
+            margin-bottom: 4rem;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            overflow: hidden;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .section-header {
+            background: linear-gradient(135deg, #8B4513, #DAA520);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .section-header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .section-content {
+            padding: 2rem;
+        }
+
+        /* News Section */
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .news-card {
+            border: 1px solid #e9ecef;
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .news-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        }
+
+        .news-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .news-card-content {
+            padding: 1.5rem;
+        }
+
+        .news-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: #8B4513;
+        }
+
+        .news-date {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Features Grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            text-align: center;
+            padding: 2rem;
+            border-radius: 15px;
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            background: linear-gradient(135deg, #DAA520, #FFD700);
+            color: white;
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: #DAA520;
+        }
+
+        .feature-card:hover .feature-icon {
+            color: white;
+        }
+
+        .feature-card h3 {
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        /* Footer */
+        .footer {
+            background: linear-gradient(135deg, #8B4513, #DAA520);
+            color: white;
+            text-align: center;
+            padding: 3rem 2rem 2rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .footer-section a {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: #FFD700;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .nav-menu {
+                gap: 0.3rem;
+            }
+            
+            .nav-menu a {
+                padding: 0.6rem 0.8rem;
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+
+            .nav-menu.mobile-active {
+                display: flex;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .hero {
+                margin-top: 80px;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .countdown {
+                gap: 1rem;
+            }
+
+            .countdown-item .number {
+                font-size: 2rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .nav-container {
+                padding: 0 1rem;
+            }
+            
+            .logo {
+                gap: 0.5rem;
+            }
+            
+            .dharma-wheel {
+                width: 32px;
+                height: 32px;
+            }
+            
+            .logo-year {
+                font-size: 0.85rem;
+            }
+            
+            .logo-main {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="nav-container">
+            <div class="logo">
+                <a href="#home" style="color: inherit; text-decoration: none; display: flex; align-items: center; gap: 0.8rem;">
+                    <div class="dharma-wheel"></div>
+                    <div class="logo-text">
+                        <span class="logo-year">2026</span>
+                        <span class="logo-main">寒修行</span>
+                    </div>
+                </a>
+            </div>
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="#home" class="active">首頁</a></li>
+                    <li><a href="interactive.html">2026互動區</a></li>
+                    <li><a href="news.html">最新消息</a></li>
+                    <li><a href="schedule.html">時程</a></li>
+                    <li><a href="videos.html">法會影片</a></li>
+                    <li><a href="promo.html">參考影片</a></li>
+                    <li><a href="history.html">苑史區</a></li>
+                    <li><a href="doctrine.html">教誡拜讀</a></li>
+                    <li><a href="scripture.html">讀經次第</a></li>
+                    <li><a href="cards.html">卡片介紹</a></li>
+                </ul>
+                <button class="mobile-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>2026寒修行</h1>
+            <p>在寒冷的冬日中,讓心靈獲得溫暖的成長與淨化</p>
+            
+            <div class="countdown-container">
+                <h3>距離寒修行開始還有</h3>
+                <div class="countdown" id="countdown">
+                    <div class="countdown-item">
+                        <span class="number" id="days">00</span>
+                        <span class="label">天</span>
+                    </div>
+                    <div class="countdown-item">
+                        <span class="number" id="hours">00</span>
+                        <span class="label">小時</span>
+                    </div>
+                    <div class="countdown-item">
+                        <span class="number" id="minutes">00</span>
+                        <span class="label">分鐘</span>
+                    </div>
+                    <div class="countdown-item">
+                        <span class="number" id="seconds">00</span>
+                        <span class="label">秒</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cta-buttons">
+                <a href="interactive.html" class="btn btn-primary">
+                    <i class="fas fa-users"></i> 加入互動區
+                </a>
+                <a href="#schedule" class="btn btn-secondary">
+                    <i class="fas fa-calendar"></i> 查看時程
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Latest News Section -->
+        <section class="section" id="news">
+            <div class="section-header">
+                <h2><i class="fas fa-newspaper"></i> 最新消息</h2>
+                <p>掌握2026年寒修行的最新動態與重要公告</p>
+            </div>
+            <div class="section-content">
+                <div class="news-grid">
+                    <div class="news-card">
+                        <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='200'><rect width='100%' height='100%' fill='%23DAA520'/><text x='50%' y='50%' fill='white' text-anchor='middle' dy='.3em' font-size='20'>寒修行公告</text></svg>" alt="寒修行公告">
+                        <div class="news-card-content">
+                            <div class="news-date">2025年10月15日</div>
+                            <h3>2026年寒修行正式啟動</h3>
+                            <p>2026年寒修行活動即將於明年1月開始,歡迎所有信眾踴躍參與這場心靈的淨化之旅...</p>
+                        </div>
+                    </div>
+                    <div class="news-card">
+                        <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='200'><rect width='100%' height='100%' fill='%238B4513'/><text x='50%' y='50%' fill='white' text-anchor='middle' dy='.3em' font-size='20'>線上法會</text></svg>" alt="線上法會">
+                        <div class="news-card-content">
+                            <div class="news-date">2025年10月12日</div>
+                            <h3>線上法會直播時間公布</h3>
+                            <p>為了讓無法親臨現場的信眾也能參與,我們將提供完整的線上法會直播服務...</p>
+                        </div>
+                    </div>
+                    <div class="news-card">
+                        <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='200'><rect width='100%' height='100%' fill='%23B8860B'/><text x='50%' y='50%' fill='white' text-anchor='middle' dy='.3em' font-size='20'>互動活動</text></svg>" alt="互動活動">
+                        <div class="news-card-content">
+                            <div class="news-date">2025年10月10日</div>
+                            <h3>全新互動功能上線</h3>
+                            <p>2026互動區現已開放,包含祈福牆、照片分享等多項全新功能,邀請大家一同參與...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="section">
+            <div class="section-header">
+                <h2><i class="fas fa-star"></i> 精選功能</h2>
+                <p>體驗2026年寒修行的豐富內容與互動功能</p>
+            </div>
+            <div class="section-content">
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <h3>互動祈福牆</h3>
+                        <p>在線上祈福牆留下您的心願,與全體信眾一同祈福,分享修行路上的點點滴滴</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-video"></i>
+                        </div>
+                        <h3>法會直播</h3>
+                        <p>無論身在何處,都能透過高品質直播參與法會,不錯過任何殊勝的修行時刻</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-calendar-alt"></i>
+                        </div>
+                        <h3>完整時程</h3>
+                        <p>清晰的活動時間表讓您提前規劃,一鍵加入個人行事曆,不錯過重要時刻</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-book"></i>
+                        </div>
+                        <h3>教誌拜讀</h3>
+                        <p>提供完整的教誡內容與真人讀誦版本,隨時隨地都能進行學習與拜讀</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-history"></i>
+                        </div>
+                        <h3>苑史回顧</h3>
+                        <p>透過互動時間軸深入了解真如苑的歷史發展,珍貴照片見證美好歲月</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-images"></i>
+                        </div>
+                        <h3>修行卡片</h3>
+                        <p>精美的修行卡片介紹,每張都蘊含深刻的修行智慧與美好的祝福</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>聯絡我們</h3>
+                <p>真如苑台灣教區</p>
+                <p>電話: (02) 1234-5678</p>
+                <p>Email: info@shinnyo-en.org.tw</p>
+            </div>
+            <div class="footer-section">
+                <h3>快速連結</h3>
+                <a href="#home">首頁</a>
+                <a href="interactive.html">2026互動區</a>
+                <a href="#news">最新消息</a>
+                <a href="#schedule">活動時程</a>
+            </div>
+            <div class="footer-section">
+                <h3>相關網站</h3>
+                <a href="https://www.shinnyo-en.org.tw" target="_blank">真如苑台灣官網</a>
+                <a href="https://www.shinnyo-en.or.jp" target="_blank">真如苑日本總本山</a>
+            </div>
+        </div>
+        <div style="text-align: center; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.1);">
+            <p>&copy; 2026 真如苑台灣教區 版權所有</p>
+        </div>
+    </footer>
+
+    <script>
+        // 倒數計時功能
+        function updateCountdown() {
+            // 設定目標日期 (2026年1月20日 00:00:00)
+            const targetDate = new Date('2026-01-20T00:00:00').getTime();
+            const now = new Date().getTime();
+            const distance = targetDate - now;
+
+            if (distance > 0) {
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                document.getElementById('days').textContent = days.toString().padStart(2, '0');
+                document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+                document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+                document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+            } else {
+                document.getElementById('countdown').innerHTML = '<div class="countdown-item"><span class="number">寒修行已開始</span></div>';
+            }
+        }
+
+        // 每秒更新倒數計時
+        setInterval(updateCountdown, 1000);
+        updateCountdown(); // 立即執行一次
+
+        // 平滑滾動功能
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // 滾動動畫
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // 觀察所有區塊
+        document.querySelectorAll('.section, .feature-card').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+            observer.observe(el);
+        });
+
+        // 手機選單功能
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const navMenu = document.querySelector('.nav-menu');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            navMenu.classList.toggle('mobile-active');
+            
+            // 改變漢堡選單圖示
+            const icon = mobileMenuBtn.querySelector('i');
+            if (navMenu.classList.contains('mobile-active')) {
+                icon.className = 'fas fa-times';
+            } else {
+                icon.className = 'fas fa-bars';
+            }
+        });
+
+        // 點擊選單項目時關閉手機選單
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('mobile-active');
+                const icon = mobileMenuBtn.querySelector('i');
+                icon.className = 'fas fa-bars';
+            });
+        });
+
+        // 點擊頁面其他地方時關閉選單
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.nav-container')) {
+                navMenu.classList.remove('mobile-active');
+                const icon = mobileMenuBtn.querySelector('i');
+                icon.className = 'fas fa-bars';
+            }
+        });
+
+        // 導航列滾動效果
+        let lastScrollTop = 0;
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('.header');
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            
+            // 移除所有狀態類別
+            header.classList.remove('scrolled', 'transparent');
+            
+            if (scrollTop > 100) {
+                header.classList.add('scrolled');
+            } else if (scrollTop > 50) {
+                header.classList.add('transparent');
+            }
+            
+            lastScrollTop = scrollTop;
+        });
+    </script>
+</body>
+</html>

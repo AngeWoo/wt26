@@ -16,6 +16,7 @@
             --bg-light: #f8fafc;
             --bg-white: #ffffff;
             --footer-copyright-bg: #020617;
+            --teal-bg: #2a6f87;
         }
 
         * {
@@ -28,7 +29,7 @@
             font-family: 'Microsoft JhengHei', 'Noto Sans TC', Arial, sans-serif;
             line-height: 1.6;
             color: var(--text-dark);
-            background: var(--bg-light);
+            background: var(--teal-bg);
         }
 
         @keyframes animate-gradient {
@@ -173,7 +174,6 @@
             pointer-events: none;
         }
         
-        /* 創建一個透明橋接區域，確保hover不會斷開 */
         .dropdown::before {
             content: '';
             position: absolute;
@@ -184,7 +184,6 @@
             background: transparent;
         }
         
-        /* 桌面版hover顯示 */
         .dropdown:hover .dropdown-menu {
             opacity: 1;
             visibility: visible;
@@ -225,168 +224,148 @@
             padding: 0.5rem;
         }
 
-        .page-header {
-            background: linear-gradient(rgba(15, 23, 42, 0.6), rgba(30, 58, 138, 0.6)), url('bg.jpg');
-            background-size: cover;
-            background-position: center;
-            color: var(--text-light);
-            text-align: center;
-            padding: 6rem 2rem 4rem;
-            margin-top: 80px;
-            text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
-        }
-
-        .page-header h1 {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-        }
-
-        .page-header p {
-            font-size: 1.2rem;
-            max-width: 700px;
-            margin: 0 auto;
-            opacity: 0.9;
-        }
-
         .main-content {
-            max-width: 1200px;
+            padding-top: 80px;
+            color: var(--text-light);
+        }
+        
+        .slider-wrapper {
+            max-width: 1400px;
             margin: 0 auto;
             padding: 4rem 2rem;
         }
         
-        .intro-section {
-            background: var(--bg-white);
-            border-radius: 20px;
-            padding: 2.5rem;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.07);
+        .slider-header {
             margin-bottom: 3rem;
-            text-align: center;
-            border-left: 5px solid var(--accent-gold);
         }
         
-        .intro-section h2 {
-            color: var(--primary-deep-blue);
-            font-size: 2rem;
-            margin-bottom: 1rem;
+        .slider-title {
+            font-size: 2.5rem;
+            font-weight: 600;
+            text-align: center;
+            margin-bottom: 2rem;
+            position: relative;
+            padding: 1rem 0;
         }
-
-        .intro-section p {
-            color: #475569;
-            font-size: 1.1rem;
-            line-height: 1.8;
+        
+        .slider-title::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 150px;
+            height: 25px;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 20'%3E%3Cpath d='M0 10 Q 12.5 0, 25 10 T 50 10 T 75 10 T 100 10' stroke='rgba(255,255,255,0.5)' fill='none' stroke-width='2'/%3E%3C/svg%3E");
+            background-size: 50px;
+        }
+        
+        .slider-description {
             max-width: 800px;
             margin: 0 auto;
-        }
-
-        .season-tabs {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            margin-bottom: 3rem;
-            flex-wrap: wrap;
+            text-align: left;
+            padding-left: 2rem;
+            font-size: 1.1rem;
         }
         
-        .season-tab {
-            padding: 0.8rem 1.5rem;
-            border: 2px solid transparent;
-            background: var(--bg-white);
-            color: var(--primary-mid-blue);
-            border-color: #dbeafe;
-            border-radius: 25px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-weight: 600;
+        .slider-description p { margin-bottom: 0.5rem; }
+
+        .slider-container {
+            position: relative;
             display: flex;
             align-items: center;
-            gap: 0.5rem;
-        }
-
-        .season-tab:hover {
-            background: #eef2ff;
-            border-color: var(--primary-mid-blue);
         }
         
-        .season-tab.active {
-            background: var(--primary-mid-blue);
-            color: white;
-            border-color: var(--primary-mid-blue);
-        }
-        
-        .cards-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+        .slider-track-container {
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            display: flex;
             gap: 2rem;
+            padding: 2rem;
+            scrollbar-width: none; /* Firefox */
         }
-
-        .card-item {
-            background: var(--bg-white);
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.07);
-            transition: all 0.4s ease;
-            cursor: pointer;
-        }
-
-        .card-item:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
-        }
-
-        .card-image {
-            width: 100%;
-            height: 250px;
-            overflow: hidden;
+        .slider-track-container::-webkit-scrollbar { display: none; } /* Chrome, Safari */
+        
+        .slider-card {
+            flex: 0 0 280px;
+            scroll-snap-align: center;
             position: relative;
         }
 
+        .slider-card-content {
+            background: var(--bg-white);
+            border-radius: 12px;
+            color: var(--text-dark);
+            padding-bottom: 1rem;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        .card-number {
+            position: absolute;
+            top: -20px;
+            left: 20px;
+            width: 40px;
+            height: 40px;
+            background-color: #c98958;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1rem;
+            z-index: 2;
+        }
+        
         .card-image img {
             width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.4s ease;
-        }
-
-        .card-item:hover .card-image img {
-            transform: scale(1.05);
-        }
-
-        .card-badge {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            background: rgba(15, 23, 42, 0.7);
-            color: white;
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            backdrop-filter: blur(5px);
+            display: block;
+            border-top-left-radius: 12px;
+            border-top-right-radius: 12px;
         }
         
-        .card-content { padding: 1.5rem; }
-
-        .card-content h3 {
-            color: var(--primary-deep-blue);
-            font-size: 1.5rem;
-            margin-bottom: 0.5rem;
+        .card-text {
+            padding: 2rem 1.5rem 1rem;
         }
-
-        .card-subtitle {
-            color: var(--primary-mid-blue);
-            font-weight: 600;
+        
+        .card-text h3 {
+            color: var(--primary-deep-blue);
+            font-size: 1.3rem;
             margin-bottom: 1rem;
         }
-
-        .card-meaning {
-            color: #475569;
-            line-height: 1.7;
+        
+        .card-text p {
+            font-size: 0.95rem;
+            line-height: 1.8;
+            min-height: 100px;
         }
         
+        .slider-arrow {
+            display: none; /* Simplified for demonstration */
+        }
+        
+        .slider-dots {
+            text-align: center;
+            margin-top: 1rem;
+        }
+        
+        .slider-dots span {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.4);
+            margin: 0 5px;
+        }
+        
+        .slider-dots span.active {
+            background: white;
+        }
+
         .footer {
             background: var(--primary-deep-blue);
             color: var(--text-light);
             padding: 3rem 2rem 0;
-            margin-top: 4rem;
         }
 
         .footer-content {
@@ -462,18 +441,10 @@
             .mobile-menu-btn {
                 display: block;
             }
-
-            .page-header h1 { font-size: 2.5rem; }
-
-            .cards-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .season-tabs {
-                flex-direction: column;
-                align-items: stretch;
-            }
-            .season-tab { justify-content: center; }
+            
+            .slider-wrapper { padding: 2rem 0; }
+            .slider-track-container { padding: 2rem 1rem; }
+            .slider-card { flex: 0 0 80%; }
         }
     </style>
 </head>
@@ -519,72 +490,62 @@
         </div>
     </header>
 
-    <section class="page-header">
-        <h1><i class="fas fa-images"></i> 卡片介紹</h1>
-        <p>2026年度修行卡片，每張都蘊含深刻的智慧與美好的祝福</p>
-    </section>
-
     <main class="main-content">
-        <div class="intro-section">
-            <h2>關於修行卡片</h2>
-            <p>2026年的修行卡片以「四季智慧」為主題。春季代表生機與希望，夏季象徵熱情與成長，秋季寓意收穫與感恩，冬季則代表沉澱與智慧。每張卡片都融合佛法智慧與藝術美感，適合在修行時使用，也是送給親友的最佳祝福。</p>
-        </div>
-
-        <div class="season-tabs">
-            <button class="season-tab active" onclick="filterSeason(this, 'all')"><i class="fas fa-th"></i> 全部</button>
-            <button class="season-tab" onclick="filterSeason(this, 'spring')"><i class="fas fa-seedling"></i> 春</button>
-            <button class="season-tab" onclick="filterSeason(this, 'summer')"><i class="fas fa-sun"></i> 夏</button>
-            <button class="season-tab" onclick="filterSeason(this, 'autumn')"><i class="fas fa-leaf"></i> 秋</button>
-            <button class="season-tab" onclick="filterSeason(this, 'winter')"><i class="fas fa-snowflake"></i> 冬</button>
-        </div>
-
-        <div class="cards-grid" id="cardsGrid">
-            <div class="card-item" data-season="spring" onclick="viewCard(1)">
-                <div class="card-image">
-                    <img src="https://placehold.co/400x250/22c55e/f0fdf4?text=春" alt="蓮花卡片">
-                    <div class="card-badge">春之智慧</div>
-                </div>
-                <div class="card-content">
-                    <h3>蓮花卡片</h3>
-                    <p class="card-subtitle">清淨與覺醒</p>
-                    <p class="card-meaning">蓮花出淤泥而不染，象徵修行者在煩惱中保持清淨，代表新的開始。</p>
+        <div class="slider-wrapper">
+            <div class="slider-header">
+                <h1 class="slider-title">2025寒修行卡片</h1>
+                <div class="slider-description">
+                    <p><strong>內&nbsp;&nbsp;容：</strong>寒修行卡片介紹</p>
+                    <p><strong>主&nbsp;&nbsp;旨：</strong>透過一張張卡片的設計，了解真如苑主所付出的慈悲心意</p>
                 </div>
             </div>
-
-            <div class="card-item" data-season="summer" onclick="viewCard(3)">
-                <div class="card-image">
-                    <img src="https://placehold.co/400x250/f97316/fff7ed?text=夏" alt="陽光卡片">
-                    <div class="card-badge">夏之成長</div>
-                </div>
-                <div class="card-content">
-                    <h3>陽光卡片</h3>
-                    <p class="card-subtitle">熱情與光明</p>
-                    <p class="card-meaning">陽光普照大地，象徵慈悲心，提醒我們要像太陽一樣，無條件地關愛眾生。</p>
+            <div class="slider-container">
+                <div class="slider-track-container">
+                    <div class="slider-card">
+                        <span class="card-number">01</span>
+                        <div class="slider-card-content">
+                            <div class="card-image"><img src="https://placehold.co/280x200/94a3b8/e2e8f0?text=工事中" alt="2025寒修行卡片"></div>
+                            <div class="card-text">
+                                <h3>2025寒修行卡片</h3>
+                                <p>共有 6 張卡片，全部拼起來是「聖地親苑新第二精舍與聖塔」莊嚴工事中的模樣</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slider-card">
+                        <span class="card-number">02</span>
+                        <div class="slider-card-content">
+                            <div class="card-image"><img src="https://placehold.co/280x200/67e8f9/083344?text=富士山" alt="1/20 卡片"></div>
+                            <div class="card-text">
+                                <h3>1/20 卡片</h3>
+                                <p>2025年 精進目標：<br>祈念南無真如 推進聖地莊嚴</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slider-card">
+                        <span class="card-number">03</span>
+                        <div class="slider-card-content">
+                            <div class="card-image"><img src="https://placehold.co/280x200/a5b4fc/1e1b4b?text=實踐德目" alt="1/21 卡片"></div>
+                            <div class="card-text">
+                                <h3>1/21 卡片</h3>
+                                <p>2025年 實踐德目：<br>一. 慈愛的利他行 豎立信仰心的樑柱<br>二. 連結歸依處 - 「聖地」之信仰心</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slider-card">
+                        <span class="card-number">04</span>
+                        <div class="slider-card-content">
+                            <div class="card-image"><img src="https://placehold.co/280x200/fca5a5/450a0a?text=苑歌" alt="1/22 卡片"></div>
+                            <div class="card-text">
+                                <h3>1/22 卡片</h3>
+                                <p>2025年 苑歌：<br>一心利他之念 增添救度威力</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-
-            <div class="card-item" data-season="autumn" onclick="viewCard(5)">
-                <div class="card-image">
-                    <img src="https://placehold.co/400x250/eab308/fefce8?text=秋" alt="楓葉卡片">
-                    <div class="card-badge">秋之收穫</div>
-                </div>
-                <div class="card-content">
-                    <h3>楓葉卡片</h3>
-                    <p class="card-subtitle">轉變與美好</p>
-                    <p class="card-meaning">楓葉由綠轉紅，提醒我們無常即是常態，每個轉變都蘊含著新的美好。</p>
-                </div>
-            </div>
-
-            <div class="card-item" data-season="winter" onclick="viewCard(7)">
-                <div class="card-image">
-                    <img src="https://placehold.co/400x250/3b82f6/eff6ff?text=冬" alt="雪花卡片">
-                    <div class="card-badge">冬之沉澱</div>
-                </div>
-                <div class="card-content">
-                    <h3>雪花卡片</h3>
-                    <p class="card-subtitle">純淨與獨特</p>
-                    <p class="card-meaning">每片雪花都是獨一無二的，象徵每個生命的珍貴，提醒我們要沉澱心靈。</p>
-                </div>
+            <div class="slider-dots">
+                <span class="active"></span>
+                <span></span>
             </div>
         </div>
     </main>
@@ -617,23 +578,6 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Page-specific logic
-            window.filterSeason = function(element, season) {
-                const cards = document.querySelectorAll('.card-item');
-                const tabs = document.querySelectorAll('.season-tab');
-                
-                tabs.forEach(tab => tab.classList.remove('active'));
-                element.classList.add('active');
-                
-                cards.forEach(card => {
-                    card.style.display = (season === 'all' || card.dataset.season === season) ? 'block' : 'none';
-                });
-            }
-
-            window.viewCard = function(id) {
-                alert(`查看卡片詳細資訊 ${id}\n\n(此為展示功能)`);
-            }
-
             // ****** 優化的下拉選單邏輯 ******
             // 手機選單邏輯
             const mobileMenuBtn = document.getElementById('mobileMenuBtn');

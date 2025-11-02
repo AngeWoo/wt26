@@ -247,106 +247,103 @@
         }
 
         .main-content {
-            max-width: 1000px;
+            max-width: 1200px;
             margin: 0 auto;
             padding: 4rem 2rem;
         }
+
+        .subtitle {
+            text-align: center;
+            margin-bottom: 2.5rem;
+            color: var(--text-dark);
+            font-size: 1.1rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
         
-        .reading-path {
+        .scripture-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem 2rem;
+        }
+
+        .scripture-card {
+            background-color: #eef3f4;
+            border-radius: 8px;
+            padding: 1rem;
+            text-align: center;
             position: relative;
-            padding: 2rem 0;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            border: 1px solid #dde6e7;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
 
-        .reading-path::before {
-            content: '';
-            position: absolute;
-            left: 40px;
-            top: 0;
-            bottom: 0;
-            width: 4px;
-            background: linear-gradient(180deg, var(--accent-gold), var(--primary-mid-blue));
-            z-index: -1;
-        }
-
-        .path-step {
-            position: relative;
-            margin-bottom: 3rem;
-            padding-left: 100px;
-        }
-
-        .step-number {
-            position: absolute;
-            left: 0;
-            top: 0;
-            width: 80px;
-            height: 80px;
-            background: var(--primary-mid-blue);
-            color: white;
-            border-radius: 50%;
+        .scripture-card h3 {
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: var(--primary-deep-blue);
+            min-height: 48px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 2rem;
-            font-weight: 700;
-            border: 5px solid var(--bg-light);
-            box-shadow: 0 0 0 4px var(--primary-mid-blue);
+            line-height: 1.4;
         }
 
-        .step-content {
-            background: var(--bg-white);
-            border-radius: 15px;
-            padding: 2rem;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.07);
+        .scripture-card.highlighted {
+            background-color: #f5f1e8;
+            border-color: #e7e1d5;
         }
         
-        .step-content h3 {
-            color: var(--primary-deep-blue);
-            font-size: 1.8rem;
-            margin-bottom: 0.5rem;
+        .scripture-card::after {
+            content: '▶';
+            position: absolute;
+            top: 50%;
+            right: -1.1rem;
+            transform: translateY(-50%);
+            color: #b0bec5;
+            font-size: 1rem;
+            z-index: 10;
         }
 
-        .step-description {
-            color: #475569;
-            line-height: 1.7;
-            margin-bottom: 1.5rem;
-        }
-        
-        .audio-section {
-            background: var(--bg-light);
-            border-radius: 12px;
-            padding: 1.5rem;
-            border: 1px solid #e2e8f0;
+        .scripture-grid .scripture-card:nth-child(4n)::after,
+        .scripture-grid .scripture-card:last-child::after {
+            display: none;
         }
 
-        .audio-section h4 {
-            color: var(--primary-deep-blue);
-            margin-bottom: 1rem;
-            font-size: 1.1rem;
-        }
-        
-        .audio-item {
+        .audio-player-mock {
             display: flex;
             align-items: center;
-            justify-content: space-between;
-            padding: 0.8rem 0;
-            border-bottom: 1px solid #e2e8f0;
+            gap: 0.75rem;
+            margin-top: 1rem;
+            color: #546e7a;
+            font-size: 0.9rem;
         }
 
-        .audio-item:last-child { border-bottom: none; }
-        .audio-info { font-weight: 500; }
-        
-        .download-btn {
-            background: var(--primary-mid-blue);
-            color: white;
-            border: none;
-            padding: 0.6rem 1.2rem;
-            border-radius: 8px;
+        .audio-player-mock i {
             cursor: pointer;
-            transition: background 0.3s ease;
         }
 
-        .download-btn:hover { background: var(--primary-deep-blue); }
-        
+        .audio-player-mock .progress-bar-mock {
+            flex-grow: 1;
+            height: 4px;
+            background-color: #cfd8dc;
+            border-radius: 2px;
+            position: relative;
+        }
+        .audio-player-mock .progress-bar-mock::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 20%;
+            height: 100%;
+            background-color: #78909c;
+            border-radius: 2px;
+        }
+
         .footer {
             background: var(--primary-deep-blue);
             color: var(--text-light);
@@ -379,6 +376,21 @@
             text-align: center;
         }
         .copyright-area p { margin: 0; }
+
+        @media (max-width: 1200px) {
+            .scripture-grid { grid-template-columns: repeat(3, 1fr); }
+            .scripture-grid .scripture-card::after { display: block; }
+            .scripture-grid .scripture-card:nth-child(4n)::after { display: block; }
+            .scripture-grid .scripture-card:nth-child(3n)::after { display: none; }
+            .scripture-grid .scripture-card:last-child::after { display: none; }
+        }
+
+        @media (max-width: 992px) {
+            .scripture-grid { grid-template-columns: repeat(2, 1fr); }
+            .scripture-grid .scripture-card:nth-child(3n)::after { display: block; }
+            .scripture-grid .scripture-card:nth-child(2n)::after { display: none; }
+            .scripture-grid .scripture-card:last-child::after { display: none; }
+        }
 
         @media (max-width: 768px) {
             .nav-menu {
@@ -429,9 +441,24 @@
             }
 
             .page-header h1 { font-size: 2.5rem; }
-            .reading-path::before { left: 20px; }
-            .path-step { padding-left: 60px; }
-            .step-number { width: 40px; height: 40px; font-size: 1.2rem; border-width: 3px; box-shadow: 0 0 0 3px var(--primary-mid-blue); left: 0; }
+        }
+
+        @media (max-width: 576px) {
+            .scripture-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem 1.5rem;
+            }
+            .scripture-grid .scripture-card::after {
+                display: block;
+                content: '▼';
+                top: 100%;
+                left: 50%;
+                right: auto;
+                transform: translate(-50%, 0.25rem);
+            }
+            .scripture-grid .scripture-card:last-child::after {
+                display: none;
+            }
         }
     </style>
 </head>
@@ -483,51 +510,50 @@
     </section>
 
     <main class="main-content">
-        <div class="reading-path">
-            <div class="path-step">
-                <div class="step-number">1</div>
-                <div class="step-content">
-                    <h3>入門階段：心經</h3>
-                    <p class="step-description">從最廣為人知的《般若波羅蜜多心經》開始，理解空性智慧的基礎概念。此經濃縮了般若經的精髓，是進入佛法的最佳入門經典。</p>
-                    <div class="audio-section">
-                        <h4><i class="fas fa-headphones-alt"></i> 讀誦音檔</h4>
-                        <div class="audio-item">
-                            <div class="audio-info">心經 - 法師讀誦版 (3:25)</div>
-                            <button class="download-btn" onclick="download('heart-sutra')"><i class="fas fa-download"></i></button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="path-step">
-                <div class="step-number">2</div>
-                <div class="step-content">
-                    <h3>基礎階段：金剛經</h3>
-                    <p class="step-description">《金剛經》講述如何破除我執、法執，達到般若智慧。透過反覆讀誦，體會「應無所住而生其心」的深意。</p>
-                    <div class="audio-section">
-                        <h4><i class="fas fa-headphones-alt"></i> 讀誦音檔</h4>
-                        <div class="audio-item">
-                            <div class="audio-info">金剛經 - 完整讀誦 (28:15)</div>
-                            <button class="download-btn" onclick="download('diamond-sutra')"><i class="fas fa-download"></i></button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-             <div class="path-step">
-                <div class="step-number">3</div>
-                <div class="step-content">
-                    <h3>深入階段：法華經</h3>
-                    <p class="step-description">《妙法蓮華經》被譽為「經中之王」，揭示一切眾生皆可成佛的究竟教義。建議分章節學習，慢慢體會經文的深奧義理。</p>
-                    <div class="audio-section">
-                        <h4><i class="fas fa-headphones-alt"></i> 讀誦音檔</h4>
-                        <div class="audio-item">
-                            <div class="audio-info">法華經 - 第一品至七品 (1:45:30)</div>
-                            <button class="download-btn" onclick="download('lotus-1-7')"><i class="fas fa-download"></i></button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div class="subtitle">
+            <p>※ 請戴好袈裟、端正坐姿，最好能每天固定一個時間讀經、拜讀教誌，請尊貴的來領受參加寒修行。</p>
+        </div>
+        <div class="scripture-grid">
+            <!-- Row 1 -->
+            <div class="scripture-card"><h3>三禮</h3><div class="audio-player-mock"><i class="fas fa-play"></i><span>00:00</span><div class="progress-bar-mock"></div><i class="fas fa-volume-up"></i></div></div>
+            <div class="scripture-card"><h3>總禮文</h3><div class="audio-player-mock"><i class="fas fa-play"></i><span>00:00</span><div class="progress-bar-mock"></div><i class="fas fa-volume-up"></i></div></div>
+            <div class="scripture-card"><h3>三皈依文</h3><div class="audio-player-mock"><i class="fas fa-play"></i><span>00:00</span><div class="progress-bar-mock"></div><i class="fas fa-volume-up"></i></div></div>
+            <div class="scripture-card"><h3>五戒文</h3><div class="audio-player-mock"><i class="fas fa-play"></i><span>00:00</span><div class="progress-bar-mock"></div><i class="fas fa-volume-up"></i></div></div>
+            <!-- Row 2 -->
+            <div class="scripture-card"><h3>開經偈</h3><div class="audio-player-mock"><i class="fas fa-play"></i><span>00:00</span><div class="progress-bar-mock"></div><i class="fas fa-volume-up"></i></div></div>
+            <div class="scripture-card highlighted"><h3>靈山院殿發露懺悔文</h3><div class="audio-player-mock"><i class="fas fa-play"></i><span>00:00</span><div class="progress-bar-mock"></div><i class="fas fa-volume-up"></i></div></div>
+            <div class="scripture-card"><h3>般若心經</h3><div class="audio-player-mock"><i class="fas fa-play"></i><span>00:00</span><div class="progress-bar-mock"></div><i class="fas fa-volume-up"></i></div></div>
+            <div class="scripture-card"><h3>讚題 (三遍)</h3><div class="audio-player-mock"><i class="fas fa-play"></i><span>00:00</span><div class="progress-bar-mock"></div><i class="fas fa-volume-up"></i></div></div>
+            <!-- Row 3 -->
+            <div class="scripture-card"><h3>師子吼菩薩品 破惡生善</h3><div class="audio-player-mock"><i class="fas fa-play"></i><span>00:00</span><div class="progress-bar-mock"></div><i class="fas fa-volume-up"></i></div></div>
+            <div class="scripture-card highlighted"><h3>Makoto 真如禮讚<br>靈尊定心誦</h3><div class="audio-player-mock"><i class="fas fa-play"></i><span>00:00</span><div class="progress-bar-mock"></div><i class="fas fa-volume-up"></i></div></div>
+            <div class="scripture-card"><h3>Makoto 真如禮讚<br>靈尊成行誦</h3><div class="audio-player-mock"><i class="fas fa-play"></i><span>00:00</span><div class="progress-bar-mock"></div><i class="fas fa-volume-up"></i></div></div>
+            <div class="scripture-card"><h3>Makoto 真如禮讚<br>靈祖湧祥誦</h3><div class="audio-player-mock"><i class="fas fa-play"></i><span>00:00</span><div class="progress-bar-mock"></div><i class="fas fa-volume-up"></i></div></div>
+            <!-- Row 4 -->
+            <div class="scripture-card"><h3>Makoto 真如禮讚<br>開祖恆明誦</h3><div class="audio-player-mock"><i class="fas fa-play"></i><span>00:00</span><div class="progress-bar-mock"></div><i class="fas fa-volume-up"></i></div></div>
+            <div class="scripture-card"><h3>一切如來咒 (三遍)</h3><div class="audio-player-mock"><i class="fas fa-play"></i><span>00:00</span><div class="progress-bar-mock"></div><i class="fas fa-volume-up"></i></div></div>
+            <div class="scripture-card"><h3>寶生尊咒 (三遍)</h3><div class="audio-player-mock"><i class="fas fa-play"></i><span>00:00</span><div class="progress-bar-mock"></div><i class="fas fa-volume-up"></i></div></div>
+            <div class="scripture-card"><h3>十一面觀世音咒 (三遍)</h3><div class="audio-player-mock"><i class="fas fa-play"></i><span>00:00</span><div class="progress-bar-mock"></div><i class="fas fa-volume-up"></i></div></div>
+            <!-- Row 5 -->
+            <div class="scripture-card"><h3>普賢延命菩薩 (三遍)</h3><div class="audio-player-mock"><i class="fas fa-play"></i><span>00:00</span><div class="progress-bar-mock"></div><i class="fas fa-volume-up"></i></div></div>
+            <div class="scripture-card"><h3>真如慈救咒 (三遍)</h3><div class="audio-player-mock"><i class="fas fa-play"></i><span>00:00</span><div class="progress-bar-mock"></div><i class="fas fa-volume-up"></i></div></div>
+            <div class="scripture-card"><h3>地藏菩薩咒 (三遍)</h3><div class="audio-player-mock"><i class="fas fa-play"></i><span>00:00</span><div class="progress-bar-mock"></div><i class="fas fa-volume-up"></i></div></div>
+            <div class="scripture-card"><h3>弁才天咒 (三遍)</h3><div class="audio-player-mock"><i class="fas fa-play"></i><span>00:00</span><div class="progress-bar-mock"></div><i class="fas fa-volume-up"></i></div></div>
+            <!-- Row 6 -->
+            <div class="scripture-card"><h3>南無 清瀧大權現 (三遍)</h3><div class="audio-player-mock"><i class="fas fa-play"></i><span>00:00</span><div class="progress-bar-mock"></div><i class="fas fa-volume-up"></i></div></div>
+            <div class="scripture-card"><h3>笠法護法善神咒 (三遍)</h3><div class="audio-player-mock"><i class="fas fa-play"></i><span>00:00</span><div class="progress-bar-mock"></div><i class="fas fa-volume-up"></i></div></div>
+            <div class="scripture-card"><h3>諸天善神咒 (三遍)</h3><div class="audio-player-mock"><i class="fas fa-play"></i><span>00:00</span><div class="progress-bar-mock"></div><i class="fas fa-volume-up"></i></div></div>
+            <div class="scripture-card"><h3>感謝 (三遍)</h3><div class="audio-player-mock"><i class="fas fa-play"></i><span>00:00</span><div class="progress-bar-mock"></div><i class="fas fa-volume-up"></i></div></div>
+            <!-- Row 7 -->
+            <div class="scripture-card"><h3>真如苑歌</h3><div class="audio-player-mock"><i class="fas fa-play"></i><span>00:00</span><div class="progress-bar-mock"></div><i class="fas fa-volume-up"></i></div></div>
+            <div class="scripture-card"><h3>常住讚 (五遍)</h3><div class="audio-player-mock"><i class="fas fa-play"></i><span>00:00</span><div class="progress-bar-mock"></div><i class="fas fa-volume-up"></i></div></div>
+            <div class="scripture-card"><h3>心中祈念</h3><div class="audio-player-mock"><i class="fas fa-play"></i><span>00:00</span><div class="progress-bar-mock"></div><i class="fas fa-volume-up"></i></div></div>
+            <div class="scripture-card"><h3>大金剛輪陀羅尼</h3><div class="audio-player-mock"><i class="fas fa-play"></i><span>00:00</span><div class="progress-bar-mock"></div><i class="fas fa-volume-up"></i></div></div>
+            <!-- Row 8 -->
+            <div class="scripture-card"><h3>一字金輪咒 (三遍)</h3><div class="audio-player-mock"><i class="fas fa-play"></i><span>00:00</span><div class="progress-bar-mock"></div><i class="fas fa-volume-up"></i></div></div>
+            <div class="scripture-card"><h3>廻向文</h3><div class="audio-player-mock"><i class="fas fa-play"></i><span>00:00</span><div class="progress-bar-mock"></div><i class="fas fa-volume-up"></i></div></div>
+            <div class="scripture-card"><h3>三皈依文</h3><div class="audio-player-mock"><i class="fas fa-play"></i><span>00:00</span><div class="progress-bar-mock"></div><i class="fas fa-volume-up"></i></div></div>
+            <div class="scripture-card"><h3>三禮</h3><div class="audio-player-mock"><i class="fas fa-play"></i><span>00:00</span><div class="progress-bar-mock"></div><i class="fas fa-volume-up"></i></div></div>
         </div>
     </main>
 
@@ -559,11 +585,6 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Page-specific logic
-            window.download = function(filename) {
-                alert(`下載 ${filename} 音檔\n\n(此為展示功能)`);
-            }
-
             // ****** 優化的下拉選單邏輯 ******
             // 手機選單邏輯
             const mobileMenuBtn = document.getElementById('mobileMenuBtn');

@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dropdown 超級測試</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            padding: 50px;
+            background: #f0f0f0;
+        }
+
+        h1 {
+            margin-bottom: 30px;
+            color: #333;
+        }
+
+        /* 超級簡單的dropdown */
+        .simple-nav {
+            background: #2c3e50;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .simple-nav ul {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+        }
+
+        .simple-nav a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            display: block;
+            background: #34495e;
+            border-radius: 5px;
+        }
+
+        .simple-nav a:hover {
+            background: #4a5f7f;
+        }
+
+        /* Dropdown樣式 - 最簡單版本 */
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: #34495e;
+            min-width: 200px;
+            margin-top: 5px;
+            border-radius: 5px;
+            padding: 10px 0;
+            z-index: 1000;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .dropdown-content a {
+            background: transparent;
+            border-radius: 0;
+        }
+
+        .dropdown-content a:hover {
+            background: #4a5f7f;
+        }
+
+        /* hover時顯示 */
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        /* 狀態指示器 */
+        .status {
+            margin-top: 30px;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            border: 2px solid #3498db;
+        }
+
+        .status h2 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+
+        .status-item {
+            padding: 10px;
+            margin: 10px 0;
+            background: #ecf0f1;
+            border-radius: 5px;
+            font-family: monospace;
+        }
+
+        .hover-indicator {
+            display: inline-block;
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background: red;
+            margin-right: 10px;
+        }
+
+        .hover-indicator.active {
+            background: green;
+        }
+
+        /* 測試按鈕 */
+        .test-buttons {
+            margin-top: 20px;
+        }
+
+        .test-btn {
+            padding: 10px 20px;
+            background: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+
+        .test-btn:hover {
+            background: #2980b9;
+        }
+    </style>
+</head>
+<body>
+    <h1>🔍 Dropdown 超級測試頁面</h1>
+
+    <div class="simple-nav">
+        <ul>
+            <li><a href="#">首頁</a></li>
+            <li class="dropdown" id="dropdown1">
+                <a href="#">影片專區 ▼</a>
+                <div class="dropdown-content">
+                    <a href="videos.html" onclick="alert('點擊：法會影片'); return false;">📹 法會影片</a>
+                    <a href="promo.html" onclick="alert('點擊：參考影片'); return false;">🎬 參考影片</a>
+                </div>
+            </li>
+            <li class="dropdown" id="dropdown2">
+                <a href="#">學習專區 ▼</a>
+                <div class="dropdown-content">
+                    <a href="doctrine.html" onclick="alert('點擊：教誌拜讀'); return false;">📖 教誌拜讀</a>
+                    <a href="scripture.html" onclick="alert('點擊：讀經次第'); return false;">📚 讀經次第</a>
+                    <a href="cards.html" onclick="alert('點擊：卡片介紹'); return false;">🎴 卡片介紹</a>
+                </div>
+            </li>
+            <li><a href="#">其他</a></li>
+        </ul>
+    </div>
+
+    <div class="status">
+        <h2>📊 即時狀態監控</h2>
+        
+        <div class="status-item">
+            <span class="hover-indicator" id="hover-indicator-1"></span>
+            <strong>影片專區 Hover狀態：</strong> <span id="hover-status-1">未懸停</span>
+        </div>
+        
+        <div class="status-item">
+            <span class="hover-indicator" id="hover-indicator-2"></span>
+            <strong>學習專區 Hover狀態：</strong> <span id="hover-status-2">未懸停</span>
+        </div>
+        
+        <div class="status-item">
+            <strong>螢幕寬度：</strong> <span id="screen-width">-</span>
+        </div>
+        
+        <div class="status-item">
+            <strong>瀏覽器：</strong> <span id="browser-info">-</span>
+        </div>
+
+        <div class="test-buttons">
+            <button class="test-btn" onclick="testCSS()">測試CSS</button>
+            <button class="test-btn" onclick="testZIndex()">測試Z-Index</button>
+            <button class="test-btn" onclick="testPosition()">測試定位</button>
+        </div>
+
+        <div id="test-results" style="margin-top: 15px; padding: 10px; background: #fff; border-radius: 5px; display: none;">
+            <h3>測試結果：</h3>
+            <pre id="test-output"></pre>
+        </div>
+    </div>
+
+    <div style="margin-top: 30px; padding: 20px; background: #fff3cd; border: 2px solid #ffc107; border-radius: 10px;">
+        <h3>📝 測試說明：</h3>
+        <ol style="line-height: 2; margin-left: 20px;">
+            <li>將滑鼠移到「影片專區」或「學習專區」上</li>
+            <li>下拉選單應該會出現</li>
+            <li>點擊下拉選單中的任何項目，應該會彈出提示框</li>
+            <li>觀察「即時狀態監控」區域的變化</li>
+            <li>如果看不到下拉選單，點擊「測試CSS」按鈕</li>
+        </ol>
+        <p style="margin-top: 10px; color: #856404;">
+            <strong>如果這個測試頁面也不能正常工作，請告訴我：</strong><br>
+            1. 是否能看到下拉選單出現？<br>
+            2. 狀態指示燈是否變綠？<br>
+            3. 點擊下拉選單項目時是否有彈窗？
+        </p>
+    </div>
+
+    <script>
+        // 監控dropdown hover狀態
+        const dropdown1 = document.getElementById('dropdown1');
+        const dropdown2 = document.getElementById('dropdown2');
+        const indicator1 = document.getElementById('hover-indicator-1');
+        const indicator2 = document.getElementById('hover-indicator-2');
+        const status1 = document.getElementById('hover-status-1');
+        const status2 = document.getElementById('hover-status-2');
+
+        dropdown1.addEventListener('mouseenter', function() {
+            indicator1.classList.add('active');
+            status1.textContent = '✅ 已懸停 - 下拉選單應該顯示';
+            console.log('影片專區 hover 觸發');
+        });
+
+        dropdown1.addEventListener('mouseleave', function() {
+            indicator1.classList.remove('active');
+            status1.textContent = '未懸停';
+        });
+
+        dropdown2.addEventListener('mouseenter', function() {
+            indicator2.classList.add('active');
+            status2.textContent = '✅ 已懸停 - 下拉選單應該顯示';
+            console.log('學習專區 hover 觸發');
+        });
+
+        dropdown2.addEventListener('mouseleave', function() {
+            indicator2.classList.remove('active');
+            status2.textContent = '未懸停';
+        });
+
+        // 顯示螢幕寬度
+        function updateScreenWidth() {
+            document.getElementById('screen-width').textContent = window.innerWidth + 'px';
+        }
+        updateScreenWidth();
+        window.addEventListener('resize', updateScreenWidth);
+
+        // 顯示瀏覽器資訊
+        document.getElementById('browser-info').textContent = navigator.userAgent.split(' ').slice(-2).join(' ');
+
+        // 測試函數
+        function testCSS() {
+            const results = document.getElementById('test-results');
+            const output = document.getElementById('test-output');
+            results.style.display = 'block';
+            
+            const dropdown = document.querySelector('.dropdown-content');
+            const computed = window.getComputedStyle(dropdown);
+            
+            output.textContent = `
+Dropdown Content CSS 狀態：
+- display: ${computed.display}
+- position: ${computed.position}
+- z-index: ${computed.zIndex}
+- visibility: ${computed.visibility}
+- opacity: ${computed.opacity}
+- top: ${computed.top}
+- left: ${computed.left}
+
+測試建議：
+${computed.display === 'none' ? '✓ display正確設為none（hover時會變block）' : '⚠ display應該是none'}
+${computed.position === 'absolute' ? '✓ position正確' : '⚠ position應該是absolute'}
+${parseInt(computed.zIndex) >= 1000 ? '✓ z-index足夠高' : '⚠ z-index可能太低'}
+            `;
+        }
+
+        function testZIndex() {
+            const results = document.getElementById('test-results');
+            const output = document.getElementById('test-output');
+            results.style.display = 'block';
+            
+            const elements = document.querySelectorAll('*');
+            let zIndexInfo = 'Z-Index 分析：\n\n';
+            
+            elements.forEach(el => {
+                const computed = window.getComputedStyle(el);
+                if (computed.zIndex !== 'auto' && computed.position !== 'static') {
+                    zIndexInfo += `${el.tagName}.${el.className}: z-index=${computed.zIndex}, position=${computed.position}\n`;
+                }
+            });
+            
+            output.textContent = zIndexInfo;
+        }
+
+        function testPosition() {
+            const results = document.getElementById('test-results');
+            const output = document.getElementById('test-output');
+            results.style.display = 'block';
+            
+            const dropdown = document.querySelector('.dropdown');
+            const content = dropdown.querySelector('.dropdown-content');
+            const rect = content.getBoundingClientRect();
+            
+            output.textContent = `
+Dropdown位置資訊：
+- 父元素位置: ${dropdown.getBoundingClientRect().top}px (top)
+- Dropdown Content 位置:
+  * top: ${rect.top}px
+  * left: ${rect.left}px
+  * width: ${rect.width}px
+  * height: ${rect.height}px
+  * 是否在可視範圍: ${rect.top >= 0 && rect.left >= 0 ? '是' : '否'}
+            `;
+        }
+
+        // 記錄所有點擊
+        document.addEventListener('click', function(e) {
+            console.log('點擊:', e.target.tagName, e.target.textContent);
+        });
+    </script>
+</body>
+</html>

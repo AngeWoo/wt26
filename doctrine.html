@@ -3,9 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>教誡拜讀 - 2026寒修行</title>
+    <title>教誌拜讀 - 2026寒修行</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
+        :root {
+            --primary-deep-blue: #0f172a;
+            --primary-mid-blue: #1e3a8a;
+            --accent-gold: #caa24a;
+            --accent-gold-hover: #d1b160; 
+            --text-light: #f1f5f9;
+            --text-dark: #1e293b;
+            --bg-light: #f8fafc;
+            --bg-white: #ffffff;
+            --footer-copyright-bg: #020617;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -13,23 +25,30 @@
         }
 
         body {
-            font-family: 'Microsoft JhengHei', Arial, sans-serif;
+            font-family: 'Microsoft JhengHei', 'Noto Sans TC', Arial, sans-serif;
             line-height: 1.6;
-            color: #333;
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            color: var(--text-dark);
+            background: var(--bg-light);
         }
 
-        /* Header & Navigation - 統一樣式 */
+        @keyframes animate-gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
         .header {
-            background: linear-gradient(135deg, rgba(139,69,19,0.95) 0%, rgba(160,82,45,0.95) 50%, rgba(218,165,32,0.95) 100%);
-            color: white;
+            background: linear-gradient(-45deg, var(--primary-deep-blue), var(--primary-mid-blue), var(--accent-gold), var(--primary-deep-blue));
+            background-size: 400% 400%;
+            animation: animate-gradient 15s ease-in-out infinite;
+            color: var(--text-light);
             padding: 0;
             position: fixed;
             width: 100%;
             top: 0;
             z-index: 1000;
             box-shadow: 0 4px 25px rgba(0,0,0,0.15);
-            backdrop-filter: blur(15px);
+            overflow: visible;
         }
 
         .nav-container {
@@ -40,70 +59,106 @@
             align-items: center;
             padding: 0 2rem;
             height: 80px;
+            overflow: visible;
         }
-
+        
         .logo {
-            font-size: 1.8rem;
-            font-weight: 700;
             display: flex;
             align-items: center;
-            gap: 0.8rem;
-            color: #FFD700;
+        }
+
+        .logo a {
+            color: var(--accent-gold);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.9rem;
+        }
+        
+        .logo-img {
+            height: 48px; 
+            width: auto;
+            filter: drop-shadow(2px 2px 3px rgba(0,0,0,0.3));
+        }
+
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+            line-height: 1.2;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
         }
 
-        .dharma-wheel {
-            width: 40px;
-            height: 40px;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="45" fill="%23FFD700"/><circle cx="50" cy="50" r="12" fill="%23DAA520"/></svg>') center/contain no-repeat;
-            filter: drop-shadow(0 0 8px rgba(255,215,0,0.4));
-            transition: all 0.3s ease;
+        .logo-year {
+            font-size: 1.6rem;
+            font-weight: 600;
+            letter-spacing: 2.5px;
+            padding-left: 2.5px;
+            opacity: 1;
+            color: var(--text-light);
         }
 
-        .logo:hover .dharma-wheel { transform: rotate(30deg); }
-        .logo-text { display: flex; flex-direction: column; line-height: 1.1; }
-        .logo-year { font-size: 1rem; opacity: 0.9; }
-        .logo-main { font-size: 1.4rem; font-weight: 700; }
+        .logo-main {
+            font-size: 1.4rem;
+            font-weight: 700;
+        }
 
-        .nav-menu { display: flex; list-style: none; gap: 0.3rem; align-items: center; }
-        .nav-menu > li { position: relative; }
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 0.3rem;
+            align-items: center;
+            overflow: visible;
+        }
+
+        .nav-menu li {
+            position: relative;
+            overflow: visible;
+        }
 
         .nav-menu a {
-            color: rgba(255,255,255,0.9);
+            color: rgba(255,255,255,0.85);
             text-decoration: none;
-            padding: 0.9rem 1.3rem;
+            padding: 0.8rem 1.2rem;
             border-radius: 8px;
             transition: all 0.3s ease;
             font-weight: 500;
-            font-size: 1rem;
             display: flex;
             align-items: center;
             gap: 0.4rem;
             white-space: nowrap;
         }
 
-        .nav-menu a i { font-size: 0.9rem; }
-        .nav-menu a:hover { background: rgba(255,255,255,0.15); color: #FFD700; transform: translateY(-2px); }
-        .nav-menu a.active { background: rgba(255,215,0,0.2); color: #FFD700; font-weight: 600; }
-
-        .dropdown { position: relative; }
-        .dropdown-toggle { cursor: pointer; }
-        .dropdown-toggle::after {
-            content: '\f107';
-            font-family: 'Font Awesome 6 Free';
-            font-weight: 900;
-            margin-left: 0.3rem;
-            font-size: 0.8rem;
-            transition: transform 0.3s ease;
+        .nav-menu a:hover {
+            background: rgba(255,255,255,0.1);
+            color: #fff;
         }
 
-        .dropdown:hover .dropdown-toggle::after { transform: rotate(180deg); }
+        .nav-menu a.active {
+            background: rgba(202, 162, 74, 0.2);
+            color: var(--accent-gold);
+            font-weight: 700;
+        }
+
+        .dropdown {
+            position: relative;
+            overflow: visible;
+        }
+        
+        .dropdown-toggle {
+            cursor: pointer;
+        }
+
+        .dropdown-toggle::after {
+            content: '▼';
+            margin-left: 0.3rem;
+            font-size: 0.7rem;
+        }
 
         .dropdown-menu {
             position: absolute;
             top: 100%;
             left: 0;
-            background: linear-gradient(135deg, rgba(139,69,19,0.98) 0%, rgba(160,82,45,0.98) 100%);
+            background: var(--primary-deep-blue);
             min-width: 200px;
             border-radius: 12px;
             box-shadow: 0 8px 25px rgba(0,0,0,0.25);
@@ -111,24 +166,52 @@
             visibility: hidden;
             transform: translateY(-10px);
             transition: all 0.3s ease;
-            margin-top: 0.5rem;
-            backdrop-filter: blur(10px);
-            overflow: hidden;
+            margin-top: 0;
+            padding-top: 0.5rem;
+            border: 1px solid rgba(255,255,255,0.1);
+            z-index: 9999;
+            pointer-events: none;
         }
 
-        .dropdown:hover .dropdown-menu { opacity: 1; visibility: visible; transform: translateY(0); }
-        .dropdown-menu li { list-style: none; }
+        .dropdown::before {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            height: 0.5rem;
+            background: transparent;
+        }
+        
+        .dropdown:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+
+        .dropdown-menu li {
+            list-style: none;
+        }
 
         .dropdown-menu a {
             padding: 0.9rem 1.3rem;
-            display: block;
-            border-radius: 0;
             border-bottom: 1px solid rgba(255,255,255,0.1);
-            font-size: 0.95rem;
+            display: block;
+        }
+        
+        .dropdown-menu a:hover {
+            background: rgba(255,255,255,0.15);
         }
 
-        .dropdown-menu li:last-child a { border-bottom: none; }
-        .dropdown-menu a:hover { background: rgba(255,215,0,0.15); padding-left: 1.8rem; transform: translateY(0); }
+        .dropdown-menu a.active {
+            background: rgba(202, 162, 74, 0.2) !important;
+            color: var(--accent-gold) !important;
+        }
+
+        .dropdown-menu li:last-child a {
+            border-bottom: none;
+        }
 
         .mobile-menu-btn {
             display: none;
@@ -138,80 +221,60 @@
             font-size: 1.8rem;
             cursor: pointer;
             padding: 0.5rem;
-            border-radius: 8px;
         }
 
-        .mobile-menu-btn:hover { background: rgba(255,255,255,0.1); color: #FFD700; }
-
-        /* Page Header */
         .page-header {
-            background: linear-gradient(135deg, rgba(139,69,19,0.9), rgba(218,165,32,0.9)),
-                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 400"><rect fill="%23f8f9fa" width="1200" height="400"/><circle cx="600" cy="200" r="150" fill="%23DAA520" opacity="0.1"/></svg>');
+            background: linear-gradient(rgba(15, 23, 42, 0.6), rgba(30, 58, 138, 0.6)), url('bg.jpg');
             background-size: cover;
-            color: white;
+            background-position: center;
+            color: var(--text-light);
             text-align: center;
-            padding: 8rem 2rem 4rem;
+            padding: 6rem 2rem 4rem;
             margin-top: 80px;
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
         }
 
         .page-header h1 {
-            font-size: 3.5rem;
+            font-size: 3rem;
             margin-bottom: 1rem;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
         }
 
         .page-header p {
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             max-width: 700px;
             margin: 0 auto;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+            opacity: 0.9;
         }
 
-        /* Main Content */
         .main-content {
             max-width: 1200px;
             margin: 0 auto;
             padding: 4rem 2rem;
         }
-
-        /* Introduction Section */
+        
         .intro-section {
-            background: white;
+            background: var(--bg-white);
             border-radius: 20px;
-            padding: 3rem;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            margin-bottom: 4rem;
+            padding: 2.5rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.07);
+            margin-bottom: 3rem;
             text-align: center;
         }
-
+        
         .intro-section h2 {
-            color: #8B4513;
+            color: var(--primary-deep-blue);
             font-size: 2rem;
             margin-bottom: 1rem;
         }
-
+        
         .intro-section p {
-            color: #666;
+            color: #475569;
             font-size: 1.1rem;
             line-height: 1.8;
             max-width: 800px;
-            margin: 0 auto 2rem;
+            margin: 0 auto;
         }
 
-        .intro-icon {
-            width: 80px;
-            height: 80px;
-            background: linear-gradient(45deg, #DAA520, #FFD700);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 2.5rem;
-            margin: 0 auto 2rem;
-        }
-
-        /* Doctrine Cards */
         .doctrine-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
@@ -220,55 +283,65 @@
         }
 
         .doctrine-card {
-            background: white;
-            border-radius: 20px;
+            background: var(--bg-white);
+            border-radius: 15px;
             overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.07);
             transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
         }
 
         .doctrine-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
         }
 
         .doctrine-header {
-            background: linear-gradient(135deg, #8B4513, #DAA520);
+            background: linear-gradient(135deg, var(--primary-deep-blue), var(--primary-mid-blue));
             color: white;
-            padding: 2rem;
+            padding: 1.5rem 2rem;
             text-align: center;
+            position: relative;
         }
 
         .doctrine-header h3 {
-            font-size: 1.8rem;
-            margin-bottom: 0.5rem;
+            font-size: 1.5rem;
+            font-weight: 600;
         }
 
         .doctrine-number {
+            position: absolute;
+            top: 50%;
+            left: 2rem;
+            transform: translateY(-50%);
             font-size: 3rem;
             font-weight: 700;
-            opacity: 0.3;
+            opacity: 0.1;
         }
-
+        
         .doctrine-content {
-            padding: 2rem;
+            padding: 1.5rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
         }
 
         .doctrine-description {
-            color: #666;
-            line-height: 1.8;
-            margin-bottom: 2rem;
-            font-size: 1.05rem;
-        }
-
-        /* Audio Player */
-        .audio-player {
-            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
-            border-radius: 15px;
-            padding: 1.5rem;
+            color: #475569;
+            line-height: 1.7;
             margin-bottom: 1.5rem;
+            flex-grow: 1;
         }
-
+        
+        .audio-player {
+            background: var(--bg-light);
+            border-radius: 12px;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid #e2e8f0;
+        }
+        
         .audio-player-header {
             display: flex;
             align-items: center;
@@ -277,28 +350,23 @@
         }
 
         .audio-player-icon {
-            width: 50px;
-            height: 50px;
-            background: linear-gradient(45deg, #DAA520, #FFD700);
+            width: 40px;
+            height: 40px;
+            background: var(--primary-mid-blue);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
-            font-size: 1.2rem;
+            font-size: 1rem;
         }
-
+        
         .audio-player-info h4 {
-            color: #8B4513;
-            font-size: 1.1rem;
-            margin-bottom: 0.3rem;
+            color: var(--primary-deep-blue);
+            font-size: 1rem;
+            font-weight: 600;
         }
-
-        .audio-duration {
-            color: #999;
-            font-size: 0.9rem;
-        }
-
+        
         .audio-controls {
             display: flex;
             gap: 1rem;
@@ -306,128 +374,84 @@
         }
 
         .play-btn {
-            width: 50px;
-            height: 50px;
-            background: linear-gradient(45deg, #DAA520, #FFD700);
+            width: 40px;
+            height: 40px;
+            background: var(--primary-mid-blue);
             border: none;
             border-radius: 50%;
             color: white;
-            font-size: 1.2rem;
             cursor: pointer;
             transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
         }
 
-        .play-btn:hover {
-            transform: scale(1.1);
-            box-shadow: 0 5px 15px rgba(218,165,32,0.3);
-        }
-
-        .progress-bar {
-            flex: 1;
-            height: 6px;
-            background: #ddd;
-            border-radius: 3px;
-            position: relative;
-            cursor: pointer;
-        }
-
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(90deg, #DAA520, #FFD700);
-            border-radius: 3px;
-            width: 0%;
-            transition: width 0.1s ease;
-        }
-
-        /* Action Buttons */
+        .play-btn:hover { background: var(--primary-deep-blue); }
+        .progress-bar { flex: 1; height: 5px; background: #dbeafe; border-radius: 2.5px; }
+        
         .action-buttons {
-            display: flex;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
             gap: 1rem;
-            flex-wrap: wrap;
         }
 
         .action-btn {
-            flex: 1;
-            min-width: 150px;
-            padding: 1rem 1.5rem;
-            border: none;
-            border-radius: 25px;
+            padding: 0.8rem 1rem;
+            border: 1px solid;
+            border-radius: 8px;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-        }
-
-        .action-btn-primary {
-            background: linear-gradient(45deg, #DAA520, #FFD700);
-            color: white;
-        }
-
-        .action-btn-secondary {
-            background: white;
-            color: #8B4513;
-            border: 2px solid #DAA520;
-        }
-
-        .action-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.15);
-        }
-
-        /* Related Content */
-        .related-section {
-            background: white;
-            border-radius: 20px;
-            padding: 3rem;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-        }
-
-        .related-section h3 {
-            color: #8B4513;
-            font-size: 1.8rem;
-            margin-bottom: 1.5rem;
             text-align: center;
         }
 
-        .related-links {
+        .action-btn-primary {
+            background: var(--primary-mid-blue);
+            color: white;
+            border-color: var(--primary-mid-blue);
+        }
+
+        .action-btn-primary:hover { background: var(--primary-deep-blue); }
+
+        .action-btn-secondary {
+            background: var(--bg-white);
+            color: var(--primary-mid-blue);
+            border-color: var(--primary-mid-blue);
+        }
+        
+        .action-btn-secondary:hover { background: #eef2ff; }
+        
+        .footer {
+            background: var(--primary-deep-blue);
+            color: var(--text-light);
+            padding: 3rem 2rem 0;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
+            gap: 2rem;
+            padding-bottom: 3rem;
         }
-
-        .related-link {
-            background: linear-gradient(135deg, #f8f9fa, #fff);
-            padding: 1.5rem;
-            border-radius: 15px;
-            border-left: 4px solid #DAA520;
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-
-        .related-link:hover {
-            background: linear-gradient(135deg, #fff, #f8f9fa);
-            transform: translateX(10px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-
-        .related-link h4 {
-            color: #8B4513;
-            font-size: 1.2rem;
+        
+        .footer-section h3 { margin-bottom: 1rem; }
+        .footer-section a {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            display: block;
             margin-bottom: 0.5rem;
         }
+        .footer-section a:hover { color: #fff; }
 
-        .related-link p {
-            color: #666;
-            font-size: 0.95rem;
+        .copyright-area {
+            background: var(--footer-copyright-bg);
+            padding: 1.5rem 2rem;
+            color: rgba(255, 255, 255, 0.6);
+            text-align: center;
         }
+        .copyright-area p { margin: 0; }
 
-        /* Responsive */
         @media (max-width: 768px) {
             .nav-menu {
                 display: none;
@@ -436,54 +460,57 @@
                 top: 80px;
                 left: 0;
                 width: 100%;
-                background: linear-gradient(135deg, #8B4513 0%, #A0522D 100%);
+                background: var(--primary-deep-blue);
                 padding: 1rem 0;
-                gap: 0;
             }
 
-            .nav-menu.mobile-active { display: flex; }
-            .nav-menu > li { width: 100%; }
-            .nav-menu a { padding: 1rem 2rem; border-radius: 0; }
+            .nav-menu.mobile-active {
+                display: flex;
+            }
+
+            .nav-menu li {
+                width: 100%;
+            }
+
+            .nav-menu a {
+                padding: 1rem 2rem;
+            }
 
             .dropdown-menu {
                 position: static;
-                opacity: 1;
-                visibility: visible;
-                transform: none;
-                box-shadow: none;
-                background: rgba(0,0,0,0.1);
-                margin-top: 0;
+                opacity: 0;
+                visibility: hidden;
                 max-height: 0;
                 overflow: hidden;
+                transform: none;
+                transition: all 0.3s ease;
+                background: rgba(0,0,0,0.2);
+                margin-top: 0;
+                border-radius: 0;
+                box-shadow: none;
             }
-
-            .dropdown.mobile-open .dropdown-menu { max-height: 500px; }
-            .dropdown-menu a { padding-left: 3rem; background: rgba(0,0,0,0.1); }
-            .mobile-menu-btn { display: block; }
+            
+            .dropdown.mobile-open .dropdown-menu {
+                opacity: 1;
+                visibility: visible;
+                max-height: 500px;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
 
             .page-header h1 { font-size: 2.5rem; }
-
-            .doctrine-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .action-buttons {
-                flex-direction: column;
-            }
-
-            .action-btn {
-                width: 100%;
-            }
+            .doctrine-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
-    <!-- Header -->
     <header class="header">
         <div class="nav-container">
             <div class="logo">
-                <a href="index.html" style="color: inherit; text-decoration: none; display: flex; align-items: center; gap: 0.8rem;">
-                    <div class="dharma-wheel"></div>
+                <a href="index.html">
+                    <img src="logo.png" alt="Logo" class="logo-img">
                     <div class="logo-text">
                         <span class="logo-year">2026</span>
                         <span class="logo-main">寒修行</span>
@@ -491,7 +518,7 @@
                 </a>
             </div>
             <nav>
-                <ul class="nav-menu">
+                <ul class="nav-menu" id="navMenu">
                     <li><a href="index.html"><i class="fas fa-home"></i> 首頁</a></li>
                     <li><a href="interactive.html"><i class="fas fa-users"></i> 2026互動區</a></li>
                     <li><a href="news.html"><i class="fas fa-newspaper"></i> 最新消息</a></li>
@@ -506,364 +533,191 @@
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle active"><i class="fas fa-book"></i> 學習專區</a>
                         <ul class="dropdown-menu">
-                            <li><a href="doctrine.html" class="active"><i class="fas fa-pray"></i> 教誡拜讀</a></li>
+                            <li><a href="doctrine.html" class="active"><i class="fas fa-pray"></i> 教誌拜讀</a></li>
                             <li><a href="scripture.html"><i class="fas fa-book-open"></i> 讀經次第</a></li>
                             <li><a href="cards.html"><i class="fas fa-images"></i> 卡片介紹</a></li>
                         </ul>
                     </li>
                     <li><a href="history.html"><i class="fas fa-landmark"></i> 苑史區</a></li>
                 </ul>
-                <button class="mobile-menu-btn">
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
                     <i class="fas fa-bars"></i>
                 </button>
             </nav>
         </div>
     </header>
 
-    <!-- Page Header -->
     <section class="page-header">
-        <h1><i class="fas fa-pray"></i> 教誡拜讀</h1>
+        <h1><i class="fas fa-pray"></i> 教誌拜讀</h1>
         <p>深入學習核心教義，隨時隨地聆聽真人讀誦</p>
     </section>
 
-    <!-- Main Content -->
     <main class="main-content">
-        <!-- Introduction -->
         <div class="intro-section">
-            <div class="intro-icon">
-                <i class="fas fa-book-open"></i>
-            </div>
-            <h2>關於教誡拜讀</h2>
-            <p>教誡是真如苑修行的核心教義，包含了開祖與苑主的智慧開示。透過每日拜讀教誡，我們能夠深入理解佛法的真諦，將教義融入生活，實踐慈悲與智慧。</p>
-            <p>本頁提供完整的教誡內容與真人讀誦音檔，讓您可以隨時隨地學習。建議每日固定時間拜讀，養成良好的修行習慣。</p>
+            <h2>關於教誌拜讀</h2>
+            <p>教誌是真如苑修行的核心教義，包含了開祖與苑主的智慧開示。透過每日拜讀，我們能夠深入理解佛法的真諦，將教義融入生活，實踐慈悲與智慧。本頁提供完整的教誌內容與真人讀誦音檔，讓您可以隨時隨地學習。</p>
         </div>
 
-        <!-- Doctrine Cards -->
         <div class="doctrine-grid">
-            <!-- 第一誡 -->
             <div class="doctrine-card">
                 <div class="doctrine-header">
                     <div class="doctrine-number">01</div>
                     <h3>第一誡：慈悲之心</h3>
                 </div>
                 <div class="doctrine-content">
-                    <p class="doctrine-description">
-                        修行的根本在於培養慈悲之心。對一切眾生心懷慈悲，不分你我，不論親疏，以平等心對待所有生命。慈悲不僅是同情，更是願意分擔他人痛苦，幫助他人離苦得樂的心願。
-                    </p>
-                    
+                    <p class="doctrine-description">修行的根本在於培養慈悲之心。對一切眾生心懷慈悲，不分你我，以平等心對待所有生命。</p>
                     <div class="audio-player">
                         <div class="audio-player-header">
-                            <div class="audio-player-icon">
-                                <i class="fas fa-headphones"></i>
-                            </div>
+                            <div class="audio-player-icon"><i class="fas fa-headphones-alt"></i></div>
                             <div class="audio-player-info">
-                                <h4>真人讀誦版本</h4>
-                                <div class="audio-duration">時長: 8:30</div>
+                                <h4>真人讀誦</h4>
                             </div>
                         </div>
                         <div class="audio-controls">
-                            <button class="play-btn" onclick="playAudio(1)">
-                                <i class="fas fa-play"></i>
-                            </button>
-                            <div class="progress-bar">
-                                <div class="progress-fill"></div>
-                            </div>
+                            <button class="play-btn" onclick="playAudio(1)"><i class="fas fa-play"></i></button>
+                            <div class="progress-bar"></div>
                         </div>
                     </div>
-
                     <div class="action-buttons">
-                        <button class="action-btn action-btn-primary" onclick="readText(1)">
-                            <i class="fas fa-book-reader"></i> 閱讀全文
-                        </button>
-                        <button class="action-btn action-btn-secondary" onclick="downloadAudio(1)">
-                            <i class="fas fa-download"></i> 下載音檔
-                        </button>
+                        <button class="action-btn action-btn-primary" onclick="readText(1)"><i class="fas fa-book-open"></i> 閱讀</button>
+                        <button class="action-btn action-btn-secondary" onclick="downloadAudio(1)"><i class="fas fa-download"></i> 下載</button>
                     </div>
                 </div>
             </div>
 
-            <!-- 第二誡 -->
-            <div class="doctrine-card">
+             <div class="doctrine-card">
                 <div class="doctrine-header">
                     <div class="doctrine-number">02</div>
                     <h3>第二誡：智慧與覺悟</h3>
                 </div>
                 <div class="doctrine-content">
-                    <p class="doctrine-description">
-                        智慧來自於對生命真相的深刻理解。透過修行，我們逐漸覺悟到諸法無常、諸行無我的真理。智慧不是知識的累積，而是對生命本質的洞察，引領我們走向解脫之道。
-                    </p>
-                    
+                    <p class="doctrine-description">智慧來自於對生命真相的深刻理解。透過修行，我們逐漸覺悟到諸法無常、諸行無我的真理。</p>
                     <div class="audio-player">
-                        <div class="audio-player-header">
-                            <div class="audio-player-icon">
-                                <i class="fas fa-headphones"></i>
-                            </div>
-                            <div class="audio-player-info">
-                                <h4>真人讀誦版本</h4>
-                                <div class="audio-duration">時長: 10:15</div>
-                            </div>
+                         <div class="audio-player-header">
+                            <div class="audio-player-icon"><i class="fas fa-headphones-alt"></i></div>
+                            <div class="audio-player-info"><h4>真人讀誦</h4></div>
                         </div>
                         <div class="audio-controls">
-                            <button class="play-btn" onclick="playAudio(2)">
-                                <i class="fas fa-play"></i>
-                            </button>
-                            <div class="progress-bar">
-                                <div class="progress-fill"></div>
-                            </div>
+                            <button class="play-btn" onclick="playAudio(2)"><i class="fas fa-play"></i></button>
+                            <div class="progress-bar"></div>
                         </div>
                     </div>
-
                     <div class="action-buttons">
-                        <button class="action-btn action-btn-primary" onclick="readText(2)">
-                            <i class="fas fa-book-reader"></i> 閱讀全文
-                        </button>
-                        <button class="action-btn action-btn-secondary" onclick="downloadAudio(2)">
-                            <i class="fas fa-download"></i> 下載音檔
-                        </button>
+                        <button class="action-btn action-btn-primary" onclick="readText(2)"><i class="fas fa-book-open"></i> 閱讀</button>
+                        <button class="action-btn action-btn-secondary" onclick="downloadAudio(2)"><i class="fas fa-download"></i> 下載</button>
                     </div>
                 </div>
             </div>
 
-            <!-- 第三誡 -->
             <div class="doctrine-card">
                 <div class="doctrine-header">
                     <div class="doctrine-number">03</div>
                     <h3>第三誡：精進修行</h3>
                 </div>
                 <div class="doctrine-content">
-                    <p class="doctrine-description">
-                        修行需要持續不斷的努力與堅持。精進不是急躁，而是穩定而有方向的前進。每天一點一滴的累積，終將匯聚成巨大的轉變。保持初心，勇猛精進，是修行路上不可或缺的品質。
-                    </p>
-                    
+                    <p class="doctrine-description">修行需要持續不斷的努力與堅持。精進不是急躁，而是穩定而有方向的前進。</p>
                     <div class="audio-player">
-                        <div class="audio-player-header">
-                            <div class="audio-player-icon">
-                                <i class="fas fa-headphones"></i>
-                            </div>
-                            <div class="audio-player-info">
-                                <h4>真人讀誦版本</h4>
-                                <div class="audio-duration">時長: 9:45</div>
-                            </div>
+                         <div class="audio-player-header">
+                            <div class="audio-player-icon"><i class="fas fa-headphones-alt"></i></div>
+                            <div class="audio-player-info"><h4>真人讀誦</h4></div>
                         </div>
                         <div class="audio-controls">
-                            <button class="play-btn" onclick="playAudio(3)">
-                                <i class="fas fa-play"></i>
-                            </button>
-                            <div class="progress-bar">
-                                <div class="progress-fill"></div>
-                            </div>
+                            <button class="play-btn" onclick="playAudio(3)"><i class="fas fa-play"></i></button>
+                            <div class="progress-bar"></div>
                         </div>
                     </div>
-
                     <div class="action-buttons">
-                        <button class="action-btn action-btn-primary" onclick="readText(3)">
-                            <i class="fas fa-book-reader"></i> 閱讀全文
-                        </button>
-                        <button class="action-btn action-btn-secondary" onclick="downloadAudio(3)">
-                            <i class="fas fa-download"></i> 下載音檔
-                        </button>
+                        <button class="action-btn action-btn-primary" onclick="readText(3)"><i class="fas fa-book-open"></i> 閱讀</button>
+                        <button class="action-btn action-btn-secondary" onclick="downloadAudio(3)"><i class="fas fa-download"></i> 下載</button>
                     </div>
-                </div>
-            </div>
-
-            <!-- 第四誡 -->
-            <div class="doctrine-card">
-                <div class="doctrine-header">
-                    <div class="doctrine-number">04</div>
-                    <h3>第四誡：感恩與奉獻</h3>
-                </div>
-                <div class="doctrine-content">
-                    <p class="doctrine-description">
-                        以感恩的心看待生命中的一切，無論順境逆境。感恩讓我們看見生命中的美好，奉獻則讓我們的生命更有意義。透過服務他人，我們實踐了慈悲，也豐富了自己的心靈。
-                    </p>
-                    
-                    <div class="audio-player">
-                        <div class="audio-player-header">
-                            <div class="audio-player-icon">
-                                <i class="fas fa-headphones"></i>
-                            </div>
-                            <div class="audio-player-info">
-                                <h4>真人讀誦版本</h4>
-                                <div class="audio-duration">時長: 11:20</div>
-                            </div>
-                        </div>
-                        <div class="audio-controls">
-                            <button class="play-btn" onclick="playAudio(4)">
-                                <i class="fas fa-play"></i>
-                            </button>
-                            <div class="progress-bar">
-                                <div class="progress-fill"></div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="action-buttons">
-                        <button class="action-btn action-btn-primary" onclick="readText(4)">
-                            <i class="fas fa-book-reader"></i> 閱讀全文
-                        </button>
-                        <button class="action-btn action-btn-secondary" onclick="downloadAudio(4)">
-                            <i class="fas fa-download"></i> 下載音檔
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 第五誡 -->
-            <div class="doctrine-card">
-                <div class="doctrine-header">
-                    <div class="doctrine-number">05</div>
-                    <h3>第五誡：正念與禪定</h3>
-                </div>
-                <div class="doctrine-content">
-                    <p class="doctrine-description">
-                        保持正念，覺察當下的每一刻。透過禪定，我們培養內心的寧靜與專注。正念不僅在打坐時，更要融入日常生活的每個細節，讓修行與生活合而為一。
-                    </p>
-                    
-                    <div class="audio-player">
-                        <div class="audio-player-header">
-                            <div class="audio-player-icon">
-                                <i class="fas fa-headphones"></i>
-                            </div>
-                            <div class="audio-player-info">
-                                <h4>真人讀誦版本</h4>
-                                <div class="audio-duration">時長: 12:05</div>
-                            </div>
-                        </div>
-                        <div class="audio-controls">
-                            <button class="play-btn" onclick="playAudio(5)">
-                                <i class="fas fa-play"></i>
-                            </button>
-                            <div class="progress-bar">
-                                <div class="progress-fill"></div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="action-buttons">
-                        <button class="action-btn action-btn-primary" onclick="readText(5)">
-                            <i class="fas fa-book-reader"></i> 閱讀全文
-                        </button>
-                        <button class="action-btn action-btn-secondary" onclick="downloadAudio(5)">
-                            <i class="fas fa-download"></i> 下載音檔
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 第六誡 -->
-            <div class="doctrine-card">
-                <div class="doctrine-header">
-                    <div class="doctrine-number">06</div>
-                    <h3>第六誡：信心與依止</h3>
-                </div>
-                <div class="doctrine-content">
-                    <p class="doctrine-description">
-                        對三寶懷抱堅定的信心，依止善知識的教導。信心是修行路上的明燈，照亮前行的道路。透過依止，我們得以避開歧途，穩步邁向解脫。
-                    </p>
-                    
-                    <div class="audio-player">
-                        <div class="audio-player-header">
-                            <div class="audio-player-icon">
-                                <i class="fas fa-headphones"></i>
-                            </div>
-                            <div class="audio-player-info">
-                                <h4>真人讀誦版本</h4>
-                                <div class="audio-duration">時長: 10:50</div>
-                            </div>
-                        </div>
-                        <div class="audio-controls">
-                            <button class="play-btn" onclick="playAudio(6)">
-                                <i class="fas fa-play"></i>
-                            </button>
-                            <div class="progress-bar">
-                                <div class="progress-fill"></div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="action-buttons">
-                        <button class="action-btn action-btn-primary" onclick="readText(6)">
-                            <i class="fas fa-book-reader"></i> 閱讀全文
-                        </button>
-                        <button class="action-btn action-btn-secondary" onclick="downloadAudio(6)">
-                            <i class="fas fa-download"></i> 下載音檔
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Related Content -->
-        <div class="related-section">
-            <h3>相關學習資源</h3>
-            <div class="related-links">
-                <div class="related-link" onclick="goToPage('scripture.html')">
-                    <h4><i class="fas fa-book-open"></i> 讀經次第</h4>
-                    <p>有系統的讀經指引，幫助您深入經典</p>
-                </div>
-                <div class="related-link" onclick="goToPage('videos.html')">
-                    <h4><i class="fas fa-video"></i> 法會影片</h4>
-                    <p>觀看法會錄影，聆聽法師開示</p>
-                </div>
-                <div class="related-link" onclick="goToPage('interactive.html')">
-                    <h4><i class="fas fa-users"></i> 互動交流</h4>
-                    <p>與其他信眾分享學習心得</p>
                 </div>
             </div>
         </div>
     </main>
 
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>聯絡我們</h3>
+                <p>真如苑台灣教區</p>
+                <p>電話: (02) 1234-5678</p>
+                <p>Email: info@shinnyo-en.org.tw</p>
+            </div>
+            <div class="footer-section">
+                <h3>快速連結</h3>
+                <a href="index.html">首頁</a>
+                <a href="interactive.html">2026互動區</a>
+                <a href="news.html">最新消息</a>
+                <a href="schedule.html">活動時程</a>
+            </div>
+            <div class="footer-section">
+                <h3>相關網站</h3>
+                <a href="https://www.shinnyo-en.org.tw" target="_blank">真如苑台灣官網</a>
+                <a href="https://www.shinnyo-en.or.jp" target="_blank">真如苑日本總本山</a>
+            </div>
+        </div>
+        <div class="copyright-area">
+            <p>&copy; 2026 真如苑台灣教區 版權所有</p>
+        </div>
+    </footer>
+
     <script>
-        function playAudio(id) {
-            alert(`播放教誡 ${id} 音檔\n\n實際網站會在此處播放真人讀誦音檔`);
-        }
-
-        function readText(id) {
-            alert(`閱讀教誡 ${id} 完整內容\n\n實際網站會顯示完整的教誡文字內容`);
-        }
-
-        function downloadAudio(id) {
-            alert(`下載教誡 ${id} 音檔\n\n實際網站會開始下載 MP3 檔案`);
-        }
-
-        function goToPage(url) {
-            window.location.href = url;
-        }
-
-        // Mobile menu
-        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
-        const navMenu = document.querySelector('.nav-menu');
-        const dropdowns = document.querySelectorAll('.dropdown');
-
-        mobileMenuBtn.addEventListener('click', () => {
-            navMenu.classList.toggle('mobile-active');
-            const icon = mobileMenuBtn.querySelector('i');
-            icon.className = navMenu.classList.contains('mobile-active') ? 'fas fa-times' : 'fas fa-bars';
-        });
-
-        if (window.innerWidth <= 768) {
-            dropdowns.forEach(dropdown => {
-                const toggle = dropdown.querySelector('.dropdown-toggle');
-                toggle.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    dropdown.classList.toggle('mobile-open');
-                });
-            });
-        }
-
-        if (window.innerWidth > 768) {
-            dropdowns.forEach(dropdown => {
-                const toggle = dropdown.querySelector('.dropdown-toggle');
-                toggle.addEventListener('click', (e) => e.preventDefault());
-            });
-        }
-
-        document.addEventListener('click', (e) => {
-            if (!e.target.closest('.nav-container')) {
-                navMenu.classList.remove('mobile-active');
-                const icon = mobileMenuBtn.querySelector('i');
-                icon.className = 'fas fa-bars';
+        document.addEventListener('DOMContentLoaded', function() {
+            // Page-specific logic
+            window.playAudio = function(id) {
+                alert(`播放教誌 ${id} 音檔\n\n(此為展示功能)`);
             }
+
+            window.readText = function(id) {
+                alert(`閱讀教誌 ${id} 完整內容\n\n(此為展示功能)`);
+            }
+
+            window.downloadAudio = function(id) {
+                alert(`下載教誌 ${id} 音檔\n\n(此為展示功能)`);
+            }
+            
+            // ****** 優化的下拉選單邏輯 ******
+            // 手機選單邏輯
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const navMenu = document.getElementById('navMenu');
+
+            mobileMenuBtn.addEventListener('click', function() {
+                navMenu.classList.toggle('mobile-active');
+                const icon = this.querySelector('i');
+                if (navMenu.classList.contains('mobile-active')) {
+                    icon.className = 'fas fa-times';
+                } else {
+                    icon.className = 'fas fa-bars';
+                }
+            });
+
+            // 下拉選單邏輯 - 僅在手機版添加點擊事件
+            const dropdowns = document.querySelectorAll('.dropdown');
+            
+            function handleDropdownClick(e) {
+                // 只在移動版處理點擊
+                if (window.innerWidth <= 768) {
+                    e.preventDefault();
+                    const dropdown = this.closest('.dropdown');
+                    
+                    // 關閉其他dropdown
+                    dropdowns.forEach(function(otherDropdown) {
+                        if (otherDropdown !== dropdown) {
+                            otherDropdown.classList.remove('mobile-open');
+                        }
+                    });
+                    
+                    // 切換當前dropdown
+                    dropdown.classList.toggle('mobile-open');
+                }
+                // 桌面版不處理，讓CSS hover自然工作
+            }
+            
+            // 為每個dropdown-toggle添加事件監聽
+            dropdowns.forEach(function(dropdown) {
+                const toggle = dropdown.querySelector('.dropdown-toggle');
+                toggle.addEventListener('click', handleDropdownClick);
+            });
         });
     </script>
 </body>

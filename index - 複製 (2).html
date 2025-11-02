@@ -6,6 +6,23 @@
     <title>2026寒修行 - 真如苑台灣教區</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
+        :root {
+            --primary-deep-blue: #0f172a;
+            --primary-mid-blue: #1e3a8a;
+            --accent-gold: #caa24a;
+            --accent-gold-hover: #d1b160; 
+            --text-light: #f1f5f9;
+            --text-dark: #1e293b;
+            --bg-light: #f8fafc;
+            --bg-white: #ffffff;
+            --footer-copyright-bg: #020617;
+            /* ****** 新增顏色變數 ****** */
+            --sun-red: #c0392b;
+            --sun-red-hover: #a93226;
+            --moon-yellow: #f1c40f;
+            --moon-yellow-hover: #d4ac0d;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -13,38 +30,32 @@
         }
 
         body {
-            font-family: 'Microsoft JhengHei', Arial, sans-serif;
+            font-family: 'Microsoft JhengHei', 'Noto Sans TC', Arial, sans-serif;
             line-height: 1.6;
-            color: #333;
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            color: var(--text-dark);
+            background: var(--bg-light);
         }
 
-        /* Header & Navigation */
+        @keyframes animate-gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
         .header {
-            background: linear-gradient(135deg, rgba(139,69,19,0.95) 0%, rgba(160,82,45,0.95) 50%, rgba(218,165,32,0.95) 100%);
-            color: white;
+            background: linear-gradient(-45deg, var(--primary-deep-blue), var(--primary-mid-blue), var(--accent-gold), var(--primary-deep-blue));
+            background-size: 400% 400%;
+            animation: animate-gradient 15s ease-in-out infinite;
+            color: var(--text-light);
+        }
+
+        .header {
             padding: 0;
             position: fixed;
             width: 100%;
             top: 0;
             z-index: 1000;
             box-shadow: 0 4px 25px rgba(0,0,0,0.15);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .header.scrolled {
-            background: linear-gradient(135deg, rgba(139,69,19,0.9) 0%, rgba(160,82,45,0.9) 50%, rgba(218,165,32,0.9) 100%);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            box-shadow: 0 4px 30px rgba(0,0,0,0.2);
-        }
-
-        .header.transparent {
-            background: linear-gradient(135deg, rgba(139,69,19,0.8) 0%, rgba(160,82,45,0.8) 50%, rgba(218,165,32,0.8) 100%);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
         }
 
         .nav-container {
@@ -56,46 +67,40 @@
             padding: 0 2rem;
             height: 80px;
         }
-
+        
         .logo {
-            font-size: 1.8rem;
-            font-weight: 700;
             display: flex;
             align-items: center;
-            gap: 0.8rem;
-            color: #FFD700;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-            letter-spacing: 1px;
         }
 
-        .logo i {
-            font-size: 2rem;
-            text-shadow: 0 0 10px rgba(255,215,0,0.5);
+        .logo a {
+            color: var(--accent-gold);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.9rem;
         }
-
-        .dharma-wheel {
-            width: 40px;
-            height: 40px;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><linearGradient id="goldGradient" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:%23FFD700;stop-opacity:1" /><stop offset="50%" style="stop-color:%23FFA500;stop-opacity:1" /><stop offset="100%" style="stop-color:%23DAA520;stop-opacity:1" /></linearGradient></defs><g fill="url(%23goldGradient)" stroke="%23B8860B" stroke-width="0.5"><circle cx="50" cy="50" r="45"/><circle cx="50" cy="50" r="35" fill="none" stroke-width="2"/><circle cx="50" cy="50" r="25" fill="none" stroke-width="1.5"/><g><rect x="48" y="5" width="4" height="20" rx="2"/><rect x="48" y="75" width="4" height="20" rx="2"/><rect x="5" y="48" width="20" height="4" rx="2"/><rect x="75" y="48" width="20" height="4" rx="2"/><rect x="18.9" y="18.9" width="4" height="14.14" rx="2" transform="rotate(45 21 26)"/><rect x="77.1" y="77.1" width="4" height="14.14" rx="2" transform="rotate(45 79 84)"/><rect x="77.1" y="18.9" width="4" height="14.14" rx="2" transform="rotate(-45 79 26)"/><rect x="18.9" y="77.1" width="4" height="14.14" rx="2" transform="rotate(-45 21 84)"/></g><circle cx="50" cy="50" r="12" fill="url(%23goldGradient)"/><g fill="%23FFA500"><circle cx="50" cy="15" r="2"/><circle cx="50" cy="85" r="2"/><circle cx="15" cy="50" r="2"/><circle cx="85" cy="50" r="2"/><circle cx="26.86" cy="26.86" r="1.5"/><circle cx="73.14" cy="73.14" r="1.5"/><circle cx="73.14" cy="26.86" r="1.5"/><circle cx="26.86" cy="73.14" r="1.5"/></g><g fill="%23DAA520" opacity="0.8"><circle cx="50" cy="45" r="1"/><circle cx="50" cy="55" r="1"/><circle cx="45" cy="50" r="1"/><circle cx="55" cy="50" r="1"/><circle cx="47" cy="47" r="0.8"/><circle cx="53" cy="53" r="0.8"/><circle cx="53" cy="47" r="0.8"/><circle cx="47" cy="53" r="0.8"/></g></g></svg>') center/contain no-repeat;
-            filter: drop-shadow(0 0 8px rgba(255,215,0,0.4));
-            transition: all 0.3s ease;
-        }
-
-        .logo:hover .dharma-wheel {
-            filter: drop-shadow(0 0 15px rgba(255,215,0,0.6));
-            transform: rotate(30deg);
+        
+        .logo-img {
+            height: 48px; 
+            width: auto;
+            filter: drop-shadow(2px 2px 3px rgba(0,0,0,0.3));
         }
 
         .logo-text {
             display: flex;
             flex-direction: column;
-            line-height: 1.1;
+            line-height: 1.2;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
         }
 
         .logo-year {
-            font-size: 1rem;
-            opacity: 0.9;
-            font-weight: 500;
+            font-size: 1.6rem;
+            font-weight: 600;
+            letter-spacing: 2.5px;
+            padding-left: 2.5px;
+            opacity: 1;
+            color: var(--text-light);
         }
 
         .logo-main {
@@ -106,7 +111,7 @@
         .nav-menu {
             display: flex;
             list-style: none;
-            gap: 0.5rem;
+            gap: 0.3rem;
             align-items: center;
         }
 
@@ -115,49 +120,67 @@
         }
 
         .nav-menu a {
-            color: rgba(255,255,255,0.9);
+            color: rgba(255,255,255,0.85);
             text-decoration: none;
             padding: 0.8rem 1.2rem;
             border-radius: 8px;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.3s ease;
             font-weight: 500;
-            font-size: 0.95rem;
-            position: relative;
-            display: block;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
             white-space: nowrap;
         }
 
-        .nav-menu a::before {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            width: 0;
-            height: 2px;
-            background: linear-gradient(90deg, #FFD700, #FFA500);
-            transition: all 0.3s ease;
-            transform: translateX(-50%);
-        }
-
         .nav-menu a:hover {
-            background: rgba(255,255,255,0.15);
-            color: #FFD700;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-        }
-
-        .nav-menu a:hover::before {
-            width: 80%;
+            background: rgba(255,255,255,0.1);
+            color: #fff;
         }
 
         .nav-menu a.active {
-            background: rgba(255,215,0,0.2);
-            color: #FFD700;
-            font-weight: 600;
+            background: rgba(202, 162, 74, 0.2);
+            color: var(--accent-gold);
+            font-weight: 700;
         }
 
-        .nav-menu a.active::before {
-            width: 80%;
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-toggle::after {
+            content: '▼';
+            margin-left: 0.3rem;
+            font-size: 0.7rem;
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: var(--primary-deep-blue);
+            min-width: 200px;
+            border-radius: 12px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.25);
+            display: none;
+            margin-top: 0.5rem;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .dropdown:hover .dropdown-menu {
+            display: block;
+        }
+
+        .dropdown-menu li {
+            list-style: none;
+        }
+
+        .dropdown-menu a {
+            padding: 0.9rem 1.3rem;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .dropdown-menu li:last-child a {
+            border-bottom: none;
         }
 
         .mobile-menu-btn {
@@ -168,146 +191,155 @@
             font-size: 1.8rem;
             cursor: pointer;
             padding: 0.5rem;
-            border-radius: 8px;
-            transition: all 0.3s ease;
         }
 
-        .mobile-menu-btn:hover {
-            background: rgba(255,255,255,0.1);
-            color: #FFD700;
+        .hero {
+            height: 100vh;
+            margin-top: 80px;
+            padding: 0;
+            position: relative;
+            overflow: hidden;
         }
 
-        /* Mobile Navigation */
-        .nav-menu.mobile-active {
-            display: flex;
-            flex-direction: column;
+        .carousel-slides {
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+
+        .carousel-slide {
             position: absolute;
-            top: 80px;
+            top: 0;
             left: 0;
             width: 100%;
-            background: linear-gradient(135deg, #8B4513 0%, #A0522D 50%, #DAA520 100%);
-            padding: 1rem 0;
-            box-shadow: 0 4px 25px rgba(0,0,0,0.2);
-            gap: 0;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+            visibility: hidden;
         }
 
-        .nav-menu.mobile-active li {
+        .carousel-slide.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .carousel-slide img {
             width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translate(-50%, 20px);
+            }
+            to {
+                opacity: 1;
+                transform: translate(-50%, 0);
+            }
         }
 
-        .nav-menu.mobile-active a {
-            padding: 1rem 2rem;
-            border-radius: 0;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
+        .carousel-text {
+            position: absolute;
+            bottom: 15%;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            text-align: center;
+            width: 90%;
+            max-width: 900px;
+            padding: 2rem;
+            background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0) 100%);
+            border-radius: 10px;
+            animation: fadeInUp 1.5s ease-out forwards;
+            z-index: 5;
         }
 
-        .nav-menu.mobile-active a:hover {
-            background: rgba(255,255,255,0.1);
-            transform: translateX(10px);
+        .carousel-text h1 {
+            font-size: 4.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+            text-shadow: 
+                0 6px 1px rgba(0,0,0,.1),
+                0 0 5px rgba(0,0,0,.1),
+                0 1px 3px rgba(0,0,0,.3),
+                0 3px 5px rgba(0,0,0,.2),
+                0 5px 10px rgba(0,0,0,.25),
+                0 10px 10px rgba(0,0,0,.2),
+                0 20px 20px rgba(0,0,0,.15);
         }
 
-        /* Hero Section */
-        .hero {
-            background: linear-gradient(rgba(139,69,19,0.7), rgba(218,165,32,0.7)), url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><defs><pattern id="temple" patternUnits="userSpaceOnUse" width="200" height="200"><rect width="200" height="200" fill="%23f8f9fa"/><circle cx="100" cy="100" r="30" fill="%23DAA520" opacity="0.1"/></pattern></defs><rect width="100%" height="100%" fill="url(%23temple)"/></svg>');
-            background-size: cover;
-            background-position: center;
-            height: 100vh;
+        .carousel-text p {
+            font-size: 1.5rem;
+            font-weight: 400;
+            letter-spacing: 1px;
+            text-shadow: 2px 2px 6px rgba(0,0,0,0.9);
+            opacity: 0.95;
+        }
+
+        .carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.4);
+            color: white;
+            border: none;
+            cursor: pointer;
+            padding: 10px;
+            font-size: 24px;
+            z-index: 10;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
             display: flex;
             align-items: center;
             justify-content: center;
-            text-align: center;
-            color: white;
-            margin-top: 80px;
+            transition: background-color: 0.3s ease;
+        }
+        
+        .carousel-btn:hover {
+            background-color: rgba(0, 0, 0, 0.7);
         }
 
-        .hero-content {
-            max-width: 800px;
-            padding: 2rem;
+        .carousel-btn.prev {
+            left: 30px;
         }
 
-        .hero h1 {
-            font-size: 4rem;
-            margin-bottom: 1rem;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-            animation: fadeInUp 1s ease-out;
+        .carousel-btn.next {
+            right: 30px;
         }
-
-        .hero p {
-            font-size: 1.3rem;
-            margin-bottom: 2rem;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
-            animation: fadeInUp 1s ease-out 0.3s both;
-        }
-
-        .countdown-container {
-            background: rgba(255,255,255,0.1);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 2rem;
-            margin: 2rem 0;
-            animation: fadeInUp 1s ease-out 0.6s both;
-        }
-
-        .countdown {
+        
+        .carousel-dots {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
             display: flex;
-            justify-content: center;
-            gap: 2rem;
-            margin-bottom: 1rem;
+            gap: 12px;
+            z-index: 10;
         }
 
-        .countdown-item {
-            text-align: center;
-        }
-
-        .countdown-item .number {
-            font-size: 3rem;
-            font-weight: bold;
-            display: block;
-            color: #FFD700;
-        }
-
-        .countdown-item .label {
-            font-size: 1rem;
-            opacity: 0.9;
-        }
-
-        .cta-buttons {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            flex-wrap: wrap;
-            animation: fadeInUp 1s ease-out 0.9s both;
-        }
-
-        .btn {
-            padding: 1rem 2rem;
-            border: none;
-            border-radius: 50px;
-            font-size: 1.1rem;
-            font-weight: 600;
+        .dot {
+            width: 12px;
+            height: 12px;
+            background-color: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
             cursor: pointer;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            display: inline-block;
+            transition: background-color: 0.3s ease, transform 0.3s ease;
+            border: 1px solid rgba(0,0,0,0.2);
         }
 
-        .btn-primary {
-            background: linear-gradient(45deg, #DAA520, #FFD700);
-            color: #8B4513;
+        .dot:hover {
+            transform: scale(1.2);
         }
 
-        .btn-secondary {
-            background: transparent;
-            color: white;
-            border: 2px solid white;
+        .dot.active {
+            background-color: white;
+            transform: scale(1.2);
         }
 
-        .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-        }
-
-        /* Main Content Sections */
         .main-content {
             max-width: 1200px;
             margin: 0 auto;
@@ -316,16 +348,15 @@
 
         .section {
             margin-bottom: 4rem;
-            background: white;
+            background: var(--bg-white);
             border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.07);
             overflow: hidden;
-            animation: fadeInUp 0.8s ease-out;
         }
 
         .section-header {
-            background: linear-gradient(135deg, #8B4513, #DAA520);
-            color: white;
+            background: linear-gradient(135deg, var(--primary-mid-blue), var(--accent-gold));
+            color: var(--text-light);
             padding: 2rem;
             text-align: center;
         }
@@ -335,38 +366,72 @@
             margin-bottom: 0.5rem;
         }
 
-        .section-header p {
-            font-size: 1.2rem;
-            opacity: 0.9;
-        }
-
         .section-content {
             padding: 2rem;
         }
 
-        /* News Section */
         .news-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
+            perspective: 1000px;
+        }
+        
+        .news-card-link {
+            text-decoration: none;
+            color: inherit;
+            display: block;
         }
 
         .news-card {
-            border: 1px solid #e9ecef;
+            border: 1px solid rgba(0,0,0,0.05);
             border-radius: 15px;
             overflow: hidden;
-            transition: all 0.3s ease;
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
         }
 
-        .news-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        .news-card-link:hover .news-card {
+            transform: translateY(-8px) rotateX(-5deg);
+            box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04);
         }
 
-        .news-card img {
+        .news-card-img-container {
             width: 100%;
             height: 200px;
-            object-fit: cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            transition: background-color 0.4s ease;
+        }
+        /* ****** 已修改卡片顏色 ****** */
+        .bg-color-1 { background-color: var(--sun-red); }
+        .bg-color-2 { background-color: var(--moon-yellow); }
+        .bg-color-3 { background-color: var(--primary-mid-blue); }
+        
+        .news-card-link:hover .bg-color-1 {
+            background-color: var(--sun-red-hover);
+        }
+        .news-card-link:hover .bg-color-2 {
+            background-color: var(--moon-yellow-hover);
+        }
+        .news-card-link:hover .bg-color-3 {
+            background-color: var(--accent-gold);
+        }
+
+
+        .news-card-img-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.4);
+            letter-spacing: 2px;
+        }
+
+        /* ****** 新增深色文字樣式 ****** */
+        .dark-text {
+            color: var(--text-dark);
+            text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.7);
         }
 
         .news-card-content {
@@ -376,7 +441,7 @@
         .news-card h3 {
             font-size: 1.3rem;
             margin-bottom: 1rem;
-            color: #8B4513;
+            color: var(--primary-deep-blue);
         }
 
         .news-date {
@@ -385,48 +450,44 @@
             margin-bottom: 0.5rem;
         }
 
-        /* Features Grid */
         .features-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 2rem;
+            perspective: 1000px;
         }
 
         .feature-card {
             text-align: center;
             padding: 2rem;
             border-radius: 15px;
-            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
-            transition: all 0.3s ease;
+            background: var(--bg-light);
+            border: 1px solid rgba(0,0,0,0.05);
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
         }
 
         .feature-card:hover {
-            transform: translateY(-10px);
-            background: linear-gradient(135deg, #DAA520, #FFD700);
-            color: white;
+            transform: translateY(-8px) rotateX(-5deg);
+            box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04);
         }
 
         .feature-icon {
             font-size: 3rem;
             margin-bottom: 1rem;
-            color: #DAA520;
-        }
-
-        .feature-card:hover .feature-icon {
-            color: white;
+            color: var(--accent-gold);
         }
 
         .feature-card h3 {
             margin-bottom: 1rem;
             font-size: 1.5rem;
+            color: var(--text-dark);
         }
 
-        /* Footer */
         .footer {
-            background: linear-gradient(135deg, #8B4513, #DAA520);
-            color: white;
-            text-align: center;
-            padding: 3rem 2rem 2rem;
+            background: var(--primary-deep-blue);
+            color: var(--text-light);
+            padding: 3rem 2rem 0;
         }
 
         .footer-content {
@@ -435,12 +496,11 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 2rem;
-            margin-bottom: 2rem;
+            padding-bottom: 3rem;
         }
 
         .footer-section h3 {
             margin-bottom: 1rem;
-            font-size: 1.3rem;
         }
 
         .footer-section a {
@@ -448,108 +508,94 @@
             text-decoration: none;
             display: block;
             margin-bottom: 0.5rem;
-            transition: color 0.3s ease;
         }
-
         .footer-section a:hover {
-            color: #FFD700;
+            color: #fff;
         }
 
-        /* Animations */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        .copyright-area {
+            background: var(--footer-copyright-bg);
+            padding: 1.5rem 2rem;
+            color: rgba(255, 255, 255, 0.6);
+            text-align: center;
+        }
+        .copyright-area p {
+            margin: 0;
         }
 
-        /* Responsive Design */
-        @media (max-width: 1024px) {
-            .nav-menu {
-                gap: 0.3rem;
-            }
-            
-            .nav-menu a {
-                padding: 0.6rem 0.8rem;
-                font-size: 0.9rem;
-            }
-        }
 
         @media (max-width: 768px) {
             .nav-menu {
                 display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 80px;
+                left: 0;
+                width: 100%;
+                background: var(--primary-deep-blue);
+                padding: 1rem 0;
             }
 
             .nav-menu.mobile-active {
                 display: flex;
             }
 
+            .nav-menu li {
+                width: 100%;
+            }
+
+            .nav-menu a {
+                padding: 1rem 2rem;
+            }
+
+            .dropdown-menu {
+                position: static;
+                display: none;
+                background: rgba(0,0,0,0.2);
+            }
+
+            .dropdown.mobile-open .dropdown-menu {
+                display: block;
+            }
+
             .mobile-menu-btn {
                 display: block;
             }
 
-            .hero {
-                margin-top: 80px;
+            .carousel-text {
+                bottom: 10%;
+                padding: 1.5rem;
             }
-
-            .hero h1 {
-                font-size: 2.5rem;
+            .carousel-text h1 {
+                font-size: 2.8rem;
             }
-
-            .countdown {
-                gap: 1rem;
-            }
-
-            .countdown-item .number {
-                font-size: 2rem;
-            }
-
-            .cta-buttons {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .btn {
-                width: 100%;
-                max-width: 300px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .nav-container {
-                padding: 0 1rem;
-            }
-            
-            .logo {
-                gap: 0.5rem;
-            }
-            
-            .dharma-wheel {
-                width: 32px;
-                height: 32px;
-            }
-            
-            .logo-year {
-                font-size: 0.85rem;
-            }
-            
-            .logo-main {
+            .carousel-text p {
                 font-size: 1.2rem;
+            }
+            .carousel-btn {
+                width: 40px;
+                height: 40px;
+                font-size: 18px;
+            }
+            .carousel-btn.prev { left: 15px; }
+            .carousel-btn.next { right: 15px; }
+
+            .news-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .news-card-img-title {
+                font-size: 2rem;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Header -->
     <header class="header">
         <div class="nav-container">
             <div class="logo">
-                <a href="#home" style="color: inherit; text-decoration: none; display: flex; align-items: center; gap: 0.8rem;">
-                    <div class="dharma-wheel"></div>
+                <a href="#home">
+                    <img src="logo.png" alt="Logo" class="logo-img">
                     <div class="logo-text">
                         <span class="logo-year">2026</span>
                         <span class="logo-main">寒修行</span>
@@ -557,67 +603,54 @@
                 </a>
             </div>
             <nav>
-                <ul class="nav-menu">
-                    <li><a href="#home" class="active">首頁</a></li>
-                    <li><a href="interactive.html">2026互動區</a></li>
-                    <li><a href="news.html">最新消息</a></li>
-                    <li><a href="schedule.html">時程</a></li>
-                    <li><a href="videos.html">法會影片</a></li>
-                    <li><a href="promo.html">參考影片</a></li>
-                    <li><a href="history.html">苑史區</a></li>
-                    <li><a href="doctrine.html">教誡拜讀</a></li>
-                    <li><a href="scripture.html">讀經次第</a></li>
-                    <li><a href="cards.html">卡片介紹</a></li>
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="#home" class="active"><i class="fas fa-home"></i> 首頁</a></li>
+                    <li><a href="interactive.html"><i class="fas fa-users"></i> 2026互動區</a></li>
+                    <li><a href="news.html"><i class="fas fa-newspaper"></i> 最新消息</a></li>
+                    <li><a href="schedule.html"><i class="fas fa-calendar"></i> 時程</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle"><i class="fas fa-video"></i> 影片專區</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="videos.html"><i class="fas fa-play-circle"></i> 法會影片</a></li>
+                            <li><a href="promo.html"><i class="fas fa-film"></i> 參考影片</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle"><i class="fas fa-book"></i> 學習專區</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="doctrine.html"><i class="fas fa-pray"></i> 教誌拜讀</a></li>
+                            <li><a href="scripture.html"><i class="fas fa-book-open"></i> 讀經次第</a></li>
+                            <li><a href="cards.html"><i class="fas fa-images"></i> 卡片介紹</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="history.html"><i class="fas fa-landmark"></i> 苑史區</a></li>
                 </ul>
-                <button class="mobile-menu-btn">
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
                     <i class="fas fa-bars"></i>
                 </button>
             </nav>
         </div>
     </header>
 
-    <!-- Hero Section -->
     <section class="hero" id="home">
-        <div class="hero-content">
-            <h1>2026寒修行</h1>
-            <p>在寒冷的冬日中,讓心靈獲得溫暖的成長與淨化</p>
-            
-            <div class="countdown-container">
-                <h3>距離寒修行開始還有</h3>
-                <div class="countdown" id="countdown">
-                    <div class="countdown-item">
-                        <span class="number" id="days">00</span>
-                        <span class="label">天</span>
-                    </div>
-                    <div class="countdown-item">
-                        <span class="number" id="hours">00</span>
-                        <span class="label">小時</span>
-                    </div>
-                    <div class="countdown-item">
-                        <span class="number" id="minutes">00</span>
-                        <span class="label">分鐘</span>
-                    </div>
-                    <div class="countdown-item">
-                        <span class="number" id="seconds">00</span>
-                        <span class="label">秒</span>
-                    </div>
-                </div>
-            </div>
+        <div class="carousel-slides">
+            <!-- 圖片會由 JavaScript 動態生成 -->
+        </div>
+        
+        <div class="carousel-text">
+             <h1>2026 寒修行</h1>
+             <p>向世界與未來傳揚真如慈救之利他行。</p>
+        </div>
 
-            <div class="cta-buttons">
-                <a href="interactive.html" class="btn btn-primary">
-                    <i class="fas fa-users"></i> 加入互動區
-                </a>
-                <a href="#schedule" class="btn btn-secondary">
-                    <i class="fas fa-calendar"></i> 查看時程
-                </a>
-            </div>
+        <button class="carousel-btn prev">&#10094;</button>
+        <button class="carousel-btn next">&#10095;</button>
+
+        <div class="carousel-dots">
+            <!-- 指示點會由 JavaScript 動態生成 -->
         </div>
     </section>
 
-    <!-- Main Content -->
     <main class="main-content">
-        <!-- Latest News Section -->
         <section class="section" id="news">
             <div class="section-header">
                 <h2><i class="fas fa-newspaper"></i> 最新消息</h2>
@@ -625,35 +658,46 @@
             </div>
             <div class="section-content">
                 <div class="news-grid">
-                    <div class="news-card">
-                        <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='200'><rect width='100%' height='100%' fill='%23DAA520'/><text x='50%' y='50%' fill='white' text-anchor='middle' dy='.3em' font-size='20'>寒修行公告</text></svg>" alt="寒修行公告">
-                        <div class="news-card-content">
-                            <div class="news-date">2025年10月15日</div>
-                            <h3>2026年寒修行正式啟動</h3>
-                            <p>2026年寒修行活動即將於明年1月開始,歡迎所有信眾踴躍參與這場心靈的淨化之旅...</p>
+                    <a href="news.html" class="news-card-link">
+                        <div class="news-card">
+                            <div class="news-card-img-container bg-color-1">
+                                <h2 class="news-card-img-title">寒修行公告</h2>
+                            </div>
+                            <div class="news-card-content">
+                                <div class="news-date">2025年10月15日</div>
+                                <h3>2026年寒修行啟動</h3>
+                                <p>2026年寒修行活動即將於明年1月開始，歡迎所有信眾踴躍參與這場心靈的淨化之旅</p>
+                            </div>
                         </div>
-                    </div>
-                    <div class="news-card">
-                        <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='200'><rect width='100%' height='100%' fill='%238B4513'/><text x='50%' y='50%' fill='white' text-anchor='middle' dy='.3em' font-size='20'>線上法會</text></svg>" alt="線上法會">
-                        <div class="news-card-content">
-                            <div class="news-date">2025年10月12日</div>
-                            <h3>線上法會直播時間公布</h3>
-                            <p>為了讓無法親臨現場的信眾也能參與,我們將提供完整的線上法會直播服務...</p>
+                    </a>
+                    <a href="videos.html" class="news-card-link">
+                        <div class="news-card">
+                            <div class="news-card-img-container bg-color-2">
+                                <h2 class="news-card-img-title dark-text">線上法會</h2>
+                            </div>
+                            <div class="news-card-content">
+                                <div class="news-date">2025年10月12日</div>
+                                <h3>線上法會直播時間</h3>
+                                <p>為了讓無法親臨現場的信眾也能參與，我們將提供完整的線上法會直播服務</p>
+                            </div>
                         </div>
-                    </div>
-                    <div class="news-card">
-                        <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='200'><rect width='100%' height='100%' fill='%23B8860B'/><text x='50%' y='50%' fill='white' text-anchor='middle' dy='.3em' font-size='20'>互動活動</text></svg>" alt="互動活動">
-                        <div class="news-card-content">
-                            <div class="news-date">2025年10月10日</div>
-                            <h3>全新互動功能上線</h3>
-                            <p>2026互動區現已開放,包含祈福牆、照片分享等多項全新功能,邀請大家一同參與...</p>
+                    </a>
+                    <a href="interactive.html" class="news-card-link">
+                        <div class="news-card">
+                            <div class="news-card-img-container bg-color-3">
+                                <h2 class="news-card-img-title">互動活動</h2>
+                            </div>
+                            <div class="news-card-content">
+                                <div class="news-date">2025年10月10日</div>
+                                <h3>全新互動功能上線</h3>
+                                <p>包含燈檠寶山互動遊戲、小小炭火體驗談等多項全新功能，邀請大家一同參與</p>
+                            </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
             </div>
         </section>
 
-        <!-- Features Section -->
         <section class="section">
             <div class="section-header">
                 <h2><i class="fas fa-star"></i> 精選功能</h2>
@@ -665,50 +709,49 @@
                         <div class="feature-icon">
                             <i class="fas fa-users"></i>
                         </div>
-                        <h3>互動祈福牆</h3>
-                        <p>在線上祈福牆留下您的心願,與全體信眾一同祈福,分享修行路上的點點滴滴</p>
+                        <h3>2026互動區</h3>
+                        <p>包含燈檠寶山、小小炭火體驗談等多項功能，邀請您一同參與。</p>
                     </div>
                     <div class="feature-card">
                         <div class="feature-icon">
                             <i class="fas fa-video"></i>
                         </div>
                         <h3>法會直播</h3>
-                        <p>無論身在何處,都能透過高品質直播參與法會,不錯過任何殊勝的修行時刻</p>
+                        <p>無論身在何處，都能透過高品質直播參與法會，不錯過任何殊勝的修行時刻</p>
                     </div>
                     <div class="feature-card">
                         <div class="feature-icon">
                             <i class="fas fa-calendar-alt"></i>
                         </div>
                         <h3>完整時程</h3>
-                        <p>清晰的活動時間表讓您提前規劃,一鍵加入個人行事曆,不錯過重要時刻</p>
+                        <p>清晰的活動時間表讓您提前規劃，一鍵加入個人行事曆，不錯過重要時刻</p>
                     </div>
                     <div class="feature-card">
                         <div class="feature-icon">
                             <i class="fas fa-book"></i>
                         </div>
                         <h3>教誌拜讀</h3>
-                        <p>提供完整的教誡內容與真人讀誦版本,隨時隨地都能進行學習與拜讀</p>
+                        <p>提供完整的教誌內容與真人讀經版本，隨時隨地都能進行學習與拜讀</p>
                     </div>
                     <div class="feature-card">
                         <div class="feature-icon">
                             <i class="fas fa-history"></i>
                         </div>
                         <h3>苑史回顧</h3>
-                        <p>透過互動時間軸深入了解真如苑的歷史發展,珍貴照片見證美好歲月</p>
+                        <p>透過互動時間軸深入了解真如苑的歷史發展，珍貴照片見證美好歲月</p>
                     </div>
                     <div class="feature-card">
                         <div class="feature-icon">
                             <i class="fas fa-images"></i>
                         </div>
-                        <h3>修行卡片</h3>
-                        <p>精美的修行卡片介紹,每張都蘊含深刻的修行智慧與美好的祝福</p>
+                        <h3>寒修行卡片</h3>
+                        <p>精美的修行卡片介紹，每張都蘊含深刻的修行智慧與美好的祝福</p>
                     </div>
                 </div>
             </div>
         </section>
     </main>
 
-    <!-- Footer -->
     <footer class="footer">
         <div class="footer-content">
             <div class="footer-section">
@@ -721,8 +764,8 @@
                 <h3>快速連結</h3>
                 <a href="#home">首頁</a>
                 <a href="interactive.html">2026互動區</a>
-                <a href="#news">最新消息</a>
-                <a href="#schedule">活動時程</a>
+                <a href="news.html">最新消息</a>
+                <a href="schedule.html">活動時程</a>
             </div>
             <div class="footer-section">
                 <h3>相關網站</h3>
@@ -730,125 +773,117 @@
                 <a href="https://www.shinnyo-en.or.jp" target="_blank">真如苑日本總本山</a>
             </div>
         </div>
-        <div style="text-align: center; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.1);">
+        <div class="copyright-area">
             <p>&copy; 2026 真如苑台灣教區 版權所有</p>
         </div>
     </footer>
 
     <script>
-        // 倒數計時功能
-        function updateCountdown() {
-            // 設定目標日期 (2026年1月20日 00:00:00)
-            const targetDate = new Date('2026-01-20T00:00:00').getTime();
-            const now = new Date().getTime();
-            const distance = targetDate - now;
+        document.addEventListener('DOMContentLoaded', function() {
+            // 大圖輪播邏輯
+            const slidesContainer = document.querySelector('.carousel-slides');
+            const dotsContainer = document.querySelector('.carousel-dots');
+            const totalSlides = 12;
+            let currentSlide = 0;
+            let slideInterval;
 
-            if (distance > 0) {
-                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            for (let i = 1; i <= totalSlides; i++) {
+                const slide = document.createElement('div');
+                slide.className = 'carousel-slide';
+                const img = document.createElement('img');
+                img.src = `苑史-${i}.jpg`;
+                img.alt = `苑史圖片 ${i}`;
+                slide.appendChild(img);
+                slidesContainer.appendChild(slide);
 
-                document.getElementById('days').textContent = days.toString().padStart(2, '0');
-                document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
-                document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
-                document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
-            } else {
-                document.getElementById('countdown').innerHTML = '<div class="countdown-item"><span class="number">寒修行已開始</span></div>';
+                const dot = document.createElement('span');
+                dot.className = 'dot';
+                dot.dataset.slide = i - 1;
+                dotsContainer.appendChild(dot);
             }
-        }
 
-        // 每秒更新倒數計時
-        setInterval(updateCountdown, 1000);
-        updateCountdown(); // 立即執行一次
+            const slides = document.querySelectorAll('.carousel-slide');
+            const dots = document.querySelectorAll('.dot');
 
-        // 平滑滾動功能
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
+            function showSlide(index) {
+                slides.forEach(slide => slide.classList.remove('active'));
+                dots.forEach(dot => dot.classList.remove('active'));
+                
+                if (index >= totalSlides) {
+                    currentSlide = 0;
+                } else if (index < 0) {
+                    currentSlide = totalSlides - 1;
+                } else {
+                    currentSlide = index;
+                }
+                
+                slides[currentSlide].classList.add('active');
+                dots[currentSlide].classList.add('active');
+            }
+
+            function nextSlide() {
+                showSlide(currentSlide + 1);
+            }
+
+            function prevSlide() {
+                showSlide(currentSlide - 1);
+            }
+
+            function startCarousel() {
+                stopCarousel();
+                slideInterval = setInterval(nextSlide, 5000);
+            }
+
+            function stopCarousel() {
+                clearInterval(slideInterval);
+            }
+            
+            document.querySelector('.carousel-btn.next').addEventListener('click', () => {
+                nextSlide();
+                startCarousel();
+            });
+
+            document.querySelector('.carousel-btn.prev').addEventListener('click', () => {
+                prevSlide();
+                startCarousel();
+            });
+
+            dotsContainer.addEventListener('click', (e) => {
+                if (e.target.classList.contains('dot')) {
+                    const slideIndex = parseInt(e.target.dataset.slide);
+                    showSlide(slideIndex);
+                    startCarousel();
                 }
             });
-        });
 
-        // 滾動動畫
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
+            showSlide(0);
+            startCarousel();
 
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
+
+            // 手機選單
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const navMenu = document.getElementById('navMenu');
+
+            mobileMenuBtn.addEventListener('click', function() {
+                navMenu.classList.toggle('mobile-active');
+                const icon = this.querySelector('i');
+                if (navMenu.classList.contains('mobile-active')) {
+                    icon.className = 'fas fa-times';
+                } else {
+                    icon.className = 'fas fa-bars';
                 }
             });
-        }, observerOptions);
 
-        // 觀察所有區塊
-        document.querySelectorAll('.section, .feature-card').forEach(el => {
-            el.style.opacity = '0';
-            el.style.transform = 'translateY(30px)';
-            el.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
-            observer.observe(el);
-        });
-
-        // 手機選單功能
-        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
-        const navMenu = document.querySelector('.nav-menu');
-
-        mobileMenuBtn.addEventListener('click', () => {
-            navMenu.classList.toggle('mobile-active');
-            
-            // 改變漢堡選單圖示
-            const icon = mobileMenuBtn.querySelector('i');
-            if (navMenu.classList.contains('mobile-active')) {
-                icon.className = 'fas fa-times';
-            } else {
-                icon.className = 'fas fa-bars';
-            }
-        });
-
-        // 點擊選單項目時關閉手機選單
-        document.querySelectorAll('.nav-menu a').forEach(link => {
-            link.addEventListener('click', () => {
-                navMenu.classList.remove('mobile-active');
-                const icon = mobileMenuBtn.querySelector('i');
-                icon.className = 'fas fa-bars';
+            const dropdowns = document.querySelectorAll('.dropdown');
+            dropdowns.forEach(function(dropdown) {
+                const toggle = dropdown.querySelector('.dropdown-toggle');
+                toggle.addEventListener('click', function(e) {
+                    if (window.innerWidth <= 768) {
+                        e.preventDefault();
+                        dropdown.classList.toggle('mobile-open');
+                    }
+                });
             });
-        });
-
-        // 點擊頁面其他地方時關閉選單
-        document.addEventListener('click', (e) => {
-            if (!e.target.closest('.nav-container')) {
-                navMenu.classList.remove('mobile-active');
-                const icon = mobileMenuBtn.querySelector('i');
-                icon.className = 'fas fa-bars';
-            }
-        });
-
-        // 導航列滾動效果
-        let lastScrollTop = 0;
-        window.addEventListener('scroll', () => {
-            const header = document.querySelector('.header');
-            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-            
-            // 移除所有狀態類別
-            header.classList.remove('scrolled', 'transparent');
-            
-            if (scrollTop > 100) {
-                header.classList.add('scrolled');
-            } else if (scrollTop > 50) {
-                header.classList.add('transparent');
-            }
-            
-            lastScrollTop = scrollTop;
         });
     </script>
 </body>
